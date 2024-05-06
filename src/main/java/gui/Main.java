@@ -26,17 +26,383 @@ public class Main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        bg = new javax.swing.JPanel();
+        catalogoTabbedP = new javax.swing.JTabbedPane();
+        adscripcionesP = new javax.swing.JPanel();
+        datosP = new javax.swing.JPanel();
+        datosMostrarP = new javax.swing.JPanel();
+        delegadoL = new javax.swing.JLabel();
+        jefeDptoL = new javax.swing.JLabel();
+        leyendaL = new javax.swing.JLabel();
+        fundamentoSuplenciaL = new javax.swing.JLabel();
+        delegadoTF = new javax.swing.JTextField();
+        jefeDptoTF = new javax.swing.JTextField();
+        leyendaTF = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        fundamentoSuplenciaTA = new javax.swing.JTextArea();
+        incidenciasSemanaP = new javax.swing.JPanel();
+        mostrarIncSemP = new javax.swing.JPanel();
+        semanasL = new javax.swing.JLabel();
+        searchSemanasL = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tablaSemanasIncidencias = new javax.swing.JTable();
+        incidenciasTiposP = new javax.swing.JPanel();
+        docsTiposP = new javax.swing.JPanel();
+        optionMenuP = new javax.swing.JPanel();
+        catalogoOptP = new javax.swing.JPanel();
+        catalogoL = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        herramientasL = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        revisionL = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        supervisionL = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        bg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        catalogoTabbedP.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout adscripcionesPLayout = new javax.swing.GroupLayout(adscripcionesP);
+        adscripcionesP.setLayout(adscripcionesPLayout);
+        adscripcionesPLayout.setHorizontalGroup(
+            adscripcionesPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 674, Short.MAX_VALUE)
+        );
+        adscripcionesPLayout.setVerticalGroup(
+            adscripcionesPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 500, Short.MAX_VALUE)
+        );
+
+        catalogoTabbedP.addTab("Adscripciones", adscripcionesP);
+
+        delegadoL.setText("Delegado:");
+
+        jefeDptoL.setText("Jefe de Departamento:");
+
+        leyendaL.setText("Leyenda:");
+
+        fundamentoSuplenciaL.setText("Fundamento Suplencia:");
+
+        delegadoTF.setText("Mtro. Roberto Carlos Ruiz Silva");
+
+        jefeDptoTF.setText("Lic. Sandybell Pulido Flores");
+
+        leyendaTF.setText("2024, Año de Felipe Carrillo Puerto , Benemérito del Proletariado...");
+
+        fundamentoSuplenciaTA.setColumns(20);
+        fundamentoSuplenciaTA.setLineWrap(true);
+        fundamentoSuplenciaTA.setRows(5);
+        fundamentoSuplenciaTA.setText("En suplencia del Titular de la Delegación, encargada del despacho en términos de lo disupuesto por el artículo 101 de las Bases  Generales de Organización y Funcionamiento del Instituto Federal de Defensoría Pública.");
+        fundamentoSuplenciaTA.setWrapStyleWord(true);
+        jScrollPane1.setViewportView(fundamentoSuplenciaTA);
+
+        javax.swing.GroupLayout datosMostrarPLayout = new javax.swing.GroupLayout(datosMostrarP);
+        datosMostrarP.setLayout(datosMostrarPLayout);
+        datosMostrarPLayout.setHorizontalGroup(
+            datosMostrarPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(datosMostrarPLayout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addGroup(datosMostrarPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(delegadoL)
+                    .addComponent(jefeDptoL)
+                    .addComponent(leyendaL)
+                    .addComponent(fundamentoSuplenciaL))
+                .addGap(18, 18, 18)
+                .addGroup(datosMostrarPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(delegadoTF)
+                    .addComponent(jefeDptoTF)
+                    .addComponent(leyendaTF)
+                    .addComponent(jScrollPane1))
+                .addContainerGap(33, Short.MAX_VALUE))
+        );
+        datosMostrarPLayout.setVerticalGroup(
+            datosMostrarPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(datosMostrarPLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(datosMostrarPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(delegadoL)
+                    .addComponent(delegadoTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(datosMostrarPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jefeDptoL)
+                    .addComponent(jefeDptoTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(datosMostrarPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(leyendaL)
+                    .addComponent(leyendaTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(datosMostrarPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(fundamentoSuplenciaL)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(8, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout datosPLayout = new javax.swing.GroupLayout(datosP);
+        datosP.setLayout(datosPLayout);
+        datosPLayout.setHorizontalGroup(
+            datosPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(datosPLayout.createSequentialGroup()
+                .addGap(48, 48, 48)
+                .addComponent(datosMostrarP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(46, Short.MAX_VALUE))
+        );
+        datosPLayout.setVerticalGroup(
+            datosPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(datosPLayout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addComponent(datosMostrarP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(216, Short.MAX_VALUE))
+        );
+
+        catalogoTabbedP.addTab("Delegado y Jefe Dpto.", datosP);
+
+        semanasL.setText("Semana:");
+
+        tablaSemanasIncidencias.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Número", "Semana"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tablaSemanasIncidencias);
+        if (tablaSemanasIncidencias.getColumnModel().getColumnCount() > 0) {
+            tablaSemanasIncidencias.getColumnModel().getColumn(0).setMinWidth(65);
+            tablaSemanasIncidencias.getColumnModel().getColumn(0).setPreferredWidth(65);
+            tablaSemanasIncidencias.getColumnModel().getColumn(1).setMinWidth(420);
+            tablaSemanasIncidencias.getColumnModel().getColumn(1).setPreferredWidth(420);
+        }
+
+        javax.swing.GroupLayout mostrarIncSemPLayout = new javax.swing.GroupLayout(mostrarIncSemP);
+        mostrarIncSemP.setLayout(mostrarIncSemPLayout);
+        mostrarIncSemPLayout.setHorizontalGroup(
+            mostrarIncSemPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(mostrarIncSemPLayout.createSequentialGroup()
+                .addGroup(mostrarIncSemPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(mostrarIncSemPLayout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(semanasL, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(searchSemanasL, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(mostrarIncSemPLayout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)))
+                .addGap(15, 15, 15))
+        );
+        mostrarIncSemPLayout.setVerticalGroup(
+            mostrarIncSemPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(mostrarIncSemPLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(mostrarIncSemPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(semanasL)
+                    .addComponent(searchSemanasL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(19, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout incidenciasSemanaPLayout = new javax.swing.GroupLayout(incidenciasSemanaP);
+        incidenciasSemanaP.setLayout(incidenciasSemanaPLayout);
+        incidenciasSemanaPLayout.setHorizontalGroup(
+            incidenciasSemanaPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, incidenciasSemanaPLayout.createSequentialGroup()
+                .addContainerGap(97, Short.MAX_VALUE)
+                .addComponent(mostrarIncSemP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17))
+        );
+        incidenciasSemanaPLayout.setVerticalGroup(
+            incidenciasSemanaPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(incidenciasSemanaPLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(mostrarIncSemP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        catalogoTabbedP.addTab("Incidencias Semanales", incidenciasSemanaP);
+
+        javax.swing.GroupLayout incidenciasTiposPLayout = new javax.swing.GroupLayout(incidenciasTiposP);
+        incidenciasTiposP.setLayout(incidenciasTiposPLayout);
+        incidenciasTiposPLayout.setHorizontalGroup(
+            incidenciasTiposPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 674, Short.MAX_VALUE)
+        );
+        incidenciasTiposPLayout.setVerticalGroup(
+            incidenciasTiposPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 500, Short.MAX_VALUE)
+        );
+
+        catalogoTabbedP.addTab("Incidencias", incidenciasTiposP);
+
+        javax.swing.GroupLayout docsTiposPLayout = new javax.swing.GroupLayout(docsTiposP);
+        docsTiposP.setLayout(docsTiposPLayout);
+        docsTiposPLayout.setHorizontalGroup(
+            docsTiposPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 674, Short.MAX_VALUE)
+        );
+        docsTiposPLayout.setVerticalGroup(
+            docsTiposPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 500, Short.MAX_VALUE)
+        );
+
+        catalogoTabbedP.addTab("Documentos", docsTiposP);
+
+        optionMenuP.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        catalogoOptP.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        catalogoL.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        catalogoL.setText("Catalogo");
+
+        javax.swing.GroupLayout catalogoOptPLayout = new javax.swing.GroupLayout(catalogoOptP);
+        catalogoOptP.setLayout(catalogoOptPLayout);
+        catalogoOptPLayout.setHorizontalGroup(
+            catalogoOptPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(catalogoOptPLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(catalogoL, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        catalogoOptPLayout.setVerticalGroup(
+            catalogoOptPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(catalogoL, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+        );
+
+        jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        herramientasL.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        herramientasL.setText("Herramientas");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(herramientasL, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(herramientasL, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15))
+        );
+
+        jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        revisionL.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        revisionL.setText("Revision");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(revisionL, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(revisionL, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        supervisionL.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        supervisionL.setText("Supervision");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap(14, Short.MAX_VALUE)
+                .addComponent(supervisionL, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(supervisionL, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout optionMenuPLayout = new javax.swing.GroupLayout(optionMenuP);
+        optionMenuP.setLayout(optionMenuPLayout);
+        optionMenuPLayout.setHorizontalGroup(
+            optionMenuPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(optionMenuPLayout.createSequentialGroup()
+                .addGroup(optionMenuPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(optionMenuPLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(optionMenuPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(catalogoOptP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 15, Short.MAX_VALUE))
+        );
+        optionMenuPLayout.setVerticalGroup(
+            optionMenuPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(optionMenuPLayout.createSequentialGroup()
+                .addGap(92, 92, 92)
+                .addComponent(catalogoOptP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(optionMenuP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(catalogoTabbedP, javax.swing.GroupLayout.DEFAULT_SIZE, 676, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(optionMenuP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(catalogoTabbedP, javax.swing.GroupLayout.PREFERRED_SIZE, 537, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
         );
 
         pack();
@@ -78,5 +444,36 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel adscripcionesP;
+    private javax.swing.JPanel bg;
+    private javax.swing.JLabel catalogoL;
+    private javax.swing.JPanel catalogoOptP;
+    private javax.swing.JTabbedPane catalogoTabbedP;
+    private javax.swing.JPanel datosMostrarP;
+    private javax.swing.JPanel datosP;
+    private javax.swing.JLabel delegadoL;
+    private javax.swing.JTextField delegadoTF;
+    private javax.swing.JPanel docsTiposP;
+    private javax.swing.JLabel fundamentoSuplenciaL;
+    private javax.swing.JTextArea fundamentoSuplenciaTA;
+    private javax.swing.JLabel herramientasL;
+    private javax.swing.JPanel incidenciasSemanaP;
+    private javax.swing.JPanel incidenciasTiposP;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel jefeDptoL;
+    private javax.swing.JTextField jefeDptoTF;
+    private javax.swing.JLabel leyendaL;
+    private javax.swing.JTextField leyendaTF;
+    private javax.swing.JPanel mostrarIncSemP;
+    private javax.swing.JPanel optionMenuP;
+    private javax.swing.JLabel revisionL;
+    private javax.swing.JTextField searchSemanasL;
+    private javax.swing.JLabel semanasL;
+    private javax.swing.JLabel supervisionL;
+    private javax.swing.JTable tablaSemanasIncidencias;
     // End of variables declaration//GEN-END:variables
 }
