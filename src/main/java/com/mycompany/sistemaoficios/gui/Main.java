@@ -2,10 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package gui;
+package com.mycompany.sistemaoficios.gui;
 
+import com.mycompany.sistemaoficios.gui.Herramientas;
+import com.mycompany.sistemaoficios.gui.Catalogo;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.BorderLayout;
+import java.awt.Image;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -17,9 +22,12 @@ public class Main extends javax.swing.JFrame {
     /**
      * Creates new form Main
      */
+    private Image l1 = getImg("logo1").getImage();
+    private Image l2 = getImg("logo2").getImage();
     public Main() {
         initComponents();
-        
+        logo1L.setIcon(resizeImage(l1, logo1L));
+        logo2L.setIcon(resizeImage(l2, logo2L));
     }
 
     /**
@@ -40,6 +48,8 @@ public class Main extends javax.swing.JFrame {
         herramientasBtn = new javax.swing.JButton();
         content = new javax.swing.JPanel();
         header = new javax.swing.JPanel();
+        logo1L = new javax.swing.JLabel();
+        logo2L = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -119,16 +129,7 @@ public class Main extends javax.swing.JFrame {
                 .addGap(89, 89, 89))
         );
 
-        javax.swing.GroupLayout contentLayout = new javax.swing.GroupLayout(content);
-        content.setLayout(contentLayout);
-        contentLayout.setHorizontalGroup(
-            contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        contentLayout.setVerticalGroup(
-            contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
+        content.setLayout(new java.awt.BorderLayout());
 
         header.setBackground(new java.awt.Color(153, 153, 153));
 
@@ -136,11 +137,21 @@ public class Main extends javax.swing.JFrame {
         header.setLayout(headerLayout);
         headerLayout.setHorizontalGroup(
             headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 736, Short.MAX_VALUE)
+            .addGroup(headerLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(logo1L, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 568, Short.MAX_VALUE)
+                .addComponent(logo2L, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14))
         );
         headerLayout.setVerticalGroup(
             headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 86, Short.MAX_VALUE)
+            .addGroup(headerLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(logo1L, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(logo2L, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
@@ -159,7 +170,7 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(header, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(optionMenuP, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(optionMenuP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -217,6 +228,22 @@ public class Main extends javax.swing.JFrame {
             }
         });
     }
+    
+    private ImageIcon getImg(String n){
+        ClassLoader classLoader = getClass().getClassLoader();
+        java.net.URL iconURL = classLoader.getResource(n+".png");
+        if (iconURL != null) {
+            return new ImageIcon(iconURL);
+        } else {
+            System.err.println("No se pudo encontrar el icono");
+            return new ImageIcon("src/main/resources/img/"+n+".png");
+        }
+    }
+    
+    private ImageIcon resizeImage(Image image, JLabel label){
+        ImageIcon img = new ImageIcon(image.getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_SMOOTH));
+        return img;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
@@ -224,6 +251,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel content;
     private javax.swing.JPanel header;
     private javax.swing.JButton herramientasBtn;
+    private javax.swing.JLabel logo1L;
+    private javax.swing.JLabel logo2L;
     private javax.swing.JPanel menubox;
     private javax.swing.JPanel optionMenuP;
     private javax.swing.JButton reportesBtn;

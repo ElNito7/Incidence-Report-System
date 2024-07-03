@@ -13,7 +13,7 @@
                 <exec.vmArgs></exec.vmArgs>
                 <exec.args>${exec.vmArgs} -classpath %classpath ${exec.mainClass} ${exec.appArgs}</exec.args>
                 <exec.appArgs>git remote add origin https://github.com/ElNito7/Incidence-Report-System.git git branch -M main git push -u origin main</exec.appArgs>
-                <exec.mainClass>gui.Main</exec.mainClass>
+                <exec.mainClass>com.mycompany.sistemaoficios.gui.Main</exec.mainClass>
                 <exec.executable>java</exec.executable>
             </properties>
         </action>
@@ -30,7 +30,7 @@
                 <exec.vmArgs>-agentlib:jdwp=transport=dt_socket,server=n,address=${jpda.address}</exec.vmArgs>
                 <exec.args>${exec.vmArgs} -classpath %classpath ${exec.mainClass} ${exec.appArgs}</exec.args>
                 <exec.appArgs>git remote add origin https://github.com/ElNito7/Incidence-Report-System.git git branch -M main git push -u origin main</exec.appArgs>
-                <exec.mainClass>gui.Main</exec.mainClass>
+                <exec.mainClass>com.mycompany.sistemaoficios.gui.Main</exec.mainClass>
                 <exec.executable>java</exec.executable>
                 <jpda.listen>true</jpda.listen>
             </properties>
@@ -47,7 +47,7 @@
             <properties>
                 <exec.vmArgs></exec.vmArgs>
                 <exec.args>${exec.vmArgs} -classpath %classpath ${exec.mainClass} ${exec.appArgs}</exec.args>
-                <exec.mainClass>gui.Main</exec.mainClass>
+                <exec.mainClass>com.mycompany.sistemaoficios.gui.Main</exec.mainClass>
                 <exec.executable>java</exec.executable>
                 <exec.appArgs>git remote add origin https://github.com/ElNito7/Incidence-Report-System.git git branch -M main git push -u origin main</exec.appArgs>
             </properties>

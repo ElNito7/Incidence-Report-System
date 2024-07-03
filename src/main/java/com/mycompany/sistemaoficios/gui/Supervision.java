@@ -2,18 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package gui;
+package com.mycompany.sistemaoficios.gui;
 
 /**
  *
  * @author Keloc
  */
-public class Herramientas extends javax.swing.JPanel {
+public class Supervision extends javax.swing.JPanel {
 
     /**
-     * Creates new form Herramientas
+     * Creates new form Supervision
      */
-    public Herramientas() {
+    public Supervision() {
         initComponents();
     }
 
@@ -30,7 +30,8 @@ public class Herramientas extends javax.swing.JPanel {
 
         setMinimumSize(new java.awt.Dimension(734, 369));
 
-        bg.setBackground(new java.awt.Color(255, 51, 51));
+        bg.setBackground(new java.awt.Color(102, 255, 255));
+        bg.setMinimumSize(new java.awt.Dimension(734, 369));
 
         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
         bg.setLayout(bgLayout);
