@@ -27,21 +27,243 @@ public class Reportes extends javax.swing.JPanel {
     private void initComponents() {
 
         bg = new javax.swing.JPanel();
+        opcionesReportes = new javax.swing.JTabbedPane();
+        marcarIncidenciaP = new javax.swing.JPanel();
+        expedienteP = new javax.swing.JPanel();
+        expDataP = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        claveAdsExpTF2 = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        nControlTF2 = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        expJudTF2 = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        nomExpTF2 = new javax.swing.JTextField();
+        jTextField3 = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        expedientesT = new javax.swing.JTable();
+        jLabel17 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
-        setMinimumSize(new java.awt.Dimension(734, 369));
-        setPreferredSize(new java.awt.Dimension(734, 369));
+        setMinimumSize(new java.awt.Dimension(899, 520));
+        setPreferredSize(new java.awt.Dimension(899, 520));
 
-        bg.setBackground(new java.awt.Color(102, 255, 102));
+        bg.setBackground(new java.awt.Color(204, 204, 204));
+        bg.setMinimumSize(new java.awt.Dimension(899, 520));
+        bg.setPreferredSize(new java.awt.Dimension(899, 520));
+
+        opcionesReportes.setMinimumSize(new java.awt.Dimension(899, 520));
+        opcionesReportes.setPreferredSize(new java.awt.Dimension(899, 520));
+
+        javax.swing.GroupLayout marcarIncidenciaPLayout = new javax.swing.GroupLayout(marcarIncidenciaP);
+        marcarIncidenciaP.setLayout(marcarIncidenciaPLayout);
+        marcarIncidenciaPLayout.setHorizontalGroup(
+            marcarIncidenciaPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 899, Short.MAX_VALUE)
+        );
+        marcarIncidenciaPLayout.setVerticalGroup(
+            marcarIncidenciaPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 485, Short.MAX_VALUE)
+        );
+
+        opcionesReportes.addTab("Marcar Incidencia", marcarIncidenciaP);
+
+        jLabel11.setText("Clave de Adscripción:");
+
+        jLabel12.setText("No. de Control:");
+
+        jLabel13.setText("Exp. Jud:");
+
+        jLabel14.setText("Fecha Recepción:");
+
+        jLabel15.setText("Nombre:");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 22, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout expDataPLayout = new javax.swing.GroupLayout(expDataP);
+        expDataP.setLayout(expDataPLayout);
+        expDataPLayout.setHorizontalGroup(
+            expDataPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(expDataPLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(expDataPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(expDataPLayout.createSequentialGroup()
+                        .addGroup(expDataPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(expDataPLayout.createSequentialGroup()
+                                .addComponent(jLabel11)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(claveAdsExpTF2, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
+                            .addGroup(expDataPLayout.createSequentialGroup()
+                                .addComponent(jLabel12)
+                                .addGap(18, 18, 18)
+                                .addComponent(nControlTF2)))
+                        .addGap(18, 18, 18)
+                        .addGroup(expDataPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(expDataPLayout.createSequentialGroup()
+                                .addComponent(jLabel13)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(expJudTF2)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel14)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(86, 86, 86))
+                            .addComponent(jTextField3)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, expDataPLayout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(jLabel15)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nomExpTF2)))
+                .addContainerGap())
+        );
+        expDataPLayout.setVerticalGroup(
+            expDataPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(expDataPLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(expDataPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(claveAdsExpTF2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(expDataPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(expDataPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel12)
+                        .addComponent(nControlTF2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel13)
+                        .addComponent(expJudTF2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel14))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(expDataPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel15)
+                    .addComponent(nomExpTF2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(24, Short.MAX_VALUE))
+        );
+
+        jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel16.setText("Datos Generales");
+
+        expedientesT.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Expediente", "Exp. Jud.", "Año", "Defendido", "F. Recep."
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, true, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(expedientesT);
+
+        jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel17.setText("Expediente");
+
+        jButton2.setText("Guardar");
+
+        jButton1.setText("Eliminar");
+
+        jButton3.setText("Vaciar");
+
+        jButton4.setText("Editar");
+
+        javax.swing.GroupLayout expedientePLayout = new javax.swing.GroupLayout(expedienteP);
+        expedienteP.setLayout(expedientePLayout);
+        expedientePLayout.setHorizontalGroup(
+            expedientePLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(expedientePLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(expedientePLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(expedientePLayout.createSequentialGroup()
+                        .addGroup(expedientePLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1)
+                            .addGroup(expedientePLayout.createSequentialGroup()
+                                .addGroup(expedientePLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel16)
+                                    .addComponent(jLabel17))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())
+                    .addGroup(expedientePLayout.createSequentialGroup()
+                        .addComponent(expDataP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(64, 64, 64)
+                        .addGroup(expedientePLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(expedientePLayout.createSequentialGroup()
+                                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(1, 1, 1))
+                            .addGroup(expedientePLayout.createSequentialGroup()
+                                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(50, 50, 50))))
+        );
+        expedientePLayout.setVerticalGroup(
+            expedientePLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(expedientePLayout.createSequentialGroup()
+                .addGap(7, 7, 7)
+                .addComponent(jLabel16)
+                .addGroup(expedientePLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(expedientePLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(expDataP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(expedientePLayout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addGroup(expedientePLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton2)
+                            .addComponent(jButton4))
+                        .addGap(15, 15, 15)
+                        .addGroup(expedientePLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton1)
+                            .addComponent(jButton3))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel17)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        opcionesReportes.addTab("Registro de Expedientes Para Supervisión", expedienteP);
 
         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
         bg.setLayout(bgLayout);
         bgLayout.setHorizontalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 734, Short.MAX_VALUE)
+            .addComponent(opcionesReportes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         bgLayout.setVerticalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 369, Short.MAX_VALUE)
+            .addComponent(opcionesReportes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -59,5 +281,50 @@ public class Reportes extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
+    private javax.swing.JTextField claveAdsExpTF;
+    private javax.swing.JTextField claveAdsExpTF1;
+    private javax.swing.JTextField claveAdsExpTF2;
+    private javax.swing.JPanel dataExpP;
+    private javax.swing.JPanel dataExpP1;
+    private javax.swing.JPanel expDataP;
+    private javax.swing.JTextField expJudTF;
+    private javax.swing.JTextField expJudTF1;
+    private javax.swing.JTextField expJudTF2;
+    private javax.swing.JPanel expedienteP;
+    private javax.swing.JTable expedientesT;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JPanel marcarIncidenciaP;
+    private javax.swing.JTextField nControlTF;
+    private javax.swing.JTextField nControlTF1;
+    private javax.swing.JTextField nControlTF2;
+    private javax.swing.JTextField nomExpTF;
+    private javax.swing.JTextField nomExpTF1;
+    private javax.swing.JTextField nomExpTF2;
+    private javax.swing.JTabbedPane opcionesReportes;
     // End of variables declaration//GEN-END:variables
 }

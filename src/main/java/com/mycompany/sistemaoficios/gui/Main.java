@@ -7,11 +7,14 @@ package com.mycompany.sistemaoficios.gui;
 import com.mycompany.sistemaoficios.gui.Herramientas;
 import com.mycompany.sistemaoficios.gui.Catalogo;
 import com.formdev.flatlaf.FlatLightLaf;
+import com.mycompany.sistemaoficios.persistencia.HibernateUtil;
 import java.awt.BorderLayout;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import org.hibernate.Session;
 
 /**
  *
@@ -64,9 +67,9 @@ public class Main extends javax.swing.JFrame {
         catalogoBtn.setText("Catalogo");
         catalogoBtn.setBorder(null);
         catalogoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        catalogoBtn.setMaximumSize(new java.awt.Dimension(138, 70));
-        catalogoBtn.setMinimumSize(new java.awt.Dimension(138, 70));
-        catalogoBtn.setPreferredSize(new java.awt.Dimension(128, 65));
+        catalogoBtn.setMaximumSize(new java.awt.Dimension(175, 120));
+        catalogoBtn.setMinimumSize(new java.awt.Dimension(175, 70));
+        catalogoBtn.setPreferredSize(new java.awt.Dimension(175, 70));
         catalogoBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 catalogoBtnActionPerformed(evt);
@@ -77,9 +80,9 @@ public class Main extends javax.swing.JFrame {
         supervisionBtn.setText("Supervisión");
         supervisionBtn.setBorder(null);
         supervisionBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        supervisionBtn.setMaximumSize(new java.awt.Dimension(138, 70));
-        supervisionBtn.setMinimumSize(new java.awt.Dimension(138, 70));
-        supervisionBtn.setPreferredSize(new java.awt.Dimension(128, 65));
+        supervisionBtn.setMaximumSize(new java.awt.Dimension(175, 120));
+        supervisionBtn.setMinimumSize(new java.awt.Dimension(175, 70));
+        supervisionBtn.setPreferredSize(new java.awt.Dimension(175, 70));
         supervisionBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 supervisionBtnActionPerformed(evt);
@@ -90,9 +93,9 @@ public class Main extends javax.swing.JFrame {
         reportesBtn.setText("Reportes");
         reportesBtn.setBorder(null);
         reportesBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        reportesBtn.setMaximumSize(new java.awt.Dimension(138, 70));
-        reportesBtn.setMinimumSize(new java.awt.Dimension(138, 70));
-        reportesBtn.setPreferredSize(new java.awt.Dimension(128, 65));
+        reportesBtn.setMaximumSize(new java.awt.Dimension(175, 120));
+        reportesBtn.setMinimumSize(new java.awt.Dimension(175, 70));
+        reportesBtn.setPreferredSize(new java.awt.Dimension(175, 70));
         reportesBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 reportesBtnActionPerformed(evt);
@@ -103,9 +106,9 @@ public class Main extends javax.swing.JFrame {
         herramientasBtn.setText("Herramientas");
         herramientasBtn.setBorder(null);
         herramientasBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        herramientasBtn.setMaximumSize(new java.awt.Dimension(138, 70));
-        herramientasBtn.setMinimumSize(new java.awt.Dimension(138, 70));
-        herramientasBtn.setPreferredSize(new java.awt.Dimension(128, 65));
+        herramientasBtn.setMaximumSize(new java.awt.Dimension(175, 120));
+        herramientasBtn.setMinimumSize(new java.awt.Dimension(175, 70));
+        herramientasBtn.setPreferredSize(new java.awt.Dimension(175, 70));
         herramientasBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 herramientasBtnActionPerformed(evt);
@@ -117,16 +120,14 @@ public class Main extends javax.swing.JFrame {
         optionMenuP.setLayout(optionMenuPLayout);
         optionMenuPLayout.setHorizontalGroup(
             optionMenuPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(optionMenuPLayout.createSequentialGroup()
-                .addComponent(menubox, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(menubox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         optionMenuPLayout.setVerticalGroup(
             optionMenuPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(optionMenuPLayout.createSequentialGroup()
-                .addGap(91, 91, 91)
-                .addComponent(menubox, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
-                .addGap(89, 89, 89))
+                .addGap(99, 99, 99)
+                .addComponent(menubox, javax.swing.GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE)
+                .addGap(56, 56, 56))
         );
 
         content.setLayout(new java.awt.BorderLayout());
@@ -140,7 +141,7 @@ public class Main extends javax.swing.JFrame {
             .addGroup(headerLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(logo1L, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 568, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 731, Short.MAX_VALUE)
                 .addComponent(logo2L, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14))
         );
@@ -160,6 +161,7 @@ public class Main extends javax.swing.JFrame {
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bgLayout.createSequentialGroup()
                 .addComponent(optionMenuP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(header, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -177,14 +179,14 @@ public class Main extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(bg, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1080, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, 625, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -220,6 +222,21 @@ public class Main extends javax.swing.JFrame {
     }
     public static void main(String args[]) {
         FlatLightLaf.setup();
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session.beginTransaction();
+            if (session.isConnected()){
+                System.out.println("CONECTION SUCCESS");
+            }
+        } catch(Exception e){
+            if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+            }
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } finally {
+           session.close();
+        }
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {

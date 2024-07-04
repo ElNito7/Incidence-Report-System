@@ -4,12 +4,26 @@
  */
 package com.mycompany.sistemaoficios.clases;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  *
  * @author Keloc
  */
+@Entity
+@Table(name="incidencia")
 public class Incidencia {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
     private long id;
+    
+    @Column(name="indicencia")
     private String incidencia;
     
     public Incidencia(){}
