@@ -157,7 +157,7 @@ public class Catalogo extends javax.swing.JPanel {
                     .addComponent(defensorTF)
                     .addComponent(adscripcionTF)
                     .addComponent(revisorTF, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(165, Short.MAX_VALUE))
+                .addContainerGap(167, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -213,16 +213,10 @@ public class Catalogo extends javax.swing.JPanel {
 
         fundamentoSuplenciaL.setText("Fundamento Suplencia:");
 
-        delegadoTF.setText("Mtro. Roberto Carlos Ruiz Silva");
-
-        jefeDptoTF.setText("Lic. Sandybell Pulido Flores");
-
-        leyendaTF.setText("2024, Año de Felipe Carrillo Puerto , Benemérito del Proletariado...");
-
         fundamentoSuplenciaTA.setColumns(20);
         fundamentoSuplenciaTA.setLineWrap(true);
         fundamentoSuplenciaTA.setRows(5);
-        fundamentoSuplenciaTA.setText("En suplencia del Titular de la Delegación, encargada del despacho en términos de lo disupuesto por el artículo 101 de las Bases  Generales de Organización y Funcionamiento del Instituto Federal de Defensoría Pública.");
+        fundamentoSuplenciaTA.setText("\n");
         fundamentoSuplenciaTA.setWrapStyleWord(true);
         jScrollPane1.setViewportView(fundamentoSuplenciaTA);
 
@@ -274,7 +268,7 @@ public class Catalogo extends javax.swing.JPanel {
             .addGroup(datosPLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(datosMostrarP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(148, Short.MAX_VALUE))
+                .addContainerGap(279, Short.MAX_VALUE))
         );
         datosPLayout.setVerticalGroup(
             datosPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

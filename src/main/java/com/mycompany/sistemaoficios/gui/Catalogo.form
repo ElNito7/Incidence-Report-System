@@ -137,7 +137,7 @@
                                   <Component id="adscripcionTF" alignment="0" max="32767" attributes="0"/>
                                   <Component id="revisorTF" alignment="0" min="-2" pref="370" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="165" max="32767" attributes="0"/>
+                              <EmptySpace pref="167" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -286,7 +286,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="datosMostrarP" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="148" max="32767" attributes="0"/>
+                          <EmptySpace pref="279" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -375,19 +375,10 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="delegadoTF">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Mtro. Roberto Carlos Ruiz Silva"/>
-                      </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="jefeDptoTF">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Lic. Sandybell Pulido Flores"/>
-                      </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="leyendaTF">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="2024, A&#xf1;o de Felipe Carrillo Puerto , Benem&#xe9;rito del Proletariado..."/>
-                      </Properties>
                     </Component>
                     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
                       <AuxValues>
@@ -401,7 +392,7 @@
                             <Property name="columns" type="int" value="20"/>
                             <Property name="lineWrap" type="boolean" value="true"/>
                             <Property name="rows" type="int" value="5"/>
-                            <Property name="text" type="java.lang.String" value="En suplencia del Titular de la Delegaci&#xf3;n, encargada del despacho en t&#xe9;rminos de lo disupuesto por el art&#xed;culo 101 de las Bases  Generales de Organizaci&#xf3;n y Funcionamiento del Instituto Federal de Defensor&#xed;a P&#xfa;blica."/>
+                            <Property name="text" type="java.lang.String" value="&#xa;"/>
                             <Property name="wrapStyleWord" type="boolean" value="true"/>
                           </Properties>
                         </Component>
