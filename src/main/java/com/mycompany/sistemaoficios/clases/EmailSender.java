@@ -4,10 +4,17 @@
  */
 package com.mycompany.sistemaoficios.clases;
 
+import com.sun.jdi.connect.Transport;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Keloc
  */
 public class EmailSender {
-    //Clase para el manejo de correos
+    
+    
 }

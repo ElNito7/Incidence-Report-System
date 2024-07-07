@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -19,7 +20,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="adscripcion")
-public class Adscripcion {
+public class Adscripcion extends TableSetters {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
@@ -100,4 +101,12 @@ public class Adscripcion {
         this.revisor = revisor;
     }
     
+    public Object[] toRow(){
+        Object[] row = {clave, adscripcion, defensor.getNom(), oficial.getNom(), oficial.getNom()};
+        return row;
+    }
+    public DefaultTableModel getModel(){
+        String[] tblh = {"Clave", "Adscripción", "Defensor", "Oficial", "Oficial Revisor"};
+        return new DefaultTableModel(tblh,0);
+    }
 }

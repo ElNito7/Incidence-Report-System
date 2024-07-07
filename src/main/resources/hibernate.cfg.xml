@@ -30,6 +30,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/XML/XMLDocument.xml to edit this 
         <mapping class="com.mycompany.sistemaoficios.clases.Incidencia"/>
         <mapping class="com.mycompany.sistemaoficios.clases.Oficial"/>
         <mapping class="com.mycompany.sistemaoficios.clases.Semana"/>
+        <mapping class="com.mycompany.sistemaoficios.clases.Expediente"/>
+        <mapping class="com.mycompany.sistemaoficios.clases.Config"/>
+        <mapping class="com.mycompany.sistemaoficios.clases.TipoIncidencia"/>
     </session-factory>
 </hibernate-configuration>
 

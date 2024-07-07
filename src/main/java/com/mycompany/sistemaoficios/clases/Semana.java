@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,21 +19,18 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="semana")
-public class Semana {
+public class Semana extends TableSetters {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
     private long id;
     
-    @Column(name="incio")
-    private LocalDate inicio;
-    
-    @Column(name="fin")
-    private LocalDate fin;
+    @Column(name="semana")
+    private String semana;
 
-    public Semana(LocalDate inicio, LocalDate fin) {
-        this.inicio = inicio;
-        this.fin = fin;
+    public Semana(){}
+    public Semana(String semana) {
+        this.semana = semana;
     }
     
     public long getId() {
@@ -43,20 +41,20 @@ public class Semana {
         this.id = id;
     }
 
-    public LocalDate getInicio() {
-        return inicio;
+    public String getSemana() {
+        return semana;
     }
 
-    public void setInicio(LocalDate inicio) {
-        this.inicio = inicio;
+    public void setSemana(String semana) {
+        this.semana = semana;
     }
-
-    public LocalDate getFin() {
-        return fin;
+    
+    public Object[] toRow(){
+        Object[] row = {id, semana};
+        return row;
     }
-
-    public void setFin(LocalDate fin) {
-        this.fin = fin;
+    public DefaultTableModel getModel(){
+        String[] tblh = {"Número", "Semana"};
+        return new DefaultTableModel(tblh,0);
     }
-
 }

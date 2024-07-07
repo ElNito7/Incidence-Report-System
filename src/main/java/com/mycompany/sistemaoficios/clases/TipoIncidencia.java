@@ -4,38 +4,35 @@
  */
 package com.mycompany.sistemaoficios.clases;
 
-import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-
 /**
  *
  * @author Keloc
  */
 @Entity
-@Table(name="documento")
-public class Documento extends TableSetters{
+@Table(name="tipo_incidencia")
+public class TipoIncidencia extends TableSetters{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
     private long id;
     
-    @Column(name="clave")
-    private String clave;
-    
-    @Column(name="tipo")
-    private String doc;
-    
-    public Documento(){}
-    public Documento(String clave, String doc){
-        this.clave = clave;
-        this.doc = doc;
+    @Column(name="incidencia")
+    private String incidencia;
+
+    public TipoIncidencia(){}
+    public TipoIncidencia(String incidencia) {
+        this.incidencia = incidencia;
     }
 
     public long getId() {
@@ -46,29 +43,21 @@ public class Documento extends TableSetters{
         this.id = id;
     }
 
-    public String getClave() {
-        return clave;
+    public String getIncidencia() {
+        return incidencia;
     }
 
-    public void setClave(String clave) {
-        this.clave = clave;
-    }
-
-    public String getDoc() {
-        return doc;
-    }
-
-    public void setDoc(String doc) {
-        this.doc = doc;
+    public void setIncidencia(String incidencia) {
+        this.incidencia = incidencia;
     }
     
     public Object[] toRow(){
-        Object[] row = {clave, doc};
+        Object[] row = {id, incidencia};
         return row;
     }
+    
     public DefaultTableModel getModel(){
-        String[] tblh = {"Clave", "Documento"};
+        String[] tblh = {"Número", "Incidencia"};
         return new DefaultTableModel(tblh,0);
     }
-    
 }

@@ -46,8 +46,8 @@ public class Main extends javax.swing.JFrame {
         optionMenuP = new javax.swing.JPanel();
         menubox = new javax.swing.JPanel();
         catalogoBtn = new javax.swing.JButton();
+        nadaBtn = new javax.swing.JButton();
         supervisionBtn = new javax.swing.JButton();
-        reportesBtn = new javax.swing.JButton();
         herramientasBtn = new javax.swing.JButton();
         content = new javax.swing.JPanel();
         header = new javax.swing.JPanel();
@@ -78,6 +78,19 @@ public class Main extends javax.swing.JFrame {
         });
         menubox.add(catalogoBtn);
 
+        nadaBtn.setText("Supervisión");
+        nadaBtn.setBorder(null);
+        nadaBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        nadaBtn.setMaximumSize(new java.awt.Dimension(175, 120));
+        nadaBtn.setMinimumSize(new java.awt.Dimension(175, 70));
+        nadaBtn.setPreferredSize(new java.awt.Dimension(175, 70));
+        nadaBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nadaBtnActionPerformed(evt);
+            }
+        });
+        menubox.add(nadaBtn);
+
         supervisionBtn.setText("Supervisión");
         supervisionBtn.setBorder(null);
         supervisionBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -90,19 +103,6 @@ public class Main extends javax.swing.JFrame {
             }
         });
         menubox.add(supervisionBtn);
-
-        reportesBtn.setText("Reportes");
-        reportesBtn.setBorder(null);
-        reportesBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        reportesBtn.setMaximumSize(new java.awt.Dimension(175, 120));
-        reportesBtn.setMinimumSize(new java.awt.Dimension(175, 70));
-        reportesBtn.setPreferredSize(new java.awt.Dimension(175, 70));
-        reportesBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                reportesBtnActionPerformed(evt);
-            }
-        });
-        menubox.add(reportesBtn);
 
         herramientasBtn.setText("Herramientas");
         herramientasBtn.setBorder(null);
@@ -194,17 +194,17 @@ public class Main extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void supervisionBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_supervisionBtnActionPerformed
+    private void nadaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nadaBtnActionPerformed
         changeContent(new Supervision());
-    }//GEN-LAST:event_supervisionBtnActionPerformed
+    }//GEN-LAST:event_nadaBtnActionPerformed
 
     private void catalogoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_catalogoBtnActionPerformed
         changeContent(new Catalogo());
     }//GEN-LAST:event_catalogoBtnActionPerformed
 
-    private void reportesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportesBtnActionPerformed
+    private void supervisionBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_supervisionBtnActionPerformed
         changeContent(new Reportes());
-    }//GEN-LAST:event_reportesBtnActionPerformed
+    }//GEN-LAST:event_supervisionBtnActionPerformed
 
     private void herramientasBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_herramientasBtnActionPerformed
         changeContent(new Herramientas());
@@ -227,7 +227,7 @@ public class Main extends javax.swing.JFrame {
         try {
             session.beginTransaction();
             if (session.isConnected()){
-                System.out.println("CONECTION SUCCESS");
+                System.out.println("CONNECTION SUCCESS");
             }
         } catch(Exception e){
             if (session.getTransaction() != null) {
@@ -272,8 +272,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel logo1L;
     private javax.swing.JLabel logo2L;
     private javax.swing.JPanel menubox;
+    private javax.swing.JButton nadaBtn;
     private javax.swing.JPanel optionMenuP;
-    private javax.swing.JButton reportesBtn;
     private javax.swing.JButton supervisionBtn;
     // End of variables declaration//GEN-END:variables
 }

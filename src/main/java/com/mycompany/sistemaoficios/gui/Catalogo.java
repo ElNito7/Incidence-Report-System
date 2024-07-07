@@ -4,17 +4,36 @@
  */
 package com.mycompany.sistemaoficios.gui;
 
+import com.mycompany.sistemaoficios.clases.Adscripcion;
+import com.mycompany.sistemaoficios.clases.Config;
+import com.mycompany.sistemaoficios.clases.Documento;
+import com.mycompany.sistemaoficios.clases.Semana;
+import com.mycompany.sistemaoficios.clases.TableSetters;
+import com.mycompany.sistemaoficios.clases.TipoIncidencia;
+import com.mycompany.sistemaoficios.persistencia.HibernateUtil;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import org.hibernate.Session;
+import org.hibernate.query.Query;
+
 /**
  *
  * @author Keloc
  */
+
 public class Catalogo extends javax.swing.JPanel {
 
     /**
      * Creates new form Catalogo
      */
+    //private List<Documento> docs;
     public Catalogo() {
         initComponents();
+        initData();
+        initCat();
     }
 
     /**
@@ -31,7 +50,7 @@ public class Catalogo extends javax.swing.JPanel {
         adscripcionesP = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        adscsTable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         adscripcionL = new javax.swing.JLabel();
         defensorL = new javax.swing.JLabel();
@@ -44,6 +63,10 @@ public class Catalogo extends javax.swing.JPanel {
         jScrollPane4 = new javax.swing.JScrollPane();
         oficialTA = new javax.swing.JTextArea();
         revisorTF = new javax.swing.JTextField();
+        jButton9 = new javax.swing.JButton();
+        jButton10 = new javax.swing.JButton();
+        jButton11 = new javax.swing.JButton();
+        jButton12 = new javax.swing.JButton();
         datosP = new javax.swing.JPanel();
         datosMostrarP = new javax.swing.JPanel();
         delegadoL = new javax.swing.JLabel();
@@ -55,12 +78,16 @@ public class Catalogo extends javax.swing.JPanel {
         leyendaTF = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         fundamentoSuplenciaTA = new javax.swing.JTextArea();
+        jButton8 = new javax.swing.JButton();
         incidenciasSemanaP = new javax.swing.JPanel();
         mostrarIncSemP = new javax.swing.JPanel();
         semanasL = new javax.swing.JLabel();
         searchSemanasL = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tablaSemanasIncidencias = new javax.swing.JTable();
+        semanasTable = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         incidenciasTiposP = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -71,8 +98,12 @@ public class Catalogo extends javax.swing.JPanel {
         jScrollPane6 = new javax.swing.JScrollPane();
         jTextPane2 = new javax.swing.JTextPane();
         jScrollPane7 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        incidenciasTable = new javax.swing.JTable();
         tiposL = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
         docsTiposP = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
@@ -83,7 +114,7 @@ public class Catalogo extends javax.swing.JPanel {
         jScrollPane9 = new javax.swing.JScrollPane();
         jTextPane4 = new javax.swing.JTextPane();
         jScrollPane10 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        docsTable = new javax.swing.JTable();
         docsL = new javax.swing.JLabel();
 
         setMinimumSize(new java.awt.Dimension(734, 369));
@@ -99,7 +130,7 @@ public class Catalogo extends javax.swing.JPanel {
         adscripcionesP.setMinimumSize(new java.awt.Dimension(734, 369));
         adscripcionesP.setPreferredSize(new java.awt.Dimension(734, 369));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        adscsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -110,9 +141,9 @@ public class Catalogo extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jTable1.setMinimumSize(new java.awt.Dimension(60, 50));
-        jTable1.setPreferredSize(new java.awt.Dimension(300, 50));
-        jScrollPane3.setViewportView(jTable1);
+        adscsTable.setMinimumSize(new java.awt.Dimension(60, 50));
+        adscsTable.setPreferredSize(new java.awt.Dimension(300, 50));
+        jScrollPane3.setViewportView(adscsTable);
 
         jLabel1.setText("Clave de Adscripcion:");
 
@@ -129,6 +160,14 @@ public class Catalogo extends javax.swing.JPanel {
         oficialTA.setColumns(20);
         oficialTA.setRows(5);
         jScrollPane4.setViewportView(oficialTA);
+
+        jButton9.setText("jButton9");
+
+        jButton10.setText("jButton10");
+
+        jButton11.setText("jButton11");
+
+        jButton12.setText("jButton12");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -157,7 +196,14 @@ public class Catalogo extends javax.swing.JPanel {
                     .addComponent(defensorTF)
                     .addComponent(adscripcionTF)
                     .addComponent(revisorTF, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(167, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jButton10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton12, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,25 +212,39 @@ public class Catalogo extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(claveAdscTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jButton12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton11))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(adscripcionL)
+                            .addComponent(adscripcionTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(defensorL)
+                            .addComponent(defensorTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(7, 7, 7)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(oficiall)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(adscripcionL)
-                    .addComponent(adscripcionTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(defensorL)
-                    .addComponent(defensorTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(oficiall)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(revisorTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(revisorL))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(adscribcionesTextoL)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(adscribcionesTextoL)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(revisorTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(revisorL)
+                            .addComponent(jButton9))
+                        .addGap(15, 45, Short.MAX_VALUE)))
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(124, 124, 124))
         );
@@ -232,12 +292,12 @@ public class Catalogo extends javax.swing.JPanel {
                     .addComponent(leyendaL)
                     .addComponent(fundamentoSuplenciaL))
                 .addGap(18, 18, 18)
-                .addGroup(datosMostrarPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(datosMostrarPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(delegadoTF)
                     .addComponent(jefeDptoTF)
                     .addComponent(leyendaTF)
-                    .addComponent(jScrollPane1))
-                .addContainerGap(33, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE))
+                .addGap(36, 36, 36))
         );
         datosMostrarPLayout.setVerticalGroup(
             datosMostrarPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -261,28 +321,36 @@ public class Catalogo extends javax.swing.JPanel {
                 .addContainerGap(8, Short.MAX_VALUE))
         );
 
+        jButton8.setText("jButton8");
+
         javax.swing.GroupLayout datosPLayout = new javax.swing.GroupLayout(datosP);
         datosP.setLayout(datosPLayout);
         datosPLayout.setHorizontalGroup(
             datosPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(datosPLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(datosMostrarP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(279, Short.MAX_VALUE))
+                .addComponent(datosMostrarP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(28, 28, 28)
+                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39))
         );
         datosPLayout.setVerticalGroup(
             datosPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(datosPLayout.createSequentialGroup()
                 .addGap(43, 43, 43)
-                .addComponent(datosMostrarP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(102, Short.MAX_VALUE))
+                .addComponent(datosMostrarP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(102, 102, 102))
+            .addGroup(datosPLayout.createSequentialGroup()
+                .addGap(104, 104, 104)
+                .addComponent(jButton8)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         catalogoTabbedP.addTab("Delegado y Jefe Dpto.", datosP);
 
         semanasL.setText("Semana:");
 
-        tablaSemanasIncidencias.setModel(new javax.swing.table.DefaultTableModel(
+        semanasTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -305,7 +373,7 @@ public class Catalogo extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(tablaSemanasIncidencias);
+        jScrollPane2.setViewportView(semanasTable);
 
         javax.swing.GroupLayout mostrarIncSemPLayout = new javax.swing.GroupLayout(mostrarIncSemP);
         mostrarIncSemP.setLayout(mostrarIncSemPLayout);
@@ -333,21 +401,42 @@ public class Catalogo extends javax.swing.JPanel {
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
+        jButton1.setText("jButton1");
+
+        jButton2.setText("jButton2");
+
+        jButton3.setText("jButton3");
+
         javax.swing.GroupLayout incidenciasSemanaPLayout = new javax.swing.GroupLayout(incidenciasSemanaP);
         incidenciasSemanaP.setLayout(incidenciasSemanaPLayout);
         incidenciasSemanaPLayout.setHorizontalGroup(
             incidenciasSemanaPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(incidenciasSemanaPLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(mostrarIncSemP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(incidenciasSemanaPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(incidenciasSemanaPLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton3)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(incidenciasSemanaPLayout.createSequentialGroup()
+                        .addComponent(mostrarIncSemP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         incidenciasSemanaPLayout.setVerticalGroup(
             incidenciasSemanaPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(incidenciasSemanaPLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(mostrarIncSemP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(incidenciasSemanaPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
 
         catalogoTabbedP.addTab("Incidencias Semanales", incidenciasSemanaP);
@@ -389,7 +478,7 @@ public class Catalogo extends javax.swing.JPanel {
                 .addContainerGap(11, Short.MAX_VALUE))
         );
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        incidenciasTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -400,9 +489,17 @@ public class Catalogo extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane7.setViewportView(jTable2);
+        jScrollPane7.setViewportView(incidenciasTable);
 
         tiposL.setText("Tipos de Incidencia");
+
+        jButton4.setText("jButton4");
+
+        jButton5.setText("jButton5");
+
+        jButton6.setText("jButton6");
+
+        jButton7.setText("jButton7");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -416,16 +513,38 @@ public class Catalogo extends javax.swing.JPanel {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tiposL))
-                        .addGap(0, 221, Short.MAX_VALUE)))
+                            .addComponent(tiposL)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(jButton5)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jButton7))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(jButton4)
+                                        .addGap(36, 36, 36)
+                                        .addComponent(jButton6)))))
+                        .addGap(0, 29, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton4)
+                            .addComponent(jButton6))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton5)
+                            .addComponent(jButton7))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(tiposL)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -483,7 +602,7 @@ public class Catalogo extends javax.swing.JPanel {
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        docsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -494,7 +613,7 @@ public class Catalogo extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane10.setViewportView(jTable3);
+        jScrollPane10.setViewportView(docsTable);
 
         docsL.setText("Tipos de Documento");
 
@@ -568,14 +687,70 @@ public class Catalogo extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void initData(){
-        
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session.beginTransaction();
+            Config c = session.createQuery("FROM Config WHERE id = :id", Config.class).setParameter("id",(long) 1).uniqueResult();
+            delegadoTF.setText(c.getDelegado());
+            jefeDptoTF.setText(c.getJefeDpto());
+            leyendaTF.setText(c.getLeyenda());
+            fundamentoSuplenciaTA.setText(c.getFundamento());
+            session.getTransaction().commit();
+        } catch(Exception e){
+            if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+            }
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } finally {
+           session.close();
+        }
     }
+    
+    private void initCat(){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session.beginTransaction();
+            List<Documento> docs = session.createQuery("From Documento", Documento.class).list();
+            List<Adscripcion> adscs = session.createQuery("From Adscripcion", Adscripcion.class).list();
+            List<Semana> semanas = session.createQuery("From Semana", Semana.class).list();
+            List<TipoIncidencia> incs = session.createQuery("From TipoIncidencia", TipoIncidencia.class).list();
+            initTable(docs, docs.get(0).getModel(), docsTable);
+            initTable(adscs, adscs.get(0).getModel(), adscsTable);
+            initTable(semanas, semanas.get(0).getModel(), semanasTable);
+            initTable(incs, incs.get(0).getModel(), incidenciasTable);
+            session.getTransaction().commit();
+        } catch(Exception e){
+            if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+            }
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } finally {
+           session.close();
+        }
+    }
+    
+    private void initTable(List list, DefaultTableModel model, JTable table){
+        try {
+            List<TableSetters> ts = new ArrayList();
+            ts.addAll(list);
+            TableSetters.setTable(ts, model, table);
+        } catch(Exception e){
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } 
+    }
+    
+    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel adscribcionesTextoL;
     private javax.swing.JLabel adscripcionL;
     private javax.swing.JTextField adscripcionTF;
     private javax.swing.JPanel adscripcionesP;
+    private javax.swing.JTable adscsTable;
     private javax.swing.JPanel bg;
     private javax.swing.JTabbedPane catalogoTabbedP;
     private javax.swing.JTextField claveAdscTF;
@@ -587,13 +762,27 @@ public class Catalogo extends javax.swing.JPanel {
     private javax.swing.JLabel delegadoL;
     private javax.swing.JTextField delegadoTF;
     private javax.swing.JLabel docsL;
+    private javax.swing.JTable docsTable;
     private javax.swing.JPanel docsTiposP;
     private javax.swing.JLabel documentoL;
     private javax.swing.JLabel fundamentoSuplenciaL;
     private javax.swing.JTextArea fundamentoSuplenciaTA;
     private javax.swing.JLabel incidenciaL;
     private javax.swing.JPanel incidenciasSemanaP;
+    private javax.swing.JTable incidenciasTable;
     private javax.swing.JPanel incidenciasTiposP;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton12;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -610,9 +799,6 @@ public class Catalogo extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
     private javax.swing.JTextPane jTextPane1;
     private javax.swing.JTextPane jTextPane2;
     private javax.swing.JTextPane jTextPane3;
@@ -629,7 +815,7 @@ public class Catalogo extends javax.swing.JPanel {
     private javax.swing.JTextField revisorTF;
     private javax.swing.JTextField searchSemanasL;
     private javax.swing.JLabel semanasL;
-    private javax.swing.JTable tablaSemanasIncidencias;
+    private javax.swing.JTable semanasTable;
     private javax.swing.JLabel tiposL;
     // End of variables declaration//GEN-END:variables
 }

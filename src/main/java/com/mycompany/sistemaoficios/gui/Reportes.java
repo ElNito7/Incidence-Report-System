@@ -28,55 +28,6 @@ public class Reportes extends javax.swing.JPanel {
 
         bg = new javax.swing.JPanel();
         opcionesReportes = new javax.swing.JTabbedPane();
-        marcarIncidenciaP = new javax.swing.JPanel();
-        dataP = new javax.swing.JPanel();
-        jLabel18 = new javax.swing.JLabel();
-        claveAdsIncTF = new javax.swing.JTextField();
-        jLabel19 = new javax.swing.JLabel();
-        IncControlTF = new javax.swing.JTextField();
-        jLabel20 = new javax.swing.JLabel();
-        expJudIncTF = new javax.swing.JTextField();
-        jLabel21 = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
-        nomIncTF = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        suplenciaTF = new javax.swing.JTextField();
-        jButton5 = new javax.swing.JButton();
-        checkRemision = new javax.swing.JCheckBox();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        semanaCB = new javax.swing.JComboBox<>();
-        tipoDocP = new javax.swing.JPanel();
-        tipoDocsBtn = new javax.swing.JButton();
-        tipoIncBtn = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        tipoDocTF = new javax.swing.JTextField();
-        incTF = new javax.swing.JTextField();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
-        noElbRBtn = new javax.swing.JRadioButton();
-        correjirRBtn = new javax.swing.JRadioButton();
-        incOptRBtn = new javax.swing.JRadioButton();
-        obsOptRBtn = new javax.swing.JRadioButton();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        textoTA = new javax.swing.JTextArea();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
         expedienteP = new javax.swing.JPanel();
         expDataP = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
@@ -98,6 +49,58 @@ public class Reportes extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        marcarIncidenciaP = new javax.swing.JPanel();
+        dataP = new javax.swing.JPanel();
+        jLabel18 = new javax.swing.JLabel();
+        claveAdsIncTF = new javax.swing.JTextField();
+        jLabel19 = new javax.swing.JLabel();
+        IncControlTF = new javax.swing.JTextField();
+        jLabel20 = new javax.swing.JLabel();
+        expJudIncTF = new javax.swing.JTextField();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        nomIncTF = new javax.swing.JTextField();
+        jTextField4 = new javax.swing.JTextField();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        suplenciaTF = new javax.swing.JTextField();
+        vaciarSuplenciaBtn = new javax.swing.JButton();
+        checkRemision = new javax.swing.JCheckBox();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        semanaCB = new javax.swing.JComboBox<>();
+        tipoDocP = new javax.swing.JPanel();
+        tipoDocsBtn = new javax.swing.JButton();
+        tipoIncBtn = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        tipoDocTF = new javax.swing.JTextField();
+        incTF = new javax.swing.JTextField();
+        jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        incOptRBtn = new javax.swing.JRadioButton();
+        obsOptRBtn = new javax.swing.JRadioButton();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        textoTA = new javax.swing.JTextArea();
+        checkDocCB = new javax.swing.JCheckBox();
+        jCheckBox2 = new javax.swing.JCheckBox();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jCheckBox1 = new javax.swing.JCheckBox();
+        guardarIncBtn = new javax.swing.JButton();
+        vaciarIncBtn = new javax.swing.JButton();
+        eliminarBtn = new javax.swing.JButton();
+        imprimirOficioBtn = new javax.swing.JButton();
+        imprimirReporteSIBtn = new javax.swing.JButton();
+        imprimirSDBtn = new javax.swing.JButton();
+        imprimirCBTN = new javax.swing.JButton();
+        jLabel23 = new javax.swing.JLabel();
 
         setMinimumSize(new java.awt.Dimension(899, 520));
         setPreferredSize(new java.awt.Dimension(899, 520));
@@ -108,336 +111,6 @@ public class Reportes extends javax.swing.JPanel {
 
         opcionesReportes.setMinimumSize(new java.awt.Dimension(899, 520));
         opcionesReportes.setPreferredSize(new java.awt.Dimension(899, 520));
-
-        marcarIncidenciaP.setPreferredSize(new java.awt.Dimension(899, 614));
-
-        jLabel18.setText("Clave de Adscripción:");
-
-        jLabel19.setText("No. de Control:");
-
-        jLabel20.setText("Exp. Jud:");
-
-        jLabel21.setText("Fecha Recepción:");
-
-        jLabel22.setText("Nombre:");
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 22, Short.MAX_VALUE)
-        );
-
-        jLabel1.setText("Suplencia:");
-
-        jButton5.setText("...");
-
-        checkRemision.setText("No Remitió Documento");
-        checkRemision.setActionCommand("REMITIO");
-
-        javax.swing.GroupLayout dataPLayout = new javax.swing.GroupLayout(dataP);
-        dataP.setLayout(dataPLayout);
-        dataPLayout.setHorizontalGroup(
-            dataPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(dataPLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(dataPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(dataPLayout.createSequentialGroup()
-                        .addGroup(dataPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dataPLayout.createSequentialGroup()
-                                .addGap(2, 2, 2)
-                                .addComponent(jLabel22)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(nomIncTF))
-                            .addGroup(dataPLayout.createSequentialGroup()
-                                .addGroup(dataPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel18)
-                                    .addGroup(dataPLayout.createSequentialGroup()
-                                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel1)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(dataPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(dataPLayout.createSequentialGroup()
-                                        .addComponent(claveAdsIncTF, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jTextField4))
-                                    .addComponent(suplenciaTF))))
-                        .addContainerGap())
-                    .addGroup(dataPLayout.createSequentialGroup()
-                        .addComponent(jLabel19)
-                        .addGap(18, 18, 18)
-                        .addComponent(IncControlTF)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel20)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(expJudIncTF)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel21)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(checkRemision))))
-        );
-        dataPLayout.setVerticalGroup(
-            dataPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(dataPLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(dataPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel18)
-                    .addComponent(claveAdsIncTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(dataPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(suplenciaTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addComponent(jButton5))
-                .addGap(11, 11, 11)
-                .addGroup(dataPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(dataPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel19)
-                        .addComponent(IncControlTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel20)
-                        .addComponent(expJudIncTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel21)
-                        .addComponent(checkRemision))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(dataPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel22)
-                    .addComponent(nomIncTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel2.setText("Datos Generales");
-
-        jLabel3.setText("Semana:");
-
-        semanaCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        tipoDocsBtn.setText("...");
-
-        tipoIncBtn.setText("...");
-
-        jLabel4.setText("Tipo de Documento:");
-
-        jLabel5.setText("Incidencia:");
-
-        jLabel6.setText("F. Elaboración:");
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 20, Short.MAX_VALUE)
-        );
-
-        noElbRBtn.setText("No Elaboró Documento");
-        noElbRBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                noElbRBtnActionPerformed(evt);
-            }
-        });
-
-        correjirRBtn.setText("Requiere Corrección");
-
-        incOptRBtn.setText("Incidencia");
-
-        obsOptRBtn.setText("Observaciones");
-
-        jLabel7.setText("Para Oficio");
-
-        jLabel8.setText("Obs./Extemporaneidad:");
-
-        textoTA.setColumns(20);
-        textoTA.setRows(5);
-        jScrollPane2.setViewportView(textoTA);
-
-        javax.swing.GroupLayout tipoDocPLayout = new javax.swing.GroupLayout(tipoDocP);
-        tipoDocP.setLayout(tipoDocPLayout);
-        tipoDocPLayout.setHorizontalGroup(
-            tipoDocPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tipoDocPLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(tipoDocPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(tipoDocPLayout.createSequentialGroup()
-                        .addGroup(tipoDocPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(tipoDocPLayout.createSequentialGroup()
-                                .addComponent(tipoDocsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel4))
-                            .addGroup(tipoDocPLayout.createSequentialGroup()
-                                .addComponent(tipoIncBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel5)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(tipoDocPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tipoDocTF)
-                            .addComponent(incTF))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(tipoDocPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1)
-                            .addGroup(tipoDocPLayout.createSequentialGroup()
-                                .addComponent(jTextField2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(noElbRBtn)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(correjirRBtn))))
-                    .addGroup(tipoDocPLayout.createSequentialGroup()
-                        .addGroup(tipoDocPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(incOptRBtn)
-                            .addComponent(obsOptRBtn)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel8))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2)))
-                .addContainerGap())
-        );
-        tipoDocPLayout.setVerticalGroup(
-            tipoDocPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tipoDocPLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(tipoDocPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(tipoDocPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(tipoDocsBtn)
-                        .addComponent(jLabel4)
-                        .addComponent(tipoDocTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel6))
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(tipoDocPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(noElbRBtn)
-                        .addComponent(correjirRBtn)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(tipoDocPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tipoIncBtn)
-                    .addComponent(jLabel5)
-                    .addComponent(incTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(tipoDocPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(tipoDocPLayout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(incOptRBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(obsOptRBtn))
-                    .addComponent(jScrollPane2))
-                .addContainerGap())
-        );
-
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel9.setText("Tipo de Documento");
-
-        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel10.setText("Incidencias");
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane3.setViewportView(jTable1);
-
-        jCheckBox1.setText("Seleccionar Destino Para Impresión");
-
-        jButton6.setText("Guardar");
-
-        jButton7.setText("Vaciar");
-
-        jButton8.setText("jButton8");
-
-        jButton9.setText("jButton9");
-
-        jButton10.setText("Imprimir");
-
-        javax.swing.GroupLayout marcarIncidenciaPLayout = new javax.swing.GroupLayout(marcarIncidenciaP);
-        marcarIncidenciaP.setLayout(marcarIncidenciaPLayout);
-        marcarIncidenciaPLayout.setHorizontalGroup(
-            marcarIncidenciaPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(marcarIncidenciaPLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(marcarIncidenciaPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(dataP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(marcarIncidenciaPLayout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addComponent(semanaCB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, marcarIncidenciaPLayout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addGap(528, 528, 528)
-                        .addComponent(jCheckBox1))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2)
-                    .addComponent(tipoDocP, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(marcarIncidenciaPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton6)
-                    .addComponent(jButton7)
-                    .addComponent(jButton8)
-                    .addComponent(jButton9)
-                    .addComponent(jButton10))
-                .addContainerGap())
-        );
-        marcarIncidenciaPLayout.setVerticalGroup(
-            marcarIncidenciaPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(marcarIncidenciaPLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(marcarIncidenciaPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(semanaCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(marcarIncidenciaPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(marcarIncidenciaPLayout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(jButton6)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton7)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton8)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton9))
-                    .addGroup(marcarIncidenciaPLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(dataP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tipoDocP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(marcarIncidenciaPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(jCheckBox1)
-                    .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
-                .addGap(22, 22, 22))
-        );
-
-        opcionesReportes.addTab("Marcar Incidencia", marcarIncidenciaP);
 
         jLabel11.setText("Clave de Adscripción:");
 
@@ -614,11 +287,379 @@ public class Reportes extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel17)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         opcionesReportes.addTab("Registro de Expedientes Para Supervisión", expedienteP);
+
+        marcarIncidenciaP.setPreferredSize(new java.awt.Dimension(899, 614));
+
+        jLabel18.setText("Clave de Adscripción:");
+
+        jLabel19.setText("No. de Control:");
+
+        jLabel20.setText("Exp. Jud:");
+
+        jLabel21.setText("Fecha Recepción:");
+
+        jLabel22.setText("Nombre:");
+
+        jTextField4.setEditable(false);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 22, Short.MAX_VALUE)
+        );
+
+        jLabel1.setText("Suplencia:");
+
+        vaciarSuplenciaBtn.setText("...");
+
+        checkRemision.setText("No Remitió Documento");
+        checkRemision.setActionCommand("REMITIO");
+
+        javax.swing.GroupLayout dataPLayout = new javax.swing.GroupLayout(dataP);
+        dataP.setLayout(dataPLayout);
+        dataPLayout.setHorizontalGroup(
+            dataPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dataPLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(dataPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(dataPLayout.createSequentialGroup()
+                        .addGroup(dataPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dataPLayout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addComponent(jLabel22)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(nomIncTF))
+                            .addGroup(dataPLayout.createSequentialGroup()
+                                .addGroup(dataPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel18)
+                                    .addGroup(dataPLayout.createSequentialGroup()
+                                        .addComponent(vaciarSuplenciaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel1)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(dataPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(dataPLayout.createSequentialGroup()
+                                        .addComponent(claveAdsIncTF, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jTextField4))
+                                    .addComponent(suplenciaTF))))
+                        .addContainerGap())
+                    .addGroup(dataPLayout.createSequentialGroup()
+                        .addComponent(jLabel19)
+                        .addGap(18, 18, 18)
+                        .addComponent(IncControlTF)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel20)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(expJudIncTF)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel21)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(checkRemision))))
+        );
+        dataPLayout.setVerticalGroup(
+            dataPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dataPLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(dataPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel18)
+                    .addComponent(claveAdsIncTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(dataPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(suplenciaTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(vaciarSuplenciaBtn))
+                .addGap(11, 11, 11)
+                .addGroup(dataPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(dataPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel19)
+                        .addComponent(IncControlTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel20)
+                        .addComponent(expJudIncTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel21)
+                        .addComponent(checkRemision))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(dataPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel22)
+                    .addComponent(nomIncTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel2.setText("Datos Generales");
+
+        jLabel3.setText("Semana:");
+
+        semanaCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        tipoDocsBtn.setText("...");
+
+        tipoIncBtn.setText("...");
+
+        jLabel4.setText("Tipo de Documento:");
+
+        jLabel5.setText("Incidencia:");
+
+        jLabel6.setText("F. Elaboración:");
+
+        jPanel4.setMaximumSize(new java.awt.Dimension(25, 150));
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        incOptRBtn.setText("Incidencia");
+
+        obsOptRBtn.setText("Observaciones");
+
+        jLabel7.setText("Para Oficio");
+
+        jLabel8.setText("Obs./Extemporaneidad:");
+
+        textoTA.setColumns(20);
+        textoTA.setRows(5);
+        jScrollPane2.setViewportView(textoTA);
+
+        checkDocCB.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
+        checkDocCB.setText("<html> No Elaboró <br></br>Documento </html>");
+
+        jCheckBox2.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
+        jCheckBox2.setText("<html> Requiere<br></br> Corrección </html>");
+
+        javax.swing.GroupLayout tipoDocPLayout = new javax.swing.GroupLayout(tipoDocP);
+        tipoDocP.setLayout(tipoDocPLayout);
+        tipoDocPLayout.setHorizontalGroup(
+            tipoDocPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tipoDocPLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(tipoDocPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(tipoDocPLayout.createSequentialGroup()
+                        .addGroup(tipoDocPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(tipoDocPLayout.createSequentialGroup()
+                                .addComponent(tipoDocsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel4))
+                            .addGroup(tipoDocPLayout.createSequentialGroup()
+                                .addComponent(tipoIncBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel5)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(tipoDocPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(incTF, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                            .addComponent(tipoDocTF))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(tipoDocPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(tipoDocPLayout.createSequentialGroup()
+                                .addComponent(jTextField2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(checkDocCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jCheckBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextField1)))
+                    .addGroup(tipoDocPLayout.createSequentialGroup()
+                        .addGroup(tipoDocPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(incOptRBtn)
+                            .addComponent(obsOptRBtn)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2)))
+                .addContainerGap())
+        );
+        tipoDocPLayout.setVerticalGroup(
+            tipoDocPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tipoDocPLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(tipoDocPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(tipoDocPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(checkDocCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jCheckBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(tipoDocPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(tipoDocPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tipoDocsBtn)
+                            .addComponent(jLabel4)
+                            .addComponent(tipoDocTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(tipoDocPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tipoIncBtn)
+                    .addComponent(jLabel5)
+                    .addComponent(incTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(tipoDocPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(tipoDocPLayout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(incOptRBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(obsOptRBtn))
+                    .addComponent(jScrollPane2))
+                .addContainerGap())
+        );
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel9.setText("Tipo de Documento");
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel10.setText("Incidencias");
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(jTable1);
+
+        jCheckBox1.setText("Seleccionar Destino Para Impresión");
+
+        guardarIncBtn.setText("Guardar");
+
+        vaciarIncBtn.setText("Vaciar");
+
+        eliminarBtn.setText("Eliminar");
+
+        imprimirOficioBtn.setFont(new java.awt.Font("Segoe UI", 1, 8)); // NOI18N
+        imprimirOficioBtn.setText("Oficio");
+
+        imprimirReporteSIBtn.setFont(new java.awt.Font("Segoe UI", 1, 8)); // NOI18N
+        imprimirReporteSIBtn.setText("<html>\n<div style=\"text-align: center\">\nSin<br></br> Incidencias\n</div>\n</html>");
+        imprimirReporteSIBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        imprimirReporteSIBtn.setMinimumSize(new java.awt.Dimension(89, 39));
+
+        imprimirSDBtn.setFont(new java.awt.Font("Segoe UI", 1, 8)); // NOI18N
+        imprimirSDBtn.setText("<html>\n<div style=\"text-align:center\">\nSin<br></br>documentación\n</div>\n</html>");
+
+        imprimirCBTN.setFont(new java.awt.Font("Segoe UI", 1, 8)); // NOI18N
+        imprimirCBTN.setText("Correcciones");
+
+        jLabel23.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel23.setText("Impresiones");
+
+        javax.swing.GroupLayout marcarIncidenciaPLayout = new javax.swing.GroupLayout(marcarIncidenciaP);
+        marcarIncidenciaP.setLayout(marcarIncidenciaPLayout);
+        marcarIncidenciaPLayout.setHorizontalGroup(
+            marcarIncidenciaPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, marcarIncidenciaPLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(marcarIncidenciaPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(marcarIncidenciaPLayout.createSequentialGroup()
+                        .addGroup(marcarIncidenciaPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(dataP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(marcarIncidenciaPLayout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18)
+                                .addComponent(semanaCB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, marcarIncidenciaPLayout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jCheckBox1))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(marcarIncidenciaPLayout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(tipoDocP, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18))
+                    .addGroup(marcarIncidenciaPLayout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addGap(735, 735, 735)))
+                .addGroup(marcarIncidenciaPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(imprimirSDBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
+                    .addComponent(imprimirCBTN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(imprimirReporteSIBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(imprimirOficioBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, marcarIncidenciaPLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel23)
+                        .addGap(8, 8, 8))
+                    .addComponent(eliminarBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(vaciarIncBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(guardarIncBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(12, 12, 12))
+        );
+        marcarIncidenciaPLayout.setVerticalGroup(
+            marcarIncidenciaPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(marcarIncidenciaPLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(marcarIncidenciaPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(semanaCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(marcarIncidenciaPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(marcarIncidenciaPLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dataP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(marcarIncidenciaPLayout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(guardarIncBtn)
+                        .addGap(18, 18, 18)
+                        .addComponent(vaciarIncBtn)
+                        .addGap(18, 18, 18)
+                        .addComponent(eliminarBtn)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel9)
+                .addGroup(marcarIncidenciaPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(marcarIncidenciaPLayout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addComponent(tipoDocP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(marcarIncidenciaPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel10)
+                            .addComponent(jCheckBox1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
+                        .addGap(22, 22, 22))
+                    .addGroup(marcarIncidenciaPLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel23)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(imprimirOficioBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(imprimirReporteSIBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(imprimirSDBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(imprimirCBTN)
+                        .addGap(63, 63, 63))))
+        );
+
+        opcionesReportes.addTab("Marcar Incidencia", marcarIncidenciaP);
 
         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
         bg.setLayout(bgLayout);
@@ -643,37 +684,34 @@ public class Reportes extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void noElbRBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noElbRBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_noElbRBtnActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField IncControlTF;
     private javax.swing.JPanel bg;
+    private javax.swing.JCheckBox checkDocCB;
     private javax.swing.JCheckBox checkRemision;
     private javax.swing.JTextField claveAdsExpTF2;
     private javax.swing.JTextField claveAdsIncTF;
-    private javax.swing.JRadioButton correjirRBtn;
     private javax.swing.JPanel dataP;
+    private javax.swing.JButton eliminarBtn;
     private javax.swing.JPanel expDataP;
     private javax.swing.JTextField expJudIncTF;
     private javax.swing.JTextField expJudTF2;
     private javax.swing.JPanel expedienteP;
     private javax.swing.JTable expedientesT;
+    private javax.swing.JButton guardarIncBtn;
+    private javax.swing.JButton imprimirCBTN;
+    private javax.swing.JButton imprimirOficioBtn;
+    private javax.swing.JButton imprimirReporteSIBtn;
+    private javax.swing.JButton imprimirSDBtn;
     private javax.swing.JRadioButton incOptRBtn;
     private javax.swing.JTextField incTF;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -689,6 +727,7 @@ public class Reportes extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -709,7 +748,6 @@ public class Reportes extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField4;
     private javax.swing.JPanel marcarIncidenciaP;
     private javax.swing.JTextField nControlTF2;
-    private javax.swing.JRadioButton noElbRBtn;
     private javax.swing.JTextField nomExpTF2;
     private javax.swing.JTextField nomIncTF;
     private javax.swing.JRadioButton obsOptRBtn;
@@ -721,5 +759,7 @@ public class Reportes extends javax.swing.JPanel {
     private javax.swing.JTextField tipoDocTF;
     private javax.swing.JButton tipoDocsBtn;
     private javax.swing.JButton tipoIncBtn;
+    private javax.swing.JButton vaciarIncBtn;
+    private javax.swing.JButton vaciarSuplenciaBtn;
     // End of variables declaration//GEN-END:variables
 }
