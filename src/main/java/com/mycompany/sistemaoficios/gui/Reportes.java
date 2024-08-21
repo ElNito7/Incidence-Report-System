@@ -4,6 +4,36 @@
  */
 package com.mycompany.sistemaoficios.gui;
 
+import com.mycompany.sistemaoficios.clases.Adscripcion;
+import com.mycompany.sistemaoficios.clases.Config;
+import com.mycompany.sistemaoficios.clases.Trabajador;
+import com.mycompany.sistemaoficios.clases.Documento;
+import com.mycompany.sistemaoficios.clases.Expediente;
+import com.mycompany.sistemaoficios.clases.Incidencia;
+import com.mycompany.sistemaoficios.clases.MyUtils;
+import com.mycompany.sistemaoficios.clases.ReportTable;
+import com.mycompany.sistemaoficios.clases.Semana;
+import com.mycompany.sistemaoficios.clases.TipoIncidencia;
+import static com.mycompany.sistemaoficios.gui.Catalogo.initTrabs;
+import com.mycompany.sistemaoficios.persistencia.HibernateUtil;
+import com.mycompany.sistemaoficios.persistencia.ReportsConfig;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.Locale;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import org.hibernate.Session;
+import org.jdatepicker.impl.JDatePickerImpl;
+
 /**
  *
  * @author Keloc
@@ -13,10 +43,39 @@ public class Reportes extends javax.swing.JPanel {
     /**
      * Creates new form Revision
      */
+    private Incidencia inciModel = new Incidencia();
+    private Expediente expModel = new Expediente();
+    private Documento docModel = new Documento();
+    private TipoIncidencia tiModel = new TipoIncidencia();
+    
+    private JDatePickerImpl dp = MyUtils.setDateP();
+    private JDatePickerImpl editDp = MyUtils.setDateP();
+    private JDatePickerImpl recepDp = MyUtils.setDateP();
+    private JDatePickerImpl eRecepDp = MyUtils.setDateP();
+    private JDatePickerImpl elabDp = MyUtils.setDateP();
+    private JDatePickerImpl editElabDp = MyUtils.setDateP();
+    private JDatePickerImpl deD = MyUtils.setDateP();
+    private JDatePickerImpl hastaD = MyUtils.setDateP();
     public Reportes() {
         initComponents();
+        initSemanas(semanaCB);
+        dpPanel.add(dp);
+        editDpPanel.add(editDp);
+        dateElabP.add(elabDp);
+        receP.add(recepDp);
+        editRecepP.add(eRecepDp);
+        eDateElabP.add(editElabDp);
+        deDP.add(deD);
+        hastaDP.add(hastaD);
+        pOficio.add(normOfiBtn);
+        pOficio.add(jOfiBtn);
+        pOficio.add(delOfiBtn);
+        addDocList();
     }
 
+    public JComboBox getSemCb(){
+        return semanaCB;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -26,46 +85,111 @@ public class Reportes extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        editExpP = new javax.swing.JPanel();
+        expDataP1 = new javax.swing.JPanel();
+        jLabel24 = new javax.swing.JLabel();
+        editClaveAdsExpTF = new javax.swing.JTextField();
+        jLabel25 = new javax.swing.JLabel();
+        editNControlTF = new javax.swing.JTextField();
+        jLabel26 = new javax.swing.JLabel();
+        editExpJudTF = new javax.swing.JTextField();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        editNomExpTF = new javax.swing.JTextField();
+        editAdscText = new javax.swing.JTextField();
+        editDpPanel = new javax.swing.JPanel();
+        tableP = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        mostrarT = new javax.swing.JTable();
+        buscadorTF = new javax.swing.JTextField();
+        buscarTableBtn = new javax.swing.JButton();
+        mostrarTLabel = new javax.swing.JLabel();
+        editIncP = new javax.swing.JPanel();
+        dataP1 = new javax.swing.JPanel();
+        jLabel29 = new javax.swing.JLabel();
+        eClaveAdsIncTF = new javax.swing.JTextField();
+        jLabel30 = new javax.swing.JLabel();
+        eIncControlTF = new javax.swing.JTextField();
+        jLabel31 = new javax.swing.JLabel();
+        eExpJudIncTF = new javax.swing.JTextField();
+        jLabel32 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
+        eNomIncTF = new javax.swing.JTextField();
+        eDefIncTF = new javax.swing.JTextField();
+        jLabel34 = new javax.swing.JLabel();
+        eCheckRemision = new javax.swing.JCheckBox();
+        eToggleSuplencia = new javax.swing.JToggleButton();
+        eSuplenciaCB = new javax.swing.JComboBox<>();
+        editRecepP = new javax.swing.JPanel();
+        tipoDocP1 = new javax.swing.JPanel();
+        eTipoDocsBtn = new javax.swing.JButton();
+        eTipoIncBtn = new javax.swing.JButton();
+        jLabel35 = new javax.swing.JLabel();
+        jLabel36 = new javax.swing.JLabel();
+        eClaveDocTF = new javax.swing.JTextField();
+        eNumIncTF = new javax.swing.JTextField();
+        eIncTF = new javax.swing.JTextField();
+        eTipoDocTF = new javax.swing.JTextField();
+        jLabel37 = new javax.swing.JLabel();
+        eDateElabP = new javax.swing.JPanel();
+        eIncOptRBtn = new javax.swing.JRadioButton();
+        eObsOptRBtn = new javax.swing.JRadioButton();
+        jLabel38 = new javax.swing.JLabel();
+        jLabel39 = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        eTextoTA = new javax.swing.JTextArea();
+        eCheckDocCB = new javax.swing.JCheckBox();
+        eCorreccionCheck = new javax.swing.JCheckBox();
+        jLabel40 = new javax.swing.JLabel();
+        eSemsCB = new javax.swing.JComboBox<>();
+        pOficio = new javax.swing.ButtonGroup();
+        selectDatesP = new javax.swing.JPanel();
+        deDP = new javax.swing.JPanel();
+        hastaDP = new javax.swing.JPanel();
+        jLabel41 = new javax.swing.JLabel();
+        jLabel42 = new javax.swing.JLabel();
+        OfiMuestra = new javax.swing.ButtonGroup();
+        eOfiMuestra = new javax.swing.ButtonGroup();
         bg = new javax.swing.JPanel();
         opcionesReportes = new javax.swing.JTabbedPane();
         expedienteP = new javax.swing.JPanel();
         expDataP = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
-        claveAdsExpTF2 = new javax.swing.JTextField();
+        claveAdsExpTF = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        nControlTF2 = new javax.swing.JTextField();
+        nControlTF = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        expJudTF2 = new javax.swing.JTextField();
+        expJudTF = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        nomExpTF2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jPanel1 = new javax.swing.JPanel();
+        nomExpTF = new javax.swing.JTextField();
+        adscText = new javax.swing.JTextField();
+        dpPanel = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         expedientesT = new javax.swing.JTable();
         jLabel17 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        guardarExpBtn = new javax.swing.JButton();
+        delExpBtn = new javax.swing.JButton();
+        vaciarExpBtn = new javax.swing.JButton();
+        editExpBtn = new javax.swing.JButton();
         marcarIncidenciaP = new javax.swing.JPanel();
         dataP = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         claveAdsIncTF = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
-        IncControlTF = new javax.swing.JTextField();
+        incControlTF = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
         expJudIncTF = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         nomIncTF = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jPanel2 = new javax.swing.JPanel();
+        defIncTF = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        suplenciaTF = new javax.swing.JTextField();
-        vaciarSuplenciaBtn = new javax.swing.JButton();
         checkRemision = new javax.swing.JCheckBox();
+        toggleSuplencia = new javax.swing.JToggleButton();
+        suplenciaCB = new javax.swing.JComboBox<>();
+        receP = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         semanaCB = new javax.swing.JComboBox<>();
@@ -74,25 +198,24 @@ public class Reportes extends javax.swing.JPanel {
         tipoIncBtn = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        tipoDocTF = new javax.swing.JTextField();
+        claveDocTF = new javax.swing.JTextField();
+        numIncTF = new javax.swing.JTextField();
         incTF = new javax.swing.JTextField();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        tipoDocTF = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
-        incOptRBtn = new javax.swing.JRadioButton();
-        obsOptRBtn = new javax.swing.JRadioButton();
+        dateElabP = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         textoTA = new javax.swing.JTextArea();
         checkDocCB = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
+        correccionCheck = new javax.swing.JCheckBox();
+        inciBtn = new javax.swing.JRadioButton();
+        obsBtn = new javax.swing.JRadioButton();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        incTable = new javax.swing.JTable();
         guardarIncBtn = new javax.swing.JButton();
         vaciarIncBtn = new javax.swing.JButton();
         eliminarBtn = new javax.swing.JButton();
@@ -101,18 +224,519 @@ public class Reportes extends javax.swing.JPanel {
         imprimirSDBtn = new javax.swing.JButton();
         imprimirCBTN = new javax.swing.JButton();
         jLabel23 = new javax.swing.JLabel();
+        incsBtn = new javax.swing.JButton();
+        editIncBtn = new javax.swing.JButton();
+        fechasBtn = new javax.swing.JButton();
+        normOfiBtn = new javax.swing.JRadioButton();
+        jOfiBtn = new javax.swing.JRadioButton();
+        delOfiBtn = new javax.swing.JRadioButton();
 
-        setMinimumSize(new java.awt.Dimension(899, 520));
-        setPreferredSize(new java.awt.Dimension(899, 520));
+        jLabel24.setText("Clave de Adscripción:");
+
+        editClaveAdsExpTF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editClaveAdsExpTFActionPerformed(evt);
+            }
+        });
+        editClaveAdsExpTF.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                editClaveAdsExpTFKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                editClaveAdsExpTFKeyTyped(evt);
+            }
+        });
+
+        jLabel25.setText("No. de Control:");
+
+        jLabel26.setText("Exp. Jud:");
+
+        jLabel27.setText("Fecha Recepción:");
+
+        jLabel28.setText("Nombre:");
+
+        editAdscText.setEditable(false);
+
+        editDpPanel.setLayout(new java.awt.BorderLayout());
+
+        javax.swing.GroupLayout expDataP1Layout = new javax.swing.GroupLayout(expDataP1);
+        expDataP1.setLayout(expDataP1Layout);
+        expDataP1Layout.setHorizontalGroup(
+            expDataP1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(expDataP1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(expDataP1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(expDataP1Layout.createSequentialGroup()
+                        .addGroup(expDataP1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(expDataP1Layout.createSequentialGroup()
+                                .addComponent(jLabel24)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(editClaveAdsExpTF))
+                            .addGroup(expDataP1Layout.createSequentialGroup()
+                                .addComponent(jLabel25)
+                                .addGap(18, 18, 18)
+                                .addComponent(editNControlTF)))
+                        .addGap(18, 18, 18)
+                        .addGroup(expDataP1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(expDataP1Layout.createSequentialGroup()
+                                .addComponent(jLabel26)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(editExpJudTF)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel27)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(editDpPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(86, 86, 86))
+                            .addComponent(editAdscText)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, expDataP1Layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(jLabel28)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(editNomExpTF)))
+                .addContainerGap())
+        );
+        expDataP1Layout.setVerticalGroup(
+            expDataP1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(expDataP1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(expDataP1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel24)
+                    .addComponent(editClaveAdsExpTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(editAdscText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(expDataP1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(expDataP1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel25)
+                        .addComponent(editNControlTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel26)
+                        .addComponent(editExpJudTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel27))
+                    .addComponent(editDpPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(expDataP1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel28)
+                    .addComponent(editNomExpTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout editExpPLayout = new javax.swing.GroupLayout(editExpP);
+        editExpP.setLayout(editExpPLayout);
+        editExpPLayout.setHorizontalGroup(
+            editExpPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(editExpPLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(expDataP1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        editExpPLayout.setVerticalGroup(
+            editExpPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(editExpPLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(expDataP1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        mostrarT.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "No", "Text"
+            }
+        ));
+        mostrarT.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mostrarTMouseClicked(evt);
+            }
+        });
+        jScrollPane4.setViewportView(mostrarT);
+
+        buscadorTF.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                buscadorTFKeyPressed(evt);
+            }
+        });
+
+        buscarTableBtn.setText("Buscar");
+        buscarTableBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarTableBtnActionPerformed(evt);
+            }
+        });
+
+        mostrarTLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        mostrarTLabel.setText("Tabla de ...");
+
+        javax.swing.GroupLayout tablePLayout = new javax.swing.GroupLayout(tableP);
+        tableP.setLayout(tablePLayout);
+        tablePLayout.setHorizontalGroup(
+            tablePLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tablePLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(tablePLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(mostrarTLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 612, Short.MAX_VALUE)
+                    .addGroup(tablePLayout.createSequentialGroup()
+                        .addComponent(buscadorTF, javax.swing.GroupLayout.PREFERRED_SIZE, 475, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(buscarTableBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        tablePLayout.setVerticalGroup(
+            tablePLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tablePLayout.createSequentialGroup()
+                .addContainerGap(7, Short.MAX_VALUE)
+                .addComponent(mostrarTLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(tablePLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buscadorTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buscarTableBtn))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        jLabel29.setText("Clave de Adscripción:");
+
+        eClaveAdsIncTF.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                eClaveAdsIncTFKeyPressed(evt);
+            }
+        });
+
+        jLabel30.setText("No. de Control:");
+
+        eIncControlTF.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                eIncControlTFKeyPressed(evt);
+            }
+        });
+
+        jLabel31.setText("Exp. Jud:");
+
+        eExpJudIncTF.setEditable(false);
+
+        jLabel32.setText("Fecha Recepción:");
+
+        jLabel33.setText("Nombre:");
+
+        eNomIncTF.setEditable(false);
+
+        eDefIncTF.setEditable(false);
+
+        jLabel34.setText("Suplencia:");
+
+        eCheckRemision.setText("No Remitió Documento");
+        eCheckRemision.setActionCommand("REMITIO");
+
+        eToggleSuplencia.setText("...");
+        eToggleSuplencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eToggleSuplenciaActionPerformed(evt);
+            }
+        });
+
+        editRecepP.setLayout(new java.awt.BorderLayout());
+
+        javax.swing.GroupLayout dataP1Layout = new javax.swing.GroupLayout(dataP1);
+        dataP1.setLayout(dataP1Layout);
+        dataP1Layout.setHorizontalGroup(
+            dataP1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dataP1Layout.createSequentialGroup()
+                .addGroup(dataP1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(dataP1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(dataP1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(dataP1Layout.createSequentialGroup()
+                                .addComponent(jLabel30)
+                                .addGap(18, 18, 18)
+                                .addComponent(eIncControlTF, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel31)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(eExpJudIncTF, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel32)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(editRecepP, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(eCheckRemision))
+                            .addGroup(dataP1Layout.createSequentialGroup()
+                                .addComponent(eToggleSuplencia, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel34)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(eSuplenciaCB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(dataP1Layout.createSequentialGroup()
+                                .addComponent(jLabel29)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(eClaveAdsIncTF, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(eDefIncTF))))
+                    .addGroup(dataP1Layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(jLabel33)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(eNomIncTF)))
+                .addContainerGap())
+        );
+        dataP1Layout.setVerticalGroup(
+            dataP1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dataP1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(dataP1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel29)
+                    .addComponent(eClaveAdsIncTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(eDefIncTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(dataP1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel34)
+                    .addComponent(eToggleSuplencia)
+                    .addComponent(eSuplenciaCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11)
+                .addGroup(dataP1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(dataP1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel30)
+                        .addComponent(eIncControlTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel31)
+                        .addComponent(eExpJudIncTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel32)
+                        .addComponent(eCheckRemision))
+                    .addComponent(editRecepP, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(dataP1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel33)
+                    .addComponent(eNomIncTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        eTipoDocsBtn.setText("...");
+        eTipoDocsBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eTipoDocsBtnActionPerformed(evt);
+            }
+        });
+
+        eTipoIncBtn.setText("...");
+        eTipoIncBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eTipoIncBtnActionPerformed(evt);
+            }
+        });
+
+        jLabel35.setText("Tipo de Documento:");
+
+        jLabel36.setText("Incidencia:");
+
+        eClaveDocTF.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                eClaveDocTFKeyPressed(evt);
+            }
+        });
+
+        eNumIncTF.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                eNumIncTFKeyPressed(evt);
+            }
+        });
+
+        eIncTF.setEditable(false);
+
+        eTipoDocTF.setEditable(false);
+
+        jLabel37.setText("F. Elaboración:");
+
+        eDateElabP.setMaximumSize(new java.awt.Dimension(25, 150));
+        eDateElabP.setLayout(new java.awt.BorderLayout());
+
+        eOfiMuestra.add(eIncOptRBtn);
+        eIncOptRBtn.setText("Incidencia");
+
+        eOfiMuestra.add(eObsOptRBtn);
+        eObsOptRBtn.setText("Observaciones");
+
+        jLabel38.setText("Para Oficio");
+
+        jLabel39.setText("Obs./Extemporaneidad:");
+
+        eTextoTA.setColumns(20);
+        eTextoTA.setRows(5);
+        jScrollPane5.setViewportView(eTextoTA);
+
+        eCheckDocCB.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
+        eCheckDocCB.setText("<html> No Elaboró <br></br>Documento </html>");
+
+        eCorreccionCheck.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
+        eCorreccionCheck.setText("<html> Requiere<br></br> Corrección </html>");
+
+        javax.swing.GroupLayout tipoDocP1Layout = new javax.swing.GroupLayout(tipoDocP1);
+        tipoDocP1.setLayout(tipoDocP1Layout);
+        tipoDocP1Layout.setHorizontalGroup(
+            tipoDocP1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tipoDocP1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(tipoDocP1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(tipoDocP1Layout.createSequentialGroup()
+                        .addGroup(tipoDocP1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(tipoDocP1Layout.createSequentialGroup()
+                                .addComponent(eTipoDocsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel35))
+                            .addGroup(tipoDocP1Layout.createSequentialGroup()
+                                .addComponent(eTipoIncBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel36)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(tipoDocP1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(eNumIncTF, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                            .addComponent(eClaveDocTF))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(tipoDocP1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(tipoDocP1Layout.createSequentialGroup()
+                                .addComponent(eTipoDocTF)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel37)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(eDateElabP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(eCheckDocCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(eCorreccionCheck, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(eIncTF)))
+                    .addGroup(tipoDocP1Layout.createSequentialGroup()
+                        .addGroup(tipoDocP1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(eIncOptRBtn)
+                            .addComponent(eObsOptRBtn)
+                            .addComponent(jLabel38)
+                            .addComponent(jLabel39))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane5)))
+                .addContainerGap())
+        );
+        tipoDocP1Layout.setVerticalGroup(
+            tipoDocP1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tipoDocP1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(tipoDocP1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(tipoDocP1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(eCheckDocCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(eCorreccionCheck, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(tipoDocP1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(eDateElabP, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(tipoDocP1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(eTipoDocsBtn)
+                            .addComponent(jLabel35)
+                            .addComponent(eClaveDocTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(eTipoDocTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel37))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(tipoDocP1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(eTipoIncBtn)
+                    .addComponent(jLabel36)
+                    .addComponent(eNumIncTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(eIncTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(tipoDocP1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(tipoDocP1Layout.createSequentialGroup()
+                        .addComponent(jLabel39)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel38)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(eIncOptRBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(eObsOptRBtn))
+                    .addComponent(jScrollPane5))
+                .addContainerGap())
+        );
+
+        jLabel40.setText("Semana:");
+
+        javax.swing.GroupLayout editIncPLayout = new javax.swing.GroupLayout(editIncP);
+        editIncP.setLayout(editIncPLayout);
+        editIncPLayout.setHorizontalGroup(
+            editIncPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(tipoDocP1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(editIncPLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel40)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(eSemsCB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addComponent(dataP1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        editIncPLayout.setVerticalGroup(
+            editIncPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, editIncPLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(editIncPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel40)
+                    .addComponent(eSemsCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(dataP1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tipoDocP1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        deDP.setLayout(new java.awt.BorderLayout());
+
+        hastaDP.setLayout(new java.awt.BorderLayout());
+
+        jLabel41.setText("De:");
+
+        jLabel42.setText("Hasta:");
+
+        javax.swing.GroupLayout selectDatesPLayout = new javax.swing.GroupLayout(selectDatesP);
+        selectDatesP.setLayout(selectDatesPLayout);
+        selectDatesPLayout.setHorizontalGroup(
+            selectDatesPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(selectDatesPLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jLabel41)
+                .addGap(18, 18, 18)
+                .addComponent(deDP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(59, 59, 59)
+                .addComponent(jLabel42)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(hastaDP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(228, 228, 228))
+        );
+        selectDatesPLayout.setVerticalGroup(
+            selectDatesPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(selectDatesPLayout.createSequentialGroup()
+                .addGap(66, 66, 66)
+                .addGroup(selectDatesPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel42)
+                    .addComponent(jLabel41)
+                    .addGroup(selectDatesPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(deDP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(hastaDP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(118, Short.MAX_VALUE))
+        );
+
+        setMinimumSize(new java.awt.Dimension(960, 620));
+        setPreferredSize(new java.awt.Dimension(960, 620));
 
         bg.setBackground(new java.awt.Color(204, 204, 204));
-        bg.setMinimumSize(new java.awt.Dimension(899, 520));
-        bg.setPreferredSize(new java.awt.Dimension(899, 520));
+        bg.setMinimumSize(new java.awt.Dimension(960, 620));
+        bg.setPreferredSize(new java.awt.Dimension(960, 620));
 
         opcionesReportes.setMinimumSize(new java.awt.Dimension(899, 520));
         opcionesReportes.setPreferredSize(new java.awt.Dimension(899, 520));
 
         jLabel11.setText("Clave de Adscripción:");
+
+        claveAdsExpTF.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                claveAdsExpTFKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                claveAdsExpTFKeyTyped(evt);
+            }
+        });
 
         jLabel12.setText("No. de Control:");
 
@@ -122,16 +746,9 @@ public class Reportes extends javax.swing.JPanel {
 
         jLabel15.setText("Nombre:");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 22, Short.MAX_VALUE)
-        );
+        adscText.setEditable(false);
+
+        dpPanel.setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout expDataPLayout = new javax.swing.GroupLayout(expDataP);
         expDataP.setLayout(expDataPLayout);
@@ -145,28 +762,28 @@ public class Reportes extends javax.swing.JPanel {
                             .addGroup(expDataPLayout.createSequentialGroup()
                                 .addComponent(jLabel11)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(claveAdsExpTF2, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
+                                .addComponent(claveAdsExpTF, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
                             .addGroup(expDataPLayout.createSequentialGroup()
                                 .addComponent(jLabel12)
                                 .addGap(18, 18, 18)
-                                .addComponent(nControlTF2)))
+                                .addComponent(nControlTF)))
                         .addGap(18, 18, 18)
                         .addGroup(expDataPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(expDataPLayout.createSequentialGroup()
                                 .addComponent(jLabel13)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(expJudTF2)
+                                .addComponent(expJudTF)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel14)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(dpPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(86, 86, 86))
-                            .addComponent(jTextField3)))
+                            .addComponent(adscText)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, expDataPLayout.createSequentialGroup()
                         .addGap(2, 2, 2)
                         .addComponent(jLabel15)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(nomExpTF2)))
+                        .addComponent(nomExpTF)))
                 .addContainerGap())
         );
         expDataPLayout.setVerticalGroup(
@@ -175,21 +792,21 @@ public class Reportes extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(expDataPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(claveAdsExpTF2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(claveAdsExpTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(adscText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(expDataPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(expDataPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel12)
-                        .addComponent(nControlTF2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(nControlTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel13)
-                        .addComponent(expJudTF2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(expJudTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel14))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dpPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(expDataPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel15)
-                    .addComponent(nomExpTF2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nomExpTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
@@ -227,13 +844,33 @@ public class Reportes extends javax.swing.JPanel {
         jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel17.setText("Expediente");
 
-        jButton2.setText("Guardar");
+        guardarExpBtn.setText("Guardar");
+        guardarExpBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                guardarExpBtnActionPerformed(evt);
+            }
+        });
 
-        jButton1.setText("Eliminar");
+        delExpBtn.setText("Eliminar");
+        delExpBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                delExpBtnActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Vaciar");
+        vaciarExpBtn.setText("Vaciar");
+        vaciarExpBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vaciarExpBtnActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("Editar");
+        editExpBtn.setText("Editar");
+        editExpBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editExpBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout expedientePLayout = new javax.swing.GroupLayout(expedienteP);
         expedienteP.setLayout(expedientePLayout);
@@ -256,14 +893,14 @@ public class Reportes extends javax.swing.JPanel {
                         .addGap(64, 64, 64)
                         .addGroup(expedientePLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(expedientePLayout.createSequentialGroup()
-                                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(guardarExpBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(editExpBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(1, 1, 1))
                             .addGroup(expedientePLayout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(delExpBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(vaciarExpBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGap(50, 50, 50))))
         );
         expedientePLayout.setVerticalGroup(
@@ -278,12 +915,12 @@ public class Reportes extends javax.swing.JPanel {
                     .addGroup(expedientePLayout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addGroup(expedientePLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton2)
-                            .addComponent(jButton4))
+                            .addComponent(guardarExpBtn)
+                            .addComponent(editExpBtn))
                         .addGap(15, 15, 15)
                         .addGroup(expedientePLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton3))))
+                            .addComponent(delExpBtn)
+                            .addComponent(vaciarExpBtn))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel17)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -297,77 +934,93 @@ public class Reportes extends javax.swing.JPanel {
 
         jLabel18.setText("Clave de Adscripción:");
 
+        claveAdsIncTF.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                claveAdsIncTFKeyPressed(evt);
+            }
+        });
+
         jLabel19.setText("No. de Control:");
 
+        incControlTF.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                incControlTFKeyPressed(evt);
+            }
+        });
+
         jLabel20.setText("Exp. Jud:");
+
+        expJudIncTF.setEditable(false);
 
         jLabel21.setText("Fecha Recepción:");
 
         jLabel22.setText("Nombre:");
 
-        jTextField4.setEditable(false);
+        nomIncTF.setEditable(false);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 22, Short.MAX_VALUE)
-        );
+        defIncTF.setEditable(false);
 
         jLabel1.setText("Suplencia:");
 
-        vaciarSuplenciaBtn.setText("...");
-
         checkRemision.setText("No Remitió Documento");
         checkRemision.setActionCommand("REMITIO");
+        checkRemision.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkRemisionActionPerformed(evt);
+            }
+        });
+
+        toggleSuplencia.setText("...");
+        toggleSuplencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                toggleSuplenciaActionPerformed(evt);
+            }
+        });
+
+        receP.setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout dataPLayout = new javax.swing.GroupLayout(dataP);
         dataP.setLayout(dataPLayout);
         dataPLayout.setHorizontalGroup(
             dataPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dataPLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(dataPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dataPLayout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(jLabel22)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nomIncTF))
                     .addGroup(dataPLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(toggleSuplencia, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(suplenciaCB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(dataPLayout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(dataPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dataPLayout.createSequentialGroup()
-                                .addGap(2, 2, 2)
-                                .addComponent(jLabel22)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(nomIncTF))
                             .addGroup(dataPLayout.createSequentialGroup()
-                                .addGroup(dataPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel18)
-                                    .addGroup(dataPLayout.createSequentialGroup()
-                                        .addComponent(vaciarSuplenciaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel1)))
+                                .addComponent(jLabel19)
+                                .addGap(18, 18, 18)
+                                .addComponent(incControlTF)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel20)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(dataPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(dataPLayout.createSequentialGroup()
-                                        .addComponent(claveAdsIncTF, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jTextField4))
-                                    .addComponent(suplenciaTF))))
-                        .addContainerGap())
-                    .addGroup(dataPLayout.createSequentialGroup()
-                        .addComponent(jLabel19)
-                        .addGap(18, 18, 18)
-                        .addComponent(IncControlTF)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel20)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(expJudIncTF)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel21)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(checkRemision))))
+                                .addComponent(expJudIncTF, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel21)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(receP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(24, 24, 24)
+                                .addComponent(checkRemision))
+                            .addGroup(dataPLayout.createSequentialGroup()
+                                .addComponent(jLabel18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(claveAdsIncTF, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(defIncTF)))))
+                .addContainerGap())
         );
         dataPLayout.setVerticalGroup(
             dataPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -376,22 +1029,22 @@ public class Reportes extends javax.swing.JPanel {
                 .addGroup(dataPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18)
                     .addComponent(claveAdsIncTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(defIncTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(dataPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(suplenciaTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
-                    .addComponent(vaciarSuplenciaBtn))
+                    .addComponent(toggleSuplencia)
+                    .addComponent(suplenciaCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(11, 11, 11)
-                .addGroup(dataPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(dataPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(dataPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel19)
-                        .addComponent(IncControlTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(incControlTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel20)
                         .addComponent(expJudIncTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel21)
                         .addComponent(checkRemision))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(receP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(dataPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel22)
@@ -404,34 +1057,44 @@ public class Reportes extends javax.swing.JPanel {
 
         jLabel3.setText("Semana:");
 
-        semanaCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         tipoDocsBtn.setText("...");
+        tipoDocsBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tipoDocsBtnActionPerformed(evt);
+            }
+        });
 
         tipoIncBtn.setText("...");
+        tipoIncBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tipoIncBtnActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Tipo de Documento:");
 
         jLabel5.setText("Incidencia:");
 
+        claveDocTF.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                claveDocTFKeyPressed(evt);
+            }
+        });
+
+        numIncTF.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                numIncTFKeyPressed(evt);
+            }
+        });
+
+        incTF.setEditable(false);
+
+        tipoDocTF.setEditable(false);
+
         jLabel6.setText("F. Elaboración:");
 
-        jPanel4.setMaximumSize(new java.awt.Dimension(25, 150));
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        incOptRBtn.setText("Incidencia");
-
-        obsOptRBtn.setText("Observaciones");
+        dateElabP.setMaximumSize(new java.awt.Dimension(25, 150));
+        dateElabP.setLayout(new java.awt.BorderLayout());
 
         jLabel7.setText("Para Oficio");
 
@@ -443,9 +1106,21 @@ public class Reportes extends javax.swing.JPanel {
 
         checkDocCB.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
         checkDocCB.setText("<html> No Elaboró <br></br>Documento </html>");
+        checkDocCB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkDocCBActionPerformed(evt);
+            }
+        });
 
-        jCheckBox2.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
-        jCheckBox2.setText("<html> Requiere<br></br> Corrección </html>");
+        correccionCheck.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
+        correccionCheck.setText("<html> Requiere<br></br> Corrección </html>");
+
+        OfiMuestra.add(inciBtn);
+        inciBtn.setSelected(true);
+        inciBtn.setText("Incidencia");
+
+        OfiMuestra.add(obsBtn);
+        obsBtn.setText("Observaciones");
 
         javax.swing.GroupLayout tipoDocPLayout = new javax.swing.GroupLayout(tipoDocP);
         tipoDocP.setLayout(tipoDocPLayout);
@@ -466,27 +1141,27 @@ public class Reportes extends javax.swing.JPanel {
                                 .addComponent(jLabel5)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(tipoDocPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(incTF, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                            .addComponent(tipoDocTF))
+                            .addComponent(numIncTF, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                            .addComponent(claveDocTF))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(tipoDocPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(tipoDocPLayout.createSequentialGroup()
-                                .addComponent(jTextField2)
+                                .addComponent(tipoDocTF, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(dateElabP, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(checkDocCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jCheckBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jTextField1)))
+                                .addComponent(correccionCheck, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(incTF)))
                     .addGroup(tipoDocPLayout.createSequentialGroup()
                         .addGroup(tipoDocPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(incOptRBtn)
-                            .addComponent(obsOptRBtn)
                             .addComponent(jLabel7)
-                            .addComponent(jLabel8))
+                            .addComponent(jLabel8)
+                            .addComponent(inciBtn)
+                            .addComponent(obsBtn))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2)))
                 .addContainerGap())
@@ -498,33 +1173,35 @@ public class Reportes extends javax.swing.JPanel {
                 .addGroup(tipoDocPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(tipoDocPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(checkDocCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jCheckBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(correccionCheck, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(tipoDocPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(dateElabP, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(tipoDocPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(tipoDocsBtn)
                             .addComponent(jLabel4)
+                            .addComponent(claveDocTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tipoDocTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(tipoDocPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tipoIncBtn)
                     .addComponent(jLabel5)
-                    .addComponent(incTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(numIncTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(incTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(tipoDocPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(tipoDocPLayout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(tipoDocPLayout.createSequentialGroup()
                         .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(incOptRBtn)
+                        .addComponent(inciBtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(obsOptRBtn))
-                    .addComponent(jScrollPane2))
-                .addContainerGap())
+                        .addComponent(obsBtn)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -533,43 +1210,125 @@ public class Reportes extends javax.swing.JPanel {
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel10.setText("Incidencias");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        incTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Exped.", "AP Proc.", "Defendido", "Documento", "Incidencia", "F. Recep.", "F. Elab.", "Observ.", "Suplencia", "Requiere Correcciones"
             }
-        ));
-        jScrollPane3.setViewportView(jTable1);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false
+            };
 
-        jCheckBox1.setText("Seleccionar Destino Para Impresión");
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(incTable);
 
         guardarIncBtn.setText("Guardar");
+        guardarIncBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                guardarIncBtnActionPerformed(evt);
+            }
+        });
 
         vaciarIncBtn.setText("Vaciar");
+        vaciarIncBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vaciarIncBtnActionPerformed(evt);
+            }
+        });
 
         eliminarBtn.setText("Eliminar");
+        eliminarBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarBtnActionPerformed(evt);
+            }
+        });
 
-        imprimirOficioBtn.setFont(new java.awt.Font("Segoe UI", 1, 8)); // NOI18N
+        imprimirOficioBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         imprimirOficioBtn.setText("Oficio");
+        imprimirOficioBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                imprimirOficioBtnActionPerformed(evt);
+            }
+        });
 
-        imprimirReporteSIBtn.setFont(new java.awt.Font("Segoe UI", 1, 8)); // NOI18N
+        imprimirReporteSIBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         imprimirReporteSIBtn.setText("<html>\n<div style=\"text-align: center\">\nSin<br></br> Incidencias\n</div>\n</html>");
         imprimirReporteSIBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         imprimirReporteSIBtn.setMinimumSize(new java.awt.Dimension(89, 39));
+        imprimirReporteSIBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                imprimirReporteSIBtnActionPerformed(evt);
+            }
+        });
 
-        imprimirSDBtn.setFont(new java.awt.Font("Segoe UI", 1, 8)); // NOI18N
+        imprimirSDBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         imprimirSDBtn.setText("<html>\n<div style=\"text-align:center\">\nSin<br></br>documentación\n</div>\n</html>");
+        imprimirSDBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                imprimirSDBtnActionPerformed(evt);
+            }
+        });
 
-        imprimirCBTN.setFont(new java.awt.Font("Segoe UI", 1, 8)); // NOI18N
+        imprimirCBTN.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         imprimirCBTN.setText("Correcciones");
+        imprimirCBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                imprimirCBTNActionPerformed(evt);
+            }
+        });
 
         jLabel23.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel23.setText("Impresiones");
+
+        incsBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        incsBtn.setText("Incidencias");
+        incsBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                incsBtnActionPerformed(evt);
+            }
+        });
+
+        editIncBtn.setText("Editar");
+        editIncBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editIncBtnActionPerformed(evt);
+            }
+        });
+
+        fechasBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        fechasBtn.setText("Por Fechas");
+        fechasBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fechasBtnActionPerformed(evt);
+            }
+        });
+
+        normOfiBtn.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        normOfiBtn.setSelected(true);
+        normOfiBtn.setText("Normal");
+
+        jOfiBtn.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        jOfiBtn.setText("Jefe Depto.");
+
+        delOfiBtn.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        delOfiBtn.setText("Delegado");
 
         javax.swing.GroupLayout marcarIncidenciaPLayout = new javax.swing.GroupLayout(marcarIncidenciaP);
         marcarIncidenciaP.setLayout(marcarIncidenciaPLayout);
@@ -578,39 +1337,40 @@ public class Reportes extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, marcarIncidenciaPLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(marcarIncidenciaPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(dataP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(marcarIncidenciaPLayout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(semanaCB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(tipoDocP, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(marcarIncidenciaPLayout.createSequentialGroup()
                         .addGroup(marcarIncidenciaPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(dataP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(marcarIncidenciaPLayout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(18, 18, 18)
-                                .addComponent(semanaCB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, marcarIncidenciaPLayout.createSequentialGroup()
-                                .addComponent(jLabel10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jCheckBox1))
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(marcarIncidenciaPLayout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(tipoDocP, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18))
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel2))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(marcarIncidenciaPLayout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addGap(735, 735, 735)))
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(normOfiBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jOfiBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(delOfiBtn)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(marcarIncidenciaPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(imprimirSDBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
+                    .addComponent(imprimirSDBtn)
                     .addComponent(imprimirCBTN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(imprimirReporteSIBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(imprimirOficioBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, marcarIncidenciaPLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel23)
-                        .addGap(8, 8, 8))
+                    .addComponent(incsBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(eliminarBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(vaciarIncBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(guardarIncBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(12, 12, 12))
+                    .addComponent(guardarIncBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(editIncBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(fechasBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         marcarIncidenciaPLayout.setVerticalGroup(
             marcarIncidenciaPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -619,44 +1379,48 @@ public class Reportes extends javax.swing.JPanel {
                 .addGroup(marcarIncidenciaPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(semanaCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(marcarIncidenciaPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(marcarIncidenciaPLayout.createSequentialGroup()
+                        .addComponent(dataP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel9)
+                        .addGap(7, 7, 7)
+                        .addComponent(tipoDocP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2)
+                        .addGroup(marcarIncidenciaPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel10)
+                            .addComponent(normOfiBtn)
+                            .addComponent(jOfiBtn)
+                            .addComponent(delOfiBtn))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(dataP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addGap(22, 22, 22))
                     .addGroup(marcarIncidenciaPLayout.createSequentialGroup()
-                        .addGap(40, 40, 40)
                         .addComponent(guardarIncBtn)
                         .addGap(18, 18, 18)
                         .addComponent(vaciarIncBtn)
                         .addGap(18, 18, 18)
-                        .addComponent(eliminarBtn)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel9)
-                .addGroup(marcarIncidenciaPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(marcarIncidenciaPLayout.createSequentialGroup()
-                        .addGap(7, 7, 7)
-                        .addComponent(tipoDocP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(eliminarBtn)
                         .addGap(18, 18, 18)
-                        .addGroup(marcarIncidenciaPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel10)
-                            .addComponent(jCheckBox1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
-                        .addGap(22, 22, 22))
-                    .addGroup(marcarIncidenciaPLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(editIncBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
                         .addComponent(jLabel23)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(imprimirOficioBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(imprimirOficioBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(imprimirReporteSIBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(imprimirSDBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(imprimirCBTN)
-                        .addGap(63, 63, 63))))
+                        .addComponent(imprimirCBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(incsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(fechasBtn)
+                        .addGap(46, 46, 46))))
         );
 
         opcionesReportes.addTab("Marcar Incidencia", marcarIncidenciaP);
@@ -684,34 +1448,1260 @@ public class Reportes extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void claveAdsExpTFKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_claveAdsExpTFKeyTyped
+        
+    }//GEN-LAST:event_claveAdsExpTFKeyTyped
 
+    private void claveAdsExpTFKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_claveAdsExpTFKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            String claveAdsc = claveAdsExpTF.getText();
+            writeAdsc(adscText,claveAdsc);
+            if (!adscText.getText().equals("NO ENCONTRADO")){
+                initExps();
+            }
+        }
+    }//GEN-LAST:event_claveAdsExpTFKeyPressed
+
+    private void guardarExpBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarExpBtnActionPerformed
+        if(validarCamposExp()){
+            String claveAdsc = claveAdsExpTF.getText();
+            String noControl = nControlTF.getText();
+            String expJud = expJudTF.getText();
+            String nom = nomExpTF.getText();
+            LocalDate date = convert(dp);
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            try {
+                session.beginTransaction();
+                Adscripcion adsc = session.createQuery("FROM Adscripcion WHERE clave = :claveAdsc", Adscripcion.class).setParameter("claveAdsc", claveAdsc).uniqueResult();
+                Expediente exp = new Expediente(adsc, noControl, date.getYear(), expJud, date, nom);
+                session.save(exp);
+                session.getTransaction().commit();
+                initExps();
+                JOptionPane.showMessageDialog(null, "¡Expediente Añadido!");
+                nControlTF.setText("");
+                expJudTF.setText("");
+                nomExpTF.setText("");
+            } catch(Exception e){
+                if (session.getTransaction() != null) {
+                    session.getTransaction().rollback();
+                }
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            } finally {
+                session.close();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Llene todos los campos para guardar el expediente");
+        }
+    }//GEN-LAST:event_guardarExpBtnActionPerformed
+
+    private void vaciarExpBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vaciarExpBtnActionPerformed
+        claveAdsExpTF.setText("");
+        adscText.setText("");
+        nControlTF.setText("");
+        expJudTF.setText("");
+        nomExpTF.setText("");
+        MyUtils.emptyTable(expModel.getModel(), expedientesT);
+    }//GEN-LAST:event_vaciarExpBtnActionPerformed
+
+    private void editExpBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editExpBtnActionPerformed
+        int row = expedientesT.getSelectedRow();
+        if (row == -1){
+            JOptionPane.showMessageDialog(null, "Seleccione una fila para editar");
+        } else {
+            String nControl = (String) expedientesT.getValueAt(row, 0);
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            try {
+                session.beginTransaction();
+                Expediente exp = session.createQuery("FROM Expediente WHERE expediente = :exp", Expediente.class).setParameter("exp", nControl).uniqueResult();
+                editClaveAdsExpTF.setText(exp.getAdscripcion().getClave());
+                editAdscText.setText(exp.getAdscripcion().getAdscripcion());
+                editNControlTF.setText(exp.getnControl());
+                editExpJudTF.setText(exp.getExpJud());
+                editNomExpTF.setText(exp.getDefendido());
+                editDp.getModel().setDay(exp.getRecepcion().getDayOfMonth());
+                editDp.getModel().setMonth(exp.getRecepcion().getMonthValue()-1);
+                editDp.getModel().setYear(exp.getRecepcion().getYear());
+                editDp.getModel().setSelected(true);
+                int res = JOptionPane.showConfirmDialog(null, editExpP, "Edición de Expediente", JOptionPane.OK_CANCEL_OPTION);
+                if (res==0 && eValidarCamposExp()){
+                    String claveAdsc = editClaveAdsExpTF.getText();
+                    String nuevoC = editNControlTF.getText();
+                    String expJud = editExpJudTF.getText();
+                    String nom = editNomExpTF.getText();
+                    Adscripcion adsc = session.createQuery("FROM Adscripcion WHERE clave = :claveAdsc", Adscripcion.class).setParameter("claveAdsc", claveAdsc).uniqueResult();
+                    LocalDate date = (LocalDate) dp.getModel().getValue();
+                    if (date != null){
+                        date.plusMonths(1);
+                    }
+                    exp.setAdscripcion(adsc);
+                    exp.setAnio(date.getYear());
+                    exp.setDefendido(nom);
+                    exp.setExpJud(expJud);
+                    exp.setRecepcion(date);
+                    exp.setnControl(nuevoC);
+                    session.save(exp);
+                    session.getTransaction().commit();
+                    initExps();
+                }
+            } catch(Exception e){
+                if (session.getTransaction() != null) {
+                    session.getTransaction().rollback();
+                }
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            } finally {
+                session.close();
+            }
+        }
+    }//GEN-LAST:event_editExpBtnActionPerformed
+
+    private void editClaveAdsExpTFKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_editClaveAdsExpTFKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            String claveAdsc = claveAdsExpTF.getText();
+            writeAdsc(editAdscText,claveAdsc);
+        }
+    }//GEN-LAST:event_editClaveAdsExpTFKeyPressed
+
+    private void editClaveAdsExpTFKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_editClaveAdsExpTFKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editClaveAdsExpTFKeyTyped
+
+    private void editClaveAdsExpTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editClaveAdsExpTFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editClaveAdsExpTFActionPerformed
+
+    private void delExpBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delExpBtnActionPerformed
+        int row = expedientesT.getSelectedRow();
+        if (row == -1){
+            JOptionPane.showMessageDialog(null, "Seleccione una fila para editar");
+        } else if (JOptionPane.showConfirmDialog(null, "Esta acción eliminará el elemento seleccionado, ¿Desea Continuar?", "Confirmación", JOptionPane.OK_CANCEL_OPTION)==0){
+            String nControl = (String) expedientesT.getValueAt(row, 0);
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            try {
+                session.beginTransaction();
+                Expediente exp = session.createQuery("FROM Expediente WHERE expediente = :exp", Expediente.class).setParameter("exp", nControl).uniqueResult();
+                List<Incidencia> incs = session.createQuery("FROM Incidencia WHERE expediente = :e", Incidencia.class).setParameter("e", exp).list();
+                for (Incidencia i:incs){
+                    i.setExp(null);
+                    session.update(i);
+                }
+                session.delete(exp);
+                session.getTransaction().commit();
+                initExps();
+                JOptionPane.showMessageDialog(null, "¡Expediente Eliminado!");
+            } catch(Exception e){
+                if (session.getTransaction() != null) {
+                    session.getTransaction().rollback();
+                }
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            } finally {
+                session.close();
+            }
+        }
+    }//GEN-LAST:event_delExpBtnActionPerformed
+
+    private void incControlTFKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_incControlTFKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            String noControl = incControlTF.getText();
+            writeExp(noControl, claveAdsIncTF, defIncTF, expJudIncTF, nomIncTF);
+            claveDocTF.requestFocus();
+        } else if (evt.getKeyCode() == KeyEvent.VK_TAB){
+            claveDocTF.requestFocus();
+        }
+    }//GEN-LAST:event_incControlTFKeyPressed
+
+    private void vaciarIncBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vaciarIncBtnActionPerformed
+        claveAdsIncTF.setText("");
+        defIncTF.setText("");
+        incControlTF.setText("");
+        expJudIncTF.setText("");
+        nomIncTF.setText("");
+        claveDocTF.setText("");
+        tipoDocTF.setText("");
+        numIncTF.setText("");
+        incTF.setText("");
+        textoTA.setText("");
+        recepDp.getModel().setSelected(false);
+        elabDp.getModel().setSelected(false);
+        checkRemision.setSelected(false);
+        checkDocCB.setSelected(false);
+        correccionCheck.setSelected(false);
+        MyUtils.emptyTable(inciModel.getModel(), incTable);
+    }//GEN-LAST:event_vaciarIncBtnActionPerformed
+
+    private void claveAdsIncTFKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_claveAdsIncTFKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER && !semanaCB.getSelectedItem().equals("--")){
+            try {
+                writeAdsc(defIncTF, claveAdsIncTF.getText());
+                incControlTF.requestFocus();
+                if (!defIncTF.getText().equals("NO ENCONTRADO")){
+                    initIncidencias();
+                }
+            } catch(Exception e){
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            } 
+        } else if (evt.getKeyCode() == KeyEvent.VK_TAB){
+            incControlTF.requestFocus();
+        } else if (semanaCB.getSelectedItem().equals("--")){
+            JOptionPane.showMessageDialog(null, "Seleccione una semana");
+        }
+    }//GEN-LAST:event_claveAdsIncTFKeyPressed
+
+    private void claveDocTFKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_claveDocTFKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            String clave = claveDocTF.getText();
+            writeDoc(clave, tipoDocTF);
+            numIncTF.requestFocus();
+        } else if (evt.getKeyCode() == KeyEvent.VK_TAB){
+            numIncTF.requestFocus();
+        }
+    }//GEN-LAST:event_claveDocTFKeyPressed
+
+    private void numIncTFKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_numIncTFKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            writeTipoInc(numIncTF, incTF);
+            textoTA.requestFocus();
+        } else if (evt.getKeyCode() == KeyEvent.VK_TAB){
+            textoTA.requestFocus();
+        }
+    }//GEN-LAST:event_numIncTFKeyPressed
+
+    private void tipoDocsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoDocsBtnActionPerformed
+        showDocsTable("Tabla de Documentos");
+    }//GEN-LAST:event_tipoDocsBtnActionPerformed
+
+    private void tipoIncBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoIncBtnActionPerformed
+        showTipoIncTable("Tabla de Incidencias");
+    }//GEN-LAST:event_tipoIncBtnActionPerformed
+
+    private void toggleSuplenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toggleSuplenciaActionPerformed
+        if (toggleSuplencia.isSelected()){
+            Catalogo.initTrabs(suplenciaCB, "DEFENSOR");
+        } else {
+            suplenciaCB.removeAllItems();
+        }
+    }//GEN-LAST:event_toggleSuplenciaActionPerformed
+
+    private void guardarIncBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarIncBtnActionPerformed
+        if (validarCamposInc()){
+            String claveExp = incControlTF.getText();
+            String claveDoc = claveDocTF.getText();
+            String inc = incTF.getText();
+            String s = semanaCB.getSelectedItem().toString();
+            String obs = textoTA.getText();
+            String correccion = "NO";
+            LocalDate elabDate;
+            LocalDate recepDate;
+            boolean muestraInci = true;
+            if (!checkRemision.isSelected()){
+                recepDate = convert(recepDp);
+            } else {
+                recepDate = null;
+            }
+            if (!checkDocCB.isSelected()){
+                elabDate = convert(elabDp);
+            } else {
+                elabDate = null;
+            }
+            
+            if (correccionCheck.isSelected()){
+                correccion = "SI";
+            }
+            if (obsBtn.isSelected()){
+                muestraInci = false;
+            }
+            Incidencia veriInci = getInc(claveExp, claveAdsIncTF.getText(), s, inc, claveDoc, obs);
+            if (veriInci == null){
+                TipoIncidencia incidencia = buscarInc(inc);
+                Session session = HibernateUtil.getSessionFactory().openSession();
+                try {
+                    session.beginTransaction();
+                    Expediente exp = session.createQuery("FROM Expediente WHERE expediente = :claveExp",Expediente.class).setParameter("claveExp", claveExp).uniqueResult();
+                    Documento doc = session.createQuery("FROM Documento WHERE clave = :claveDoc",Documento.class).setParameter("claveDoc", claveDoc).uniqueResult();
+                    Semana sem = session.createQuery("FROM Semana WHERE semana = :s",Semana.class).setParameter("s", s).uniqueResult();
+                    Trabajador suplencia;
+                    if (toggleSuplencia.isSelected()){
+                        String suplente = suplenciaCB.getSelectedItem().toString();
+                        suplencia = session.createQuery("FROM Defensor WHERE nombre = :nom",Trabajador.class).setParameter("nom", suplente).uniqueResult();
+                    } else {
+                        suplencia = null;
+                    }
+
+                    Incidencia i = new Incidencia(incidencia, exp, doc, elabDate, recepDate, obs, suplencia, correccion, sem, exp.getAdscripcion(), muestraInci);
+                    session.save(i);
+                    session.getTransaction().commit();
+                    initIncidencias();
+                    JOptionPane.showMessageDialog(null, "¡Incidencia Agregada!");
+                    expJudIncTF.setText("");
+                    nomIncTF.setText("");
+                    claveDocTF.setText("");
+                    tipoDocTF.setText("");
+                    numIncTF.setText("");
+                    incTF.setText("");
+                    textoTA.setText("");
+                    recepDp.getModel().setSelected(false);
+                    elabDp.getModel().setSelected(false);
+                    checkRemision.setSelected(false);
+                    checkDocCB.setSelected(false);
+                    correccionCheck.setSelected(false);
+                } catch(Exception e){
+                    if (session.getTransaction() != null) {
+                        session.getTransaction().rollback();
+                    }
+                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(null, e.getMessage());
+                } finally {
+                   session.close();
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Esa Incidencia ya existe");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Llene todos los campos para guardar la incidencia");
+        }
+        
+    }//GEN-LAST:event_guardarIncBtnActionPerformed
+
+    private void eliminarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarBtnActionPerformed
+        int row = incTable.getSelectedRow();
+        if (row==-1){
+            JOptionPane.showMessageDialog(null, "Seleccione una fila a eliminar");
+        } else if (JOptionPane.showConfirmDialog(null, "Esta acción eliminará el elemento seleccionado, ¿Desea Continuar?", "Confirmación", JOptionPane.OK_CANCEL_OPTION)==0){
+            String exped = (String) incTable.getValueAt(row, 0);
+            String incidencia = (String) incTable.getValueAt(row, 4);
+            String documento = (String) incTable.getValueAt(row, 3);
+            String obs = (String) incTable.getValueAt(row, 7);
+            String cAdsc = claveAdsIncTF.getText();
+            String semana = semanaCB.getSelectedItem().toString();
+            Incidencia inc = getInc(exped, cAdsc, semana, incidencia, documento, obs);
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            try {
+                session.beginTransaction();
+                session.delete(inc);
+                session.getTransaction().commit();
+                initIncidencias();
+                JOptionPane.showMessageDialog(null, "¡Incidencia Eliminada!");
+            } catch(Exception e){
+                if (session.getTransaction() != null) {
+                    session.getTransaction().rollback();
+                }
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            } finally {
+                session.close();
+            }
+        }
+    }//GEN-LAST:event_eliminarBtnActionPerformed
+
+    private void editIncBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editIncBtnActionPerformed
+        int row = incTable.getSelectedRow();
+        if (row==-1){
+            JOptionPane.showMessageDialog(null, "Seleccione una fila a editar");
+        } else {
+            String exped = (String) incTable.getValueAt(row, 0);
+            String documento = (String) incTable.getValueAt(row, 3);
+            String incidencia = (String) incTable.getValueAt(row, 4);
+            String frecep = (String) incTable.getValueAt(row, 5);
+            String felab = (String) incTable.getValueAt(row, 6);
+            String observaciones = (String) incTable.getValueAt(row, 7);
+            String suplencia = (String) incTable.getValueAt(row, 8);
+            String rc = (String) incTable.getValueAt(row, 9);
+            String cAdsc = claveAdsIncTF.getText();
+            String semana = semanaCB.getSelectedItem().toString();
+            Incidencia inc = getInc(exped, cAdsc, semana, incidencia, documento, observaciones);
+            LocalDate felabD;
+            initSemanas(eSemsCB);
+            eSemsCB.setSelectedItem(semana);
+            eClaveAdsIncTF.setText(cAdsc);
+            writeAdsc(eDefIncTF, cAdsc);
+            if (!suplencia.equals("")){
+                eToggleSuplencia.setSelected(true);
+                Catalogo.initTrabs(eSuplenciaCB, "DEFENSOR");
+                eSuplenciaCB.setSelectedItem(suplencia);
+            } else {
+                eSuplenciaCB.removeAllItems();
+                eToggleSuplencia.setSelected(false);
+            }
+            if (rc.equals("SI")){
+                eCorreccionCheck.setSelected(true);
+            } else {
+                eCorreccionCheck.setSelected(false);
+            }
+            if (felab.equals("NO ELABORO")){
+                editElabDp.getModel().setSelected(false);
+                felabD = null;
+                eCheckDocCB.setSelected(true);
+            } else {
+                String[] fe = felab.split("-");
+                editElabDp.getModel().setDate(Integer.parseInt(fe[0]), Integer.parseInt(fe[1])-1, Integer.parseInt(fe[2]));
+                editElabDp.getModel().setSelected(true);
+                felabD = LocalDate.parse(felab);
+                eCheckDocCB.setSelected(false);
+            }
+            if (!frecep.equals("NO REMITIO")){
+                String[] fe = frecep.split("-");
+                eRecepDp.getModel().setDate(Integer.parseInt(fe[0]), Integer.parseInt(fe[1])-1, Integer.parseInt(fe[2]));
+                eRecepDp.getModel().setSelected(true);
+                eCheckRemision.setSelected(false);
+            } else {
+                eRecepDp.getModel().setSelected(false);
+                eCheckRemision.setSelected(true);
+            }
+            if (inc.isMuestraInci() == true){
+                eIncOptRBtn.setSelected(true);
+            } else {
+                eObsOptRBtn.setSelected(true);
+            }
+            eIncControlTF.setText(exped);
+            writeExp(exped, eClaveAdsIncTF, eDefIncTF, eExpJudIncTF, eNomIncTF);
+            eClaveDocTF.setText(documento);
+            writeDoc(documento, eTipoDocTF);
+            TipoIncidencia i = buscarInc(incidencia);
+            eNumIncTF.setText(String.valueOf(i.getId()));
+            writeTipoInc(eNumIncTF, eIncTF);
+            eTextoTA.setText(observaciones);
+            int res = JOptionPane.showConfirmDialog(null, editIncP, "Edición de Incidencia", JOptionPane.OK_CANCEL_OPTION);
+            if (res==0 && eValidarCamposInc()){
+                Session session = HibernateUtil.getSessionFactory().openSession();
+                try {
+                    session.beginTransaction();
+                    String e = eIncControlTF.getText();
+                    String a = eClaveAdsIncTF.getText();
+                    String s = eSemsCB.getSelectedItem().toString();
+                    String cD = eClaveDocTF.getText();
+                    String nInc = eIncTF.getText();
+                    Trabajador suplente;
+                    if (eToggleSuplencia.isSelected()){
+                        String nom = eSuplenciaCB.getSelectedItem().toString();
+                        suplente = session.createQuery("FROM Defensor WHERE nombre :n", Trabajador.class).setParameter("n", nom).uniqueResult();
+                    } else {
+                        suplente = null;
+                    }
+                    String corr = "NO";
+                    if (eCorreccionCheck.isSelected()){
+                        corr = "SI";
+                    }
+                    LocalDate f;
+                    if (editElabDp.getModel().isSelected() && !eCheckDocCB.isSelected()){
+                        f = convert(editElabDp);
+                    } else {
+                        f = null;
+                    }
+                    LocalDate r;
+                    if (eRecepDp.getModel().isSelected() && !eCheckRemision.isSelected()){
+                        r = convert(eRecepDp);
+                    } else {
+                        r = null;
+                    }
+                    boolean muestraInci = false;
+                    if (eIncOptRBtn.isSelected()){
+                        muestraInci = true;
+                    }
+                    //nuevos
+                    Expediente exp = session.createQuery("FROM Expediente WHERE expediente = :exp", Expediente.class).setParameter("exp", e).uniqueResult();
+                    Adscripcion adsc = session.createQuery("FROM Adscripcion WHERE clave = :claveAdsc", Adscripcion.class).setParameter("claveAdsc", a).uniqueResult();
+                    Semana sem = session.createQuery("FROM Semana WHERE semana = :s", Semana.class).setParameter("s", s).uniqueResult();
+                    Documento nD = session.createQuery("FROM Documento WHERE clave = :c", Documento.class).setParameter("c", cD).uniqueResult();
+                    TipoIncidencia nInci = session.createQuery("FROM TipoIncidencia WHERE incidencia = :i", TipoIncidencia.class).setParameter("i", nInc).uniqueResult();
+                    
+                    inc.setAdsc(adsc);
+                    inc.setExp(exp);
+                    inc.setSem(sem);
+                    inc.setIncidencia(nInci);
+                    inc.setDoc(nD);
+                    inc.setObservaciones(eTextoTA.getText());
+                    inc.setSuplencia(suplente);
+                    inc.setElab(f);
+                    inc.setFecha(f);
+                    inc.setCorreccion(corr);
+                    inc.setMuestraInci(muestraInci);
+                    session.update(inc);
+                    session.getTransaction().commit();
+                    initIncidencias();
+                    JOptionPane.showMessageDialog(null, "¡Incidencia Actualizada!");
+                } catch(Exception e){
+                    if (session.getTransaction() != null) {
+                        session.getTransaction().rollback();
+                    }
+                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(null, e.getMessage());
+                } finally {
+                    session.close();
+                }
+            }
+        }
+    }//GEN-LAST:event_editIncBtnActionPerformed
+
+    private void eClaveAdsIncTFKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_eClaveAdsIncTFKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            String clave = eClaveAdsIncTF.getText();
+            try {
+                writeAdsc(eDefIncTF, clave);
+                eIncControlTF.requestFocus();
+            } catch(Exception e){
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            } 
+        } else if (evt.getKeyCode() == KeyEvent.VK_TAB){
+            eIncControlTF.requestFocus();
+        }
+    }//GEN-LAST:event_eClaveAdsIncTFKeyPressed
+
+    private void eIncControlTFKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_eIncControlTFKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            String noControl = eIncControlTF.getText();
+            writeExp(noControl, eClaveAdsIncTF, eDefIncTF, eExpJudIncTF, eNomIncTF);
+            eClaveDocTF.requestFocus();
+        } else if (evt.getKeyCode() == KeyEvent.VK_TAB){
+            eClaveDocTF.requestFocus();
+        }
+    }//GEN-LAST:event_eIncControlTFKeyPressed
+
+    private void eToggleSuplenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eToggleSuplenciaActionPerformed
+        if (eToggleSuplencia.isSelected()){
+            Catalogo.initTrabs(eSuplenciaCB,"DEFENSOR");
+        } else {
+            eSuplenciaCB.removeAllItems();
+        }
+    }//GEN-LAST:event_eToggleSuplenciaActionPerformed
+
+    private void eTipoDocsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eTipoDocsBtnActionPerformed
+        showDocsTable("Tabla de Documentos desde Edición");
+    }//GEN-LAST:event_eTipoDocsBtnActionPerformed
+
+    private void eTipoIncBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eTipoIncBtnActionPerformed
+        showTipoIncTable("Tabla de Incidencias desde Edición");
+    }//GEN-LAST:event_eTipoIncBtnActionPerformed
+
+    private void eClaveDocTFKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_eClaveDocTFKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            String clave = eClaveDocTF.getText();
+            writeDoc(clave, eTipoDocTF);
+            eNumIncTF.requestFocus();
+        } else if (evt.getKeyCode() == KeyEvent.VK_TAB){
+            eNumIncTF.requestFocus();
+        }
+    }//GEN-LAST:event_eClaveDocTFKeyPressed
+
+    private void eNumIncTFKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_eNumIncTFKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            writeTipoInc(eNumIncTF, eIncTF);
+            eTextoTA.requestFocus();
+        } else if (evt.getKeyCode() == KeyEvent.VK_TAB){
+            eTextoTA.requestFocus();
+        }
+    }//GEN-LAST:event_eNumIncTFKeyPressed
+
+    private void imprimirOficioBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imprimirOficioBtnActionPerformed
+        String nOficio = JOptionPane.showInputDialog(null, "Ingresa el numero de oficio");
+        if (!nOficio.isBlank()){
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            try{
+                session.beginTransaction();
+                String semana = semanaCB.getSelectedItem().toString();
+                Config config = session.createQuery("FROM Config WHERE id = 1", Config.class).uniqueResult();
+                Adscripcion adsc = session.createQuery("FROM Adscripcion WHERE clave = :c", Adscripcion.class).setParameter("c", claveAdsIncTF.getText().toUpperCase()).uniqueResult();
+                Semana sem = session.createQuery("FROM Semana WHERE semana = :s", Semana.class).setParameter("s", semana).uniqueResult();
+                String def = defIncTF.getText();
+                LocalDate hoy = LocalDate.now();
+                DateTimeFormatter formateador = DateTimeFormatter.ofPattern("EEEE, d 'de' MMMM 'de' yyyy", new Locale("es", "ES"));
+                String fecha = config.getUbi() + " a "+ hoy.format(formateador);
+                String leyenda = config.getLeyenda();
+                String firma = config.getDelegado();
+                String puesto = "Titular de la Delegación";
+                String jfa = config.getJefeDpto()+". Jefe de Departamento";
+                String sup = "";
+                if (jOfiBtn.isSelected()){
+                    puesto = "Jefe de Departamento";
+                    firma = config.getJefeDpto();
+                    sup = config.getFundamento();
+                } else if (delOfiBtn.isSelected()){
+                    jfa = firma +". "+puesto;
+                }
+                String oficial = adsc.getOficial().getNom();
+                String revisor = adsc.getRevisor().getNom()+"."+"Oficial Administrativo Revisor";
+                String dele = config.getDelegacion()+"/"+nOficio+"/"+hoy.getYear();
+                String delegacion = config.getAsJud();
+                String repo = config.getReporte();
+                String aj = adsc.getAdscripcion();
+                if (adsc.getRevSup() != null){
+                    revisor = adsc.getRevSup().getNom();
+                }
+                String[] arr = {def, fecha, leyenda, semana, firma, puesto, oficial, jfa, revisor, dele, delegacion, repo, aj, sup};
+                List<Incidencia> incs = session.createQuery("FROM Incidencia WHERE (adscripcion = :adsc AND semana = :sem)", Incidencia.class)
+                        .setParameter("adsc", adsc)
+                        .setParameter("sem", sem)
+                        .list();
+                List<ReportTable> rt = ReportsConfig.extractData(incs);
+                ReportsConfig.makeOficio(arr, rt);
+            } catch(Exception e){
+                if (session.getTransaction() != null) {
+                    session.getTransaction().rollback();
+                }
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            } finally {
+                session.close();
+            }
+        }
+    }//GEN-LAST:event_imprimirOficioBtnActionPerformed
+
+    private void imprimirReporteSIBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imprimirReporteSIBtnActionPerformed
+        noDataReport("NO SE PRESENTARON INCIDENCIAS EN EL PERIODO QUE SE REPORTA");
+    }//GEN-LAST:event_imprimirReporteSIBtnActionPerformed
+
+    private void imprimirSDBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imprimirSDBtnActionPerformed
+        noDataReport("NO SE PRESENTÓ DOCUMENTACIÓN EN EL PERIODO QUE SE REPORTA");
+    }//GEN-LAST:event_imprimirSDBtnActionPerformed
+
+    private void incsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_incsBtnActionPerformed
+        String clave = claveAdsIncTF.getText().toUpperCase();
+        if (!clave.isBlank()){
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            try{
+                session.beginTransaction();
+                String semana = semanaCB.getSelectedItem().toString();
+                Config config = session.createQuery("FROM Config WHERE id = 1", Config.class).uniqueResult();
+                Adscripcion adsc = session.createQuery("FROM Adscripcion WHERE clave = :c", Adscripcion.class).setParameter("c", clave).uniqueResult();
+                Semana sem = session.createQuery("FROM Semana WHERE semana = :s", Semana.class).setParameter("s", semana).uniqueResult();
+                List<Incidencia> incs = session.createQuery("FROM Incidencia WHERE (adscripcion = :adsc AND semana = :sem)", Incidencia.class)
+                        .setParameter("adsc", adsc)
+                        .setParameter("sem", sem)
+                        .list();
+                String def = defIncTF.getText();
+                String firma = config.getDelegado();
+                String jfa = config.getJefeDpto();
+                String revisor = adsc.getRevisor().getNom();
+                String dele = config.getAsJud();
+                if (adsc.getRevSup() != null){
+                    revisor = adsc.getRevSup().getNom();
+                }
+                String suplencia = "SIN SUPLENCIA";
+                if (toggleSuplencia.isSelected()){
+                    suplencia = suplenciaCB.getSelectedItem().toString();
+                }
+                String[] arr = {def, suplencia, clave, semana, firma, revisor, jfa, dele};
+                ReportsConfig.makeIncidencias(arr, incs);
+            } catch(Exception e){
+                if (session.getTransaction() != null) {
+                    session.getTransaction().rollback();
+                }
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            } finally {
+                session.close();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Ingrese clave de adscripción");
+        }
+    }//GEN-LAST:event_incsBtnActionPerformed
+
+    private void imprimirCBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imprimirCBTNActionPerformed
+        String clave = claveAdsIncTF.getText().toUpperCase();
+        
+        if (!clave.isBlank()){
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            try{
+                session.beginTransaction();
+                String semana = semanaCB.getSelectedItem().toString();
+                Config config = session.createQuery("FROM Config WHERE id = 1", Config.class).uniqueResult();
+                Adscripcion adsc = session.createQuery("FROM Adscripcion WHERE clave = :c", Adscripcion.class).setParameter("c", clave).uniqueResult();
+                Semana sem = session.createQuery("FROM Semana WHERE semana = :s", Semana.class).setParameter("s", semana).uniqueResult();
+                List<Incidencia> incs = session.createQuery("FROM Incidencia WHERE (adscripcion = :adsc AND semana = :sem AND correccion = :corr)", Incidencia.class)
+                        .setParameter("adsc", adsc)
+                        .setParameter("sem", sem)
+                        .setParameter("corr", "SI")
+                        .list();
+                String def = defIncTF.getText();
+                String firma = config.getDelegado();
+                String jfa = config.getJefeDpto();
+                String revisor = adsc.getRevisor().getNom();
+                String dele = config.getAsJud();
+                if (adsc.getRevSup() != null){
+                    revisor = adsc.getRevSup().getNom();
+                }
+                String suplencia = "SIN SUPLENCIA";
+                if (toggleSuplencia.isSelected()){
+                    suplencia = suplenciaCB.getSelectedItem().toString();
+                }
+                String[] arr = {def, suplencia, clave, semana, firma, revisor, jfa, dele};
+                ReportsConfig.makeIncidencias(arr, incs);
+            } catch(Exception e){
+                if (session.getTransaction() != null) {
+                    session.getTransaction().rollback();
+                }
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            } finally {
+                session.close();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Ingrese clave de adscripción");
+        }
+    }//GEN-LAST:event_imprimirCBTNActionPerformed
+
+    private void fechasBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fechasBtnActionPerformed
+        String clave = claveAdsIncTF.getText().toUpperCase();
+        int res = JOptionPane.showConfirmDialog(null, selectDatesP, "Selección de fecha de incidencias", JOptionPane.OK_CANCEL_OPTION);
+        if (!clave.isBlank() && res == 0){
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            try{
+                session.beginTransaction();
+                String semana = semanaCB.getSelectedItem().toString();
+                Config config = session.createQuery("FROM Config WHERE id = 1", Config.class).uniqueResult();
+                Adscripcion adsc = session.createQuery("FROM Adscripcion WHERE clave = :c", Adscripcion.class).setParameter("c", clave).uniqueResult();
+                Semana sem = session.createQuery("FROM Semana WHERE semana = :s", Semana.class).setParameter("s", semana).uniqueResult();
+                List<Incidencia> incs = session.createQuery("FROM Incidencia WHERE (adscripcion = :adsc AND semana = :sem AND (fecha BETWEEN :fi AND :fe))", Incidencia.class)
+                        .setParameter("adsc", adsc)
+                        .setParameter("sem", sem)
+                        .setParameter("fi", convert(deD))
+                        .setParameter("fe", convert(hastaD))
+                        .list();
+                String def = defIncTF.getText();
+                String firma = config.getDelegado();
+                String jfa = config.getJefeDpto();
+                String revisor = adsc.getRevisor().getNom();
+                String dele = config.getAsJud();
+                if (adsc.getRevSup() != null){
+                    revisor = adsc.getRevSup().getNom();
+                }
+                String suplencia = "SIN SUPLENCIA";
+                if (toggleSuplencia.isSelected()){
+                    suplencia = suplenciaCB.getSelectedItem().toString();
+                }
+                String[] arr = {def, suplencia, clave, semana, firma, revisor, jfa, dele};
+                ReportsConfig.makeIncidencias(arr, incs);
+            } catch(Exception e){
+                if (session.getTransaction() != null) {
+                    session.getTransaction().rollback();
+                }
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            } finally {
+                session.close();
+                deD.getModel().setSelected(false);
+                hastaD.getModel().setSelected(false);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Ingrese clave de adscripción");
+        }
+    }//GEN-LAST:event_fechasBtnActionPerformed
+
+    private void mostrarTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mostrarTMouseClicked
+        if (evt.getClickCount()==2){
+            int row = mostrarT.getSelectedRow();
+            if (mostrarT.getColumnName(1).equals("Documento")){
+                String clave = (String) mostrarT.getValueAt(row, 0);
+                if (mostrarTLabel.getText().equals("Tabla de Documentos")){
+                    claveDocTF.setText(clave);
+                    writeDoc(clave, tipoDocTF);
+                    numIncTF.requestFocus();
+                } else {
+                    eClaveDocTF.setText(clave);
+                    writeDoc(clave, eTipoDocTF);
+                    eNumIncTF.requestFocus();
+                }
+            } else {
+                long ti = (long) mostrarT.getValueAt(row, 0);
+                if (mostrarTLabel.getText().equals("Tabla de Incidencias")){
+                    numIncTF.setText(String.valueOf(ti));
+                    writeTipoInc(numIncTF, incTF);
+                    textoTA.requestFocus();
+                } else {
+                    eNumIncTF.setText(String.valueOf(ti));
+                    writeTipoInc(eNumIncTF, eIncTF);
+                    eTextoTA.requestFocus();
+                }
+            }
+            SwingUtilities.getWindowAncestor(tableP).dispose();
+        }
+    }//GEN-LAST:event_mostrarTMouseClicked
+
+    private void checkRemisionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkRemisionActionPerformed
+        if(checkRemision.isSelected()){
+            recepDp.getModel().setSelected(false);
+        } else {
+            recepDp.getModel().setSelected(true);
+        }
+    }//GEN-LAST:event_checkRemisionActionPerformed
+
+    private void buscarTableBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarTableBtnActionPerformed
+        String search = buscadorTF.getText();
+        buscar(search);
+    }//GEN-LAST:event_buscarTableBtnActionPerformed
+
+    private void buscadorTFKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscadorTFKeyPressed
+        
+    }//GEN-LAST:event_buscadorTFKeyPressed
+
+    private void checkDocCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkDocCBActionPerformed
+        if (checkDocCB.isSelected()){
+            elabDp.getModel().setSelected(false);
+        } else {
+            elabDp.getModel().setSelected(true);
+        }
+    }//GEN-LAST:event_checkDocCBActionPerformed
+
+    private void buscar(String search){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session.beginTransaction();
+            if (mostrarT.getColumnModel().getColumn(1).getHeaderValue().toString().equals("Documento")){
+                List<Documento> docs = session.createQuery("FROM Documento WHERE clave LIKE :s OR tipo LIKE :s", Documento.class)
+                    .setParameter("s", "%"+search+"%")
+                    .list();
+                MyUtils.initTable(docs, docModel.getModel(), mostrarT);
+            } else {
+                List<TipoIncidencia> tis = session.createQuery("FROM TipoIncidencia WHERE incidencia LIKE :s", TipoIncidencia.class)
+                    .setParameter("s", "%"+search+"%")
+                    .list();
+                MyUtils.initTable(tis, tiModel.getModel(), mostrarT);
+            }
+            mostrarT.getColumnModel().getColumn(0).setMaxWidth(100);
+        } catch(Exception e){
+            if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+            }
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } finally {
+            session.close();
+        }
+    }
+    
+    private void addDocList(){
+        buscadorTF.getDocument().addDocumentListener(new DocumentListener(){
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                
+            }
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                String search = buscadorTF.getText();
+                if(search.isBlank()){
+                    buscar(search);
+                }
+            }
+            
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+            }
+        });
+    }
+    
+    private void noDataReport(String m){
+        String clave = claveAdsIncTF.getText().toUpperCase();
+        if (!clave.isBlank()){
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            try{
+                session.beginTransaction();
+                String semana = semanaCB.getSelectedItem().toString();
+                Config config = session.createQuery("FROM Config WHERE id = 1", Config.class).uniqueResult();
+                Adscripcion adsc = session.createQuery("FROM Adscripcion WHERE clave = :c", Adscripcion.class).setParameter("c", clave).uniqueResult();
+                String def = defIncTF.getText();
+                String firma = config.getDelegado();
+                String jfa = config.getJefeDpto();
+                String revisor = adsc.getRevisor().getNom();
+                String dele = config.getAsJud();
+                if (adsc.getRevSup() != null){
+                    revisor = adsc.getRevSup().getNom();
+                }
+                String suplencia = "SIN SUPLENCIA";
+                if (toggleSuplencia.isSelected()){
+                    suplencia = suplenciaCB.getSelectedItem().toString();
+                }
+                String[] arr = {def, suplencia, clave, semana, firma, revisor, jfa, dele};
+                ReportsConfig.makeNoData(m, arr);
+            } catch(Exception e){
+                if (session.getTransaction() != null) {
+                    session.getTransaction().rollback();
+                }
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            } finally {
+                session.close();
+            }
+        }
+    }
+    private void writeAdsc(JTextField tf, String clave){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session.beginTransaction();
+            Adscripcion adsc = session.createQuery("FROM Adscripcion WHERE clave = :claveAdsc", Adscripcion.class).setParameter("claveAdsc", clave).uniqueResult();
+            if (adsc != null){
+                tf.setText(adsc.getDefensor().getNom());
+            } else {
+                tf.setText("NO ENCONTRADO");
+            }
+            session.getTransaction().commit();
+        } catch(Exception e){
+            if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+            }
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } finally {
+            session.close();
+        }
+    }
+    
+    
+    private void initExps(){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session.beginTransaction();
+            String adscClave = claveAdsExpTF.getText();
+            Adscripcion adsc = session.createQuery("FROM Adscripcion WHERE clave = :c", Adscripcion.class).setParameter("c", adscClave).uniqueResult();
+            List<Expediente> exps = session.createQuery("FROM Expediente WHERE adscripcion = :adsc", Expediente.class).setParameter("adsc", adsc).list();
+            MyUtils.initTable(exps, expModel.getModel(), expedientesT);
+            session.getTransaction().commit();
+        } catch(Exception e){
+            if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+            }
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } finally {
+            session.close();
+        }
+    }
+    
+    public static void initSemanas(JComboBox cb){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session.beginTransaction();
+            List<Semana> sems = session.createQuery("FROM Semana ORDER BY id DESC", Semana.class).list();
+            cb.removeAllItems();
+            cb.addItem("--");
+            for (Semana s: sems){
+                cb.addItem(s.getSemana());
+            }
+            session.getTransaction().commit();
+        } catch(Exception e){
+            if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+            }
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } finally {
+            session.close();
+        }
+    }
+    
+    private void initIncidencias(){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session.beginTransaction();
+            String adscClave = claveAdsIncTF.getText();
+            String semana = semanaCB.getSelectedItem().toString();
+            Adscripcion adsc = session.createQuery("FROM Adscripcion WHERE clave = :c", Adscripcion.class).setParameter("c", adscClave).uniqueResult();
+            System.out.println(adsc.getAdscripcion());
+            Semana sem = session.createQuery("FROM Semana WHERE semana = :s", Semana.class).setParameter("s", semana).uniqueResult();
+            System.out.println(sem.getSemana());
+            List<Incidencia> incs = session.createQuery("FROM Incidencia WHERE (adscripcion = :adsc AND semana = :sem)", Incidencia.class)
+                    .setParameter("adsc", adsc)
+                    .setParameter("sem", sem)
+                    .list();
+            if (!incs.isEmpty()){
+                MyUtils.initTable(incs, inciModel.getModel(), incTable);
+            }
+            session.getTransaction().commit();
+        } catch(Exception e){
+            if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+            }
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } finally {
+            session.close();
+        }
+    }
+    
+    private LocalDate convert(JDatePickerImpl dpi){
+        LocalDate fecha;
+        if (dpi.getModel().getValue() != null){
+            int year = dpi.getModel().getYear();
+            int month = dpi.getModel().getMonth()+1;
+            int day = dpi.getModel().getDay();
+            fecha = LocalDate.of(year, month, day);
+        } else {
+            fecha = null;
+        }
+        return fecha;
+    }
+    
+    private void writeExp(String noControl, JTextField claveAds, JTextField defAds, JTextField ap, JTextField nomI){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+            try {
+                session.beginTransaction();
+                Expediente exp = session.createQuery("FROM Expediente WHERE expediente = :nC", Expediente.class).setParameter("nC", noControl).uniqueResult();
+                if (claveAds.getText().isBlank() && exp != null){
+                    claveAds.setText(exp.getAdscripcion().getClave());
+                    defAds.setText(exp.getAdscripcion().getDefensor().getNom());
+                    initIncidencias();
+                }
+                if (exp != null && claveAds.getText().equals(exp.getAdscripcion().getClave())){
+                    ap.setText(exp.getExpJud());
+                    nomI.setText(exp.getDefendido());
+                } else {
+                    ap.setText("NO ENCONTRADO");
+                    nomI.setText("NO ENCONTRADO");
+                }
+                session.getTransaction().commit();
+            } catch(Exception e){
+                if (session.getTransaction() != null) {
+                    session.getTransaction().rollback();
+                }
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            } finally {
+                session.close();
+            }
+    }
+    
+    private void writeDoc(String clave, JTextField tipo){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+            try {
+                session.beginTransaction();
+                Documento doc = session.createQuery("FROM Documento WHERE clave = :cDoc", Documento.class).setParameter("cDoc", clave).uniqueResult();
+                if (doc != null){
+                    tipo.setText(doc.getDoc());
+                } else {
+                    tipo.setText("NO ENCONTRADO");
+                }
+                session.getTransaction().commit();
+            } catch(Exception e){
+                if (session.getTransaction() != null) {
+                    session.getTransaction().rollback();
+                }
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            } finally {
+                session.close();
+            }
+    }
+    
+    private void writeTipoInc(JTextField claveF, JTextField inc){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+            try {
+                long clave = Long.parseLong(claveF.getText());
+                session.beginTransaction();
+                TipoIncidencia ti = session.createQuery("FROM TipoIncidencia WHERE id = :num", TipoIncidencia.class).setParameter("num", clave).uniqueResult();
+                if (ti != null){
+                    inc.setText(ti.getIncidencia());
+                } else {
+                    inc.setText("NO ENCONTRADO");
+                }
+                session.getTransaction().commit();
+            } catch(Exception e){
+                if (session.getTransaction() != null) {
+                    session.getTransaction().rollback();
+                }
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            } finally {
+                session.close();
+            }
+    }
+    
+    private TipoIncidencia buscarInc(String inc){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+            try {
+                session.beginTransaction();
+                TipoIncidencia ti = session.createQuery("FROM TipoIncidencia WHERE incidencia = :i", TipoIncidencia.class).setParameter("i", inc).uniqueResult();
+                session.getTransaction().commit();
+                return ti;
+            } catch(Exception e){
+                if (session.getTransaction() != null) {
+                    session.getTransaction().rollback();
+                }
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            } finally {
+                session.close();
+            }
+            return null;
+    }
+
+    private void showDocsTable(String t){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session.beginTransaction();
+            List<Documento> docs = session.createQuery("FROM Documento", Documento.class).list();
+            MyUtils.initTable(docs, docModel.getModel(), mostrarT);
+            mostrarT.getColumnModel().getColumn(0).setMaxWidth(100);
+            mostrarTLabel.setText(t);
+            session.getTransaction().commit();
+        } catch(Exception e){
+            if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+            }
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } finally {
+           session.close();
+        }
+        JOptionPane.showMessageDialog(null, tableP);
+    }
+    
+    private void showTipoIncTable(String t){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session.beginTransaction();
+            List<TipoIncidencia> incs = session.createQuery("FROM TipoIncidencia", TipoIncidencia.class).list();
+            MyUtils.initTable(incs, tiModel.getModel(), mostrarT);
+            mostrarT.getColumnModel().getColumn(0).setMaxWidth(100);
+            mostrarTLabel.setText(t);
+            session.getTransaction().commit();
+        } catch(Exception e){
+            if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+            }
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } finally {
+           session.close();
+        }
+        JOptionPane.showMessageDialog(null, tableP);
+    }
+    
+    private boolean validarCamposInc(){
+        return (!claveAdsIncTF.getText().isBlank() && !incControlTF.getText().isBlank() && !claveDocTF.getText().isBlank() &&
+                !numIncTF.getText().isBlank() && validacionFechas());
+    }
+    
+    private boolean validacionFechas(){
+        return (recepDp.getModel().isSelected() || checkRemision.isSelected()) && (elabDp.getModel().isSelected() || checkDocCB.isSelected());
+    }
+    
+    private boolean validarCamposExp(){
+        return (!claveAdsExpTF.getText().isBlank() && !nControlTF.getText().isBlank() && !expJudTF.getText().isBlank() &&
+                !nomExpTF.getText().isBlank() && dp.getModel().isSelected());
+    }
+    
+    private boolean eValidarCamposInc(){
+        return (!eClaveAdsIncTF.getText().isBlank() && !eIncControlTF.getText().isBlank() && !eClaveDocTF.getText().isBlank() &&
+                !eNumIncTF.getText().isBlank() && eValidacionFechas());
+    }
+    
+    private boolean eValidacionFechas(){
+        return (eRecepDp.getModel().isSelected() || eCheckRemision.isSelected()) && (editElabDp.getModel().isSelected() || eCheckDocCB.isSelected());
+    }
+    
+    private boolean eValidarCamposExp(){
+        return (!editClaveAdsExpTF.getText().isBlank() && !editNControlTF.getText().isBlank() && !editExpJudTF.getText().isBlank() &&
+                !editNomExpTF.getText().isBlank() && editDp.getModel().isSelected());
+    }
+    
+    private Incidencia getInc(String exped, String cAdsc, String semana, String incidencia, String documento, String o){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session.beginTransaction();
+            Expediente exp = session.createQuery("FROM Expediente WHERE expediente = :exp", Expediente.class).setParameter("exp", exped).uniqueResult();
+            
+            Adscripcion adsc = session.createQuery("FROM Adscripcion WHERE clave = :claveAdsc", Adscripcion.class).setParameter("claveAdsc", cAdsc).uniqueResult();
+            Semana sem = session.createQuery("FROM Semana WHERE semana = :s", Semana.class).setParameter("s", semana).uniqueResult();
+            TipoIncidencia inci = session.createQuery("FROM TipoIncidencia WHERE incidencia = :inc", TipoIncidencia.class).setParameter("inc", incidencia).uniqueResult();
+            Documento doc = session.createQuery("FROM Documento WHERE clave = :d", Documento.class).setParameter("d", documento).uniqueResult();
+            Incidencia inc = session.createQuery("FROM Incidencia WHERE adsc = :adsc AND sem = :sem AND exp = :exp AND incidencia = :inc AND doc = :doc"
+                    + " AND observaciones = :obs", Incidencia.class)
+                    .setParameter("adsc", adsc)
+                    .setParameter("sem", sem)
+                    .setParameter("exp", exp)
+                    .setParameter("inc", inci)
+                    .setParameter("doc", doc)
+                    .setParameter("obs", o)
+                    .uniqueResult();
+            session.getTransaction().commit();
+            return inc;
+        } catch(Exception e){
+            if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+            }
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } finally {
+           session.close();
+        }
+        return null;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField IncControlTF;
+    private javax.swing.ButtonGroup OfiMuestra;
+    private javax.swing.JTextField adscText;
     private javax.swing.JPanel bg;
+    private javax.swing.JTextField buscadorTF;
+    private javax.swing.JButton buscarTableBtn;
     private javax.swing.JCheckBox checkDocCB;
     private javax.swing.JCheckBox checkRemision;
-    private javax.swing.JTextField claveAdsExpTF2;
+    private javax.swing.JTextField claveAdsExpTF;
     private javax.swing.JTextField claveAdsIncTF;
+    private javax.swing.JTextField claveDocTF;
+    private javax.swing.JCheckBox correccionCheck;
     private javax.swing.JPanel dataP;
+    private javax.swing.JPanel dataP1;
+    private javax.swing.JPanel dateElabP;
+    private javax.swing.JPanel deDP;
+    private javax.swing.JTextField defIncTF;
+    private javax.swing.JButton delExpBtn;
+    private javax.swing.JRadioButton delOfiBtn;
+    private javax.swing.JPanel dpPanel;
+    private javax.swing.JCheckBox eCheckDocCB;
+    private javax.swing.JCheckBox eCheckRemision;
+    private javax.swing.JTextField eClaveAdsIncTF;
+    private javax.swing.JTextField eClaveDocTF;
+    private javax.swing.JCheckBox eCorreccionCheck;
+    private javax.swing.JPanel eDateElabP;
+    private javax.swing.JTextField eDefIncTF;
+    private javax.swing.JTextField eExpJudIncTF;
+    private javax.swing.JTextField eIncControlTF;
+    private javax.swing.JRadioButton eIncOptRBtn;
+    private javax.swing.JTextField eIncTF;
+    private javax.swing.JTextField eNomIncTF;
+    private javax.swing.JTextField eNumIncTF;
+    private javax.swing.JRadioButton eObsOptRBtn;
+    private javax.swing.ButtonGroup eOfiMuestra;
+    private javax.swing.JComboBox<String> eSemsCB;
+    private javax.swing.JComboBox<String> eSuplenciaCB;
+    private javax.swing.JTextArea eTextoTA;
+    private javax.swing.JTextField eTipoDocTF;
+    private javax.swing.JButton eTipoDocsBtn;
+    private javax.swing.JButton eTipoIncBtn;
+    private javax.swing.JToggleButton eToggleSuplencia;
+    private javax.swing.JTextField editAdscText;
+    private javax.swing.JTextField editClaveAdsExpTF;
+    private javax.swing.JPanel editDpPanel;
+    private javax.swing.JButton editExpBtn;
+    private javax.swing.JTextField editExpJudTF;
+    private javax.swing.JPanel editExpP;
+    private javax.swing.JButton editIncBtn;
+    private javax.swing.JPanel editIncP;
+    private javax.swing.JTextField editNControlTF;
+    private javax.swing.JTextField editNomExpTF;
+    private javax.swing.JPanel editRecepP;
     private javax.swing.JButton eliminarBtn;
     private javax.swing.JPanel expDataP;
+    private javax.swing.JPanel expDataP1;
     private javax.swing.JTextField expJudIncTF;
-    private javax.swing.JTextField expJudTF2;
+    private javax.swing.JTextField expJudTF;
     private javax.swing.JPanel expedienteP;
     private javax.swing.JTable expedientesT;
+    private javax.swing.JButton fechasBtn;
+    private javax.swing.JButton guardarExpBtn;
     private javax.swing.JButton guardarIncBtn;
+    private javax.swing.JPanel hastaDP;
     private javax.swing.JButton imprimirCBTN;
     private javax.swing.JButton imprimirOficioBtn;
     private javax.swing.JButton imprimirReporteSIBtn;
     private javax.swing.JButton imprimirSDBtn;
-    private javax.swing.JRadioButton incOptRBtn;
+    private javax.swing.JTextField incControlTF;
     private javax.swing.JTextField incTF;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
+    private javax.swing.JTable incTable;
+    private javax.swing.JRadioButton inciBtn;
+    private javax.swing.JButton incsBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -728,38 +2718,62 @@ public class Reportes extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
+    private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel4;
+    private javax.swing.JRadioButton jOfiBtn;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JPanel marcarIncidenciaP;
-    private javax.swing.JTextField nControlTF2;
-    private javax.swing.JTextField nomExpTF2;
+    private javax.swing.JTable mostrarT;
+    private javax.swing.JLabel mostrarTLabel;
+    private javax.swing.JTextField nControlTF;
+    private javax.swing.JTextField nomExpTF;
     private javax.swing.JTextField nomIncTF;
-    private javax.swing.JRadioButton obsOptRBtn;
+    private javax.swing.JRadioButton normOfiBtn;
+    private javax.swing.JTextField numIncTF;
+    private javax.swing.JRadioButton obsBtn;
     private javax.swing.JTabbedPane opcionesReportes;
+    private javax.swing.ButtonGroup pOficio;
+    private javax.swing.JPanel receP;
+    private javax.swing.JPanel selectDatesP;
     private javax.swing.JComboBox<String> semanaCB;
-    private javax.swing.JTextField suplenciaTF;
+    private javax.swing.JComboBox<String> suplenciaCB;
+    private javax.swing.JPanel tableP;
     private javax.swing.JTextArea textoTA;
     private javax.swing.JPanel tipoDocP;
+    private javax.swing.JPanel tipoDocP1;
     private javax.swing.JTextField tipoDocTF;
     private javax.swing.JButton tipoDocsBtn;
     private javax.swing.JButton tipoIncBtn;
+    private javax.swing.JToggleButton toggleSuplencia;
+    private javax.swing.JButton vaciarExpBtn;
     private javax.swing.JButton vaciarIncBtn;
-    private javax.swing.JButton vaciarSuplenciaBtn;
     // End of variables declaration//GEN-END:variables
 }

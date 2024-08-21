@@ -27,8 +27,9 @@ public class Incidencia extends TableSetters{
     @Column(name="id")
     private long id;
     
-    @Column(name="incidencia")
-    private String incidencia;
+    @ManyToOne
+    @JoinColumn(name="tipo_incidencia", nullable=true)
+    private TipoIncidencia incidencia;
     
     @ManyToOne
     @JoinColumn(name = "expediente", nullable = true)
@@ -38,17 +39,46 @@ public class Incidencia extends TableSetters{
     @JoinColumn(name = "documento", nullable = true)
     private Documento doc;
     
-    @Column(name="")
+    @Column(name="f_elab")
     private LocalDate elab;
+    
+    @Column(name="observaciones")
     private String observaciones;
-    private String suplencia;
+    
+    @ManyToOne
+    @JoinColumn(name = "suplencia", nullable = true)
+    private Trabajador suplencia;
+    
+    @Column(name="correccion")
     private String correccion;
     
+    @ManyToOne
+    @JoinColumn(name = "semana", nullable = true)
+    private Semana sem;
+    
+    @ManyToOne
+    @JoinColumn(name = "adscripcion", nullable = true)
+    private Adscripcion adsc;
+    
+    @Column(name="fecha")
+    private LocalDate recep;
+    
+    @Column(name="muestraInci")
+    private boolean muestraInci;
+    
     public Incidencia(){}
-    public Incidencia(String inc, Expediente exp, Documento doc){
+    public Incidencia(TipoIncidencia inc, Expediente exp, Documento doc, LocalDate elab, LocalDate recep, String observ, Trabajador suplencia, String correccion, Semana sem, Adscripcion adsc, boolean muestraInci){
         this.incidencia = inc;
         this.exp = exp;
         this.doc = doc;
+        this.elab = elab;
+        this.observaciones = observ;
+        this.suplencia = suplencia;
+        this.correccion = correccion;
+        this.sem = sem;
+        this.adsc = adsc;
+        this.recep = recep;
+        this.muestraInci = muestraInci;
     }
 
     public long getId() {
@@ -59,11 +89,11 @@ public class Incidencia extends TableSetters{
         this.id = id;
     }
 
-    public String getIncidencia() {
+    public TipoIncidencia getIncidencia() {
         return incidencia;
     }
 
-    public void setIncidencia(String incidencia) {
+    public void setIncidencia(TipoIncidencia incidencia) {
         this.incidencia = incidencia;
     }
 
@@ -91,11 +121,11 @@ public class Incidencia extends TableSetters{
         this.observaciones = observaciones;
     }
 
-    public String getSuplencia() {
+    public Trabajador getSuplencia() {
         return suplencia;
     }
 
-    public void setSuplencia(String suplencia) {
+    public void setSuplencia(Trabajador suplencia) {
         this.suplencia = suplencia;
     }
 
@@ -106,14 +136,90 @@ public class Incidencia extends TableSetters{
     public void setCorreccion(String correccion) {
         this.correccion = correccion;
     }
+
+    public LocalDate getElab() {
+        return elab;
+    }
+
+    public void setElab(LocalDate elab) {
+        this.elab = elab;
+    }
+
+    public Semana getSem() {
+        return sem;
+    }
+
+    public void setSem(Semana sem) {
+        this.sem = sem;
+    }
+
+    public Adscripcion getAdsc() {
+        return adsc;
+    }
+
+    public void setAdsc(Adscripcion adsc) {
+        this.adsc = adsc;
+    }
+
+    public LocalDate getFecha() {
+        return recep;
+    }
+
+    public void setFecha(LocalDate fecha) {
+        this.recep = fecha;
+    }
+
+    public LocalDate getRecep() {
+        return recep;
+    }
+
+    public void setRecep(LocalDate recep) {
+        this.recep = recep;
+    }
+
+    public boolean isMuestraInci() {
+        return muestraInci;
+    }
+
+    public void setMuestraInci(boolean muestraInci) {
+        this.muestraInci = muestraInci;
+    }
     
     public Object[] toRow(){
-        Object[] row = {exp.getnControl(), exp.getExpJud(), exp.getDefendido(), doc.getClave(), incidencia, exp.getRecepcion(), elab, observaciones, suplencia, correccion};
+        String suplente = "";
+        String felab = "NO ELABORO";
+        String frecep = "NO REMITIO";
+        String nc = "";
+        String expjud = "";
+        String def = "";
+        String d = "";
+        String inc = "";
+        if (suplencia != null){
+            suplente = suplencia.getNom();
+        }
+        if (elab != null){
+            felab = elab.toString();
+        }
+        if(recep != null){
+            frecep = recep.toString();
+        }
+        if(exp != null){
+            nc = exp.getnControl();
+            expjud =  exp.getExpJud();
+            def = exp.getDefendido();
+        }
+        if(doc != null){
+            d = doc.getClave();
+        }
+        if(incidencia != null){
+            inc = incidencia.getIncidencia();
+        }
+        Object[] row = {nc, expjud, def, d, inc, frecep, felab, observaciones, suplente, correccion};
         return row;
     }
     
     public DefaultTableModel getModel(){
-        String[] tblh = {"Expediente", "AP Proc.", "Defendido", "Decumento", "Incidencia", "F. Recep.", "F. Elab.", "Observaciones", "Suplencia", "Corrección"};
+        String[] tblh = {"Expediente", "AP Proc.", "Defendido", "Documento", "Incidencia", "F. Recep.", "F. Elab.", "Observaciones", "Suplencia", "Corrección"};
         return new DefaultTableModel(tblh,0);
     }
     

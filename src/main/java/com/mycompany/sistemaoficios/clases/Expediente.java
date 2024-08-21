@@ -121,4 +121,5 @@ public class Expediente extends TableSetters{
         String[] tblh = {"Expediente", "Exp. Jud.", "Año", "Defendido", "F. Recep."};
         return new DefaultTableModel(tblh,0);
     }
+    
 }

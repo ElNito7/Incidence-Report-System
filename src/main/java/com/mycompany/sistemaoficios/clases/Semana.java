@@ -57,4 +57,5 @@ public class Semana extends TableSetters {
         String[] tblh = {"Número", "Semana"};
         return new DefaultTableModel(tblh,0);
     }
+    
 }

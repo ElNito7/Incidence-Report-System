@@ -34,18 +34,22 @@ public class Adscripcion extends TableSetters {
     
     @ManyToOne
     @JoinColumn(name = "defensor", nullable = true)
-    private Defensor defensor;
+    private Trabajador defensor;
     
     @ManyToOne
     @JoinColumn(name = "oficial", nullable = true)
-    private Oficial oficial;
+    private Trabajador oficial;
     
     @ManyToOne
     @JoinColumn(name = "revisor", nullable = true)
-    private Oficial revisor;
+    private Trabajador revisor;
+    
+    @ManyToOne
+    @JoinColumn(name = "revSup", nullable = true)
+    private Trabajador revSup;
     
     public Adscripcion(){}
-    public Adscripcion(String clave, String adscripcion, Defensor defensor, Oficial oficial, Oficial revisor){
+    public Adscripcion(String clave, String adscripcion, Trabajador defensor, Trabajador oficial, Trabajador revisor){
         this.clave = clave;
         this.adscripcion = adscripcion;
         this.defensor = defensor;
@@ -77,36 +81,50 @@ public class Adscripcion extends TableSetters {
         this.adscripcion = adscripcion;
     }
 
-    public Defensor getDefensor() {
+    public Trabajador getDefensor() {
         return defensor;
     }
 
-    public void setDefensor(Defensor defensor) {
+    public void setDefensor(Trabajador defensor) {
         this.defensor = defensor;
     }
 
-    public Oficial getOficial() {
+    public Trabajador getOficial() {
         return oficial;
     }
 
-    public void setOficial(Oficial oficial) {
+    public void setOficial(Trabajador oficial) {
         this.oficial = oficial;
     }
 
-    public Oficial getRevisor() {
+    public Trabajador getRevisor() {
         return revisor;
     }
 
-    public void setRevisor(Oficial revisor) {
+    public void setRevisor(Trabajador revisor) {
         this.revisor = revisor;
+    }
+
+    public Trabajador getRevSup() {
+        return revSup;
+    }
+
+    public void setRevSup(Trabajador revSup) {
+        this.revSup = revSup;
     }
     
     public Object[] toRow(){
-        Object[] row = {clave, adscripcion, defensor.getNom(), oficial.getNom(), oficial.getNom()};
+        String revNom = revisor.getNom();
+        if (revSup != null){
+            revNom = revSup.getNom();
+        }
+        Object[] row = {clave, adscripcion, defensor.getNom(), oficial.getNom(), revNom};
         return row;
     }
+    
     public DefaultTableModel getModel(){
         String[] tblh = {"Clave", "Adscripción", "Defensor", "Oficial", "Oficial Revisor"};
         return new DefaultTableModel(tblh,0);
     }
+   
 }

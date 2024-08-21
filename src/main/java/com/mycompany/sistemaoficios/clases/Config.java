@@ -34,13 +34,26 @@ public class Config {
     
     @Column(name="fundamento")
     private String fundamento;
+    
+    @Column(name="delegacion")
+    private String delegacion;
+    
+    @Column(name="asJud")
+    private String asJud;
+    
+    @Column(name="reporte")
+    private String reporte;
+    
+    @Column(name="ubicacion")
+    private String ubi;
 
     public Config(){}
-    public Config(String delegado, String jefeDpto, String leyenda, String justificacion) {
+    public Config(String delegado, String jefeDpto, String leyenda, String justificacion, String delegacion) {
         this.delegado = delegado;
         this.jefeDpto = jefeDpto;
         this.leyenda = leyenda;
         this.fundamento = justificacion;
+        this.delegacion = delegacion;
     }
 
     public long getId() {
@@ -81,6 +94,38 @@ public class Config {
 
     public void setFundamento(String fundamento) {
         this.fundamento = fundamento;
+    }
+
+    public String getDelegacion() {
+        return delegacion;
+    }
+
+    public void setDelegacion(String delegacion) {
+        this.delegacion = delegacion;
+    }
+
+    public String getAsJud() {
+        return asJud;
+    }
+
+    public void setAsJud(String asJud) {
+        this.asJud = asJud;
+    }
+
+    public String getReporte() {
+        return reporte;
+    }
+
+    public void setReporte(String reporte) {
+        this.reporte = reporte;
+    }
+
+    public String getUbi() {
+        return ubi;
+    }
+
+    public void setUbi(String ubi) {
+        this.ubi = ubi;
     }
     
     

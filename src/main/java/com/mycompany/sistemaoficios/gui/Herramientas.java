@@ -4,6 +4,21 @@
  */
 package com.mycompany.sistemaoficios.gui;
 
+import com.mycompany.sistemaoficios.clases.Adscripcion;
+import com.mycompany.sistemaoficios.clases.Trabajador;
+import com.mycompany.sistemaoficios.clases.MyUtils;
+import com.mycompany.sistemaoficios.clases.TableSetters;
+import com.mycompany.sistemaoficios.persistencia.HibernateUtil;
+import java.awt.event.KeyEvent;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.table.DefaultTableModel;
+import org.hibernate.Session;
+
 /**
  *
  * @author Keloc
@@ -13,8 +28,11 @@ public class Herramientas extends javax.swing.JPanel {
     /**
      * Creates new form Herramientas
      */
+    private Trabajador t = new Trabajador();
     public Herramientas() {
         initComponents();
+        initTrabajadores();
+        addDocList();
     }
 
     /**
@@ -26,21 +44,280 @@ public class Herramientas extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        trabsP = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        nomTF = new javax.swing.JTextField();
+        correoTF = new javax.swing.JTextField();
+        puestoCB = new javax.swing.JComboBox<>();
         bg = new javax.swing.JPanel();
+        herramientasTP = new javax.swing.JTabbedPane();
+        trabajadoresP = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        trabajadoresT = new javax.swing.JTable();
+        agregarBtn = new javax.swing.JButton();
+        editarBtn = new javax.swing.JButton();
+        borrarBtn = new javax.swing.JButton();
+        buscadorTF = new javax.swing.JTextField();
+        buscarTrBtn = new javax.swing.JButton();
+        databaseP = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        dbUrlTF = new javax.swing.JTextField();
+        dbUserTF = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        testBtn = new javax.swing.JButton();
+        resL = new javax.swing.JLabel();
+        conBtn = new javax.swing.JButton();
+        vaciarBtn = new javax.swing.JButton();
+        dbPassTF = new javax.swing.JPasswordField();
+        mostrarContraBtn = new javax.swing.JToggleButton();
 
-        setMinimumSize(new java.awt.Dimension(734, 369));
+        jLabel1.setText("Nombre:");
 
-        bg.setBackground(new java.awt.Color(255, 51, 51));
+        jLabel2.setText("Correo:");
+
+        jLabel3.setText("Puesto");
+
+        puestoCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DEFENSOR", "OFICIAL", "OFICIAL REVISOR" }));
+
+        javax.swing.GroupLayout trabsPLayout = new javax.swing.GroupLayout(trabsP);
+        trabsP.setLayout(trabsPLayout);
+        trabsPLayout.setHorizontalGroup(
+            trabsPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(trabsPLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(trabsPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addGap(47, 47, 47)
+                .addGroup(trabsPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(nomTF)
+                    .addComponent(correoTF)
+                    .addComponent(puestoCB, 0, 500, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
+        );
+        trabsPLayout.setVerticalGroup(
+            trabsPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(trabsPLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(trabsPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(trabsPLayout.createSequentialGroup()
+                        .addGroup(trabsPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(nomTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel2))
+                    .addComponent(correoTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(trabsPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(puestoCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(26, Short.MAX_VALUE))
+        );
+
+        setMinimumSize(new java.awt.Dimension(960, 620));
+        setPreferredSize(new java.awt.Dimension(960, 620));
+
+        bg.setBackground(new java.awt.Color(204, 204, 204));
+        bg.setMinimumSize(new java.awt.Dimension(960, 620));
+
+        trabajadoresT.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Trabajador", "Correo", "Puesto"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(trabajadoresT);
+
+        agregarBtn.setText("Agregar");
+        agregarBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agregarBtnActionPerformed(evt);
+            }
+        });
+
+        editarBtn.setText("Editar");
+        editarBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editarBtnActionPerformed(evt);
+            }
+        });
+
+        borrarBtn.setText("Borrar");
+        borrarBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                borrarBtnActionPerformed(evt);
+            }
+        });
+
+        buscadorTF.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                buscadorTFKeyPressed(evt);
+            }
+        });
+
+        buscarTrBtn.setText("Buscar");
+        buscarTrBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarTrBtnActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout trabajadoresPLayout = new javax.swing.GroupLayout(trabajadoresP);
+        trabajadoresP.setLayout(trabajadoresPLayout);
+        trabajadoresPLayout.setHorizontalGroup(
+            trabajadoresPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(trabajadoresPLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(trabajadoresPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2)
+                    .addGroup(trabajadoresPLayout.createSequentialGroup()
+                        .addComponent(agregarBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
+                        .addGap(61, 61, 61)
+                        .addComponent(editarBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
+                        .addGap(65, 65, 65)
+                        .addComponent(borrarBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
+                        .addGap(597, 597, 597))
+                    .addGroup(trabajadoresPLayout.createSequentialGroup()
+                        .addComponent(buscadorTF)
+                        .addGap(37, 37, 37)
+                        .addComponent(buscarTrBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        trabajadoresPLayout.setVerticalGroup(
+            trabajadoresPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(trabajadoresPLayout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addGroup(trabajadoresPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buscadorTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buscarTrBtn))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(trabajadoresPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(agregarBtn)
+                    .addComponent(editarBtn)
+                    .addComponent(borrarBtn))
+                .addContainerGap(91, Short.MAX_VALUE))
+        );
+
+        herramientasTP.addTab("Trabajadores", trabajadoresP);
+
+        jLabel4.setText("URL de Conexión:");
+
+        jLabel5.setText("Usuario:");
+
+        jLabel6.setText("Contraseña:");
+
+        testBtn.setText("Probar Conexión");
+        testBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                testBtnActionPerformed(evt);
+            }
+        });
+
+        conBtn.setText("Conectar");
+        conBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                conBtnActionPerformed(evt);
+            }
+        });
+
+        vaciarBtn.setText("Vaciar");
+        vaciarBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vaciarBtnActionPerformed(evt);
+            }
+        });
+
+        mostrarContraBtn.setText("Mostrar");
+        mostrarContraBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mostrarContraBtnActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout databasePLayout = new javax.swing.GroupLayout(databaseP);
+        databaseP.setLayout(databasePLayout);
+        databasePLayout.setHorizontalGroup(
+            databasePLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(databasePLayout.createSequentialGroup()
+                .addGap(84, 84, 84)
+                .addGroup(databasePLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel6))
+                .addGap(13, 13, 13)
+                .addGroup(databasePLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(databasePLayout.createSequentialGroup()
+                        .addGroup(databasePLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(dbUrlTF)
+                            .addComponent(dbUserTF)
+                            .addComponent(dbPassTF))
+                        .addGap(42, 42, 42)
+                        .addGroup(databasePLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(conBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(vaciarBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(mostrarContraBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(68, 68, 68))
+                    .addGroup(databasePLayout.createSequentialGroup()
+                        .addComponent(testBtn)
+                        .addGap(18, 18, 18)
+                        .addComponent(resL, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(419, Short.MAX_VALUE))))
+        );
+        databasePLayout.setVerticalGroup(
+            databasePLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(databasePLayout.createSequentialGroup()
+                .addGap(78, 78, 78)
+                .addGroup(databasePLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(dbUrlTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(conBtn))
+                .addGap(21, 21, 21)
+                .addGroup(databasePLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(dbUserTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(vaciarBtn))
+                .addGap(28, 28, 28)
+                .addGroup(databasePLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(dbPassTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(mostrarContraBtn))
+                .addGap(18, 18, 18)
+                .addGroup(databasePLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(testBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(resL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(348, Short.MAX_VALUE))
+        );
+
+        herramientasTP.addTab("Base de Datos", databaseP);
 
         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
         bg.setLayout(bgLayout);
         bgLayout.setHorizontalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 734, Short.MAX_VALUE)
+            .addComponent(herramientasTP)
         );
         bgLayout.setVerticalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 369, Short.MAX_VALUE)
+            .addComponent(herramientasTP)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -55,8 +332,321 @@ public class Herramientas extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void agregarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarBtnActionPerformed
+        try {
+            int res = JOptionPane.showConfirmDialog(null, trabsP, "Agregando Trabajador", JOptionPane.OK_CANCEL_OPTION);
+            if(res==0 && !nomTF.getText().isBlank() && !correoTF.getText().isBlank()){
+                String nom = nomTF.getText().toUpperCase();
+                String correo = correoTF.getText();
+                String puesto = puestoCB.getSelectedItem().toString();
+                add(nom, correo, puesto);
+                initTrabajadores();
+            }
+            blank();
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }//GEN-LAST:event_agregarBtnActionPerformed
 
+    private void editarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarBtnActionPerformed
+        int row = trabajadoresT.getSelectedRow();
+        if(row==-1){
+            JOptionPane.showMessageDialog(null, "Seleccione una fila para editar");
+        } else {
+            String nom = (String) trabajadoresT.getValueAt(row, 0);
+            String corr = (String) trabajadoresT.getValueAt(row, 1);
+            String puesto = (String) trabajadoresT.getValueAt(row, 2);
+            nomTF.setText(nom);
+            correoTF.setText(corr);
+            puestoCB.setSelectedItem(puesto);
+            int res = JOptionPane.showConfirmDialog(null, trabsP, "Editando Trabajador", JOptionPane.OK_CANCEL_OPTION);
+            if(res==0 && !nomTF.getText().isBlank() && !correoTF.getText().isBlank()){
+                String nuevoN = nomTF.getText().toUpperCase();
+                String nuevoC = correoTF.getText();
+                String p = puestoCB.getSelectedItem().toString();
+                edit(nom,corr,puesto,nuevoN,nuevoC,p);
+                initTrabajadores();
+            }
+        }
+        blank();
+    }//GEN-LAST:event_editarBtnActionPerformed
+
+    private void borrarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarBtnActionPerformed
+        int row = trabajadoresT.getSelectedRow();
+        if(row==-1){
+            JOptionPane.showMessageDialog(null, "Seleccione una fila para eliminar");
+        } else if (JOptionPane.showConfirmDialog(null, "Esta accion eliminará al trabajador seleccionado y su información relacionada, ¿desea continuar?", "Confirmación", JOptionPane.OK_CANCEL_OPTION)==0){
+            String nom = (String) trabajadoresT.getValueAt(row, 0);
+            String corr = (String) trabajadoresT.getValueAt(row, 1);
+            String puesto = (String) trabajadoresT.getValueAt(row, 2);
+            borrar(nom, corr, puesto);
+            initTrabajadores();
+        }
+    }//GEN-LAST:event_borrarBtnActionPerformed
+
+    private void buscarTrBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarTrBtnActionPerformed
+        String text = buscadorTF.getText();
+        if (!text.isBlank()){
+            buscar(text);
+        } else {
+            initTrabajadores();
+        }
+    }//GEN-LAST:event_buscarTrBtnActionPerformed
+
+    private void buscadorTFKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscadorTFKeyPressed
+        String t = buscadorTF.getText();
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER && !t.isBlank()){
+            buscar(t);
+        }
+    }//GEN-LAST:event_buscadorTFKeyPressed
+
+    private void testBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_testBtnActionPerformed
+        String pass = new String(dbPassTF.getPassword());
+        if (dbUrlTF.getText().isBlank() || dbUserTF.getText().isBlank() || pass.isBlank()){
+            JOptionPane.showMessageDialog(null, "Ingrese todos los datos necesarios");
+        } else if(HibernateUtil.testConnection(dbUrlTF.getText(), dbUserTF.getText(), pass)){
+            resL.setText("¡Conexión encontrada!");
+        } else {
+            resL.setText("Conexión no encontrada");
+        }
+    }//GEN-LAST:event_testBtnActionPerformed
+
+    private void conBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_conBtnActionPerformed
+        String pass = new String(dbPassTF.getPassword());
+        if (dbUrlTF.getText().isBlank() || dbUserTF.getText().isBlank() || pass.isBlank()){
+            JOptionPane.showMessageDialog(null, "Ingrese todos los datos necesarios");
+        } else if(HibernateUtil.testConnection(dbUrlTF.getText(), dbUserTF.getText(), pass)){
+            saveConfig(dbUrlTF.getText(), dbUserTF.getText(), pass);
+        } else {
+            JOptionPane.showMessageDialog(null, "Conexión fallida");
+        }
+    }//GEN-LAST:event_conBtnActionPerformed
+
+    private void saveConfig(String url, String user, String pass){
+        try {
+            String write = HibernateUtil.generateConfigContent(url, user, pass);
+            HibernateUtil.writeFile(write);
+            JOptionPane.showMessageDialog(null, "Cambios guardados");
+            HibernateUtil.newConnection();
+        } catch(IOException e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }
+    
+    private void vaciarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vaciarBtnActionPerformed
+        dbUrlTF.setText("");
+        dbUserTF.setText("");
+        dbPassTF.setText("");
+    }//GEN-LAST:event_vaciarBtnActionPerformed
+
+    private void mostrarContraBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarContraBtnActionPerformed
+        Main.togglePass(dbPassTF, mostrarContraBtn);
+    }//GEN-LAST:event_mostrarContraBtnActionPerformed
+    
+    private void buscar(String text){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session.beginTransaction();
+            List<Trabajador> tr = session.createQuery("FROM Trabajador WHERE nombre LIKE :t OR correo LIKE :t OR puesto LIKE :t", Trabajador.class)
+                    .setParameter("t", "%"+text+"%")
+                    .list();
+            setTable(tr);
+            session.getTransaction().commit();
+        } catch(Exception e){
+            if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+            }
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } finally {
+           session.close();
+        }
+    }
+    
+    private void initTrabajadores(){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session.beginTransaction();
+            List<Trabajador> trabs = session.createQuery("FROM Trabajador", Trabajador.class).list();
+            setTable(trabs);
+            session.getTransaction().commit();
+        } catch(Exception e){
+            if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+            }
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } finally {
+           session.close();
+        }
+    }
+    
+    private void setTable(List<Trabajador> tr){
+        MyUtils.initTable(tr, t.getModel(), trabajadoresT);
+        trabajadoresT.getColumnModel().getColumn(2).setMaxWidth(200);
+        trabajadoresT.getColumnModel().getColumn(2).setMinWidth(150);
+        trabajadoresT.getColumnModel().getColumn(1).setMinWidth(300);
+        trabajadoresT.getColumnModel().getColumn(1).setMaxWidth(450);
+    }
+    
+    private void add(String nom, String corr, String p){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session.beginTransaction();
+            Trabajador d = new Trabajador(nom, corr, p);
+            session.save(d);
+            session.getTransaction().commit();
+            Main.updateTrabajadores();
+            JOptionPane.showMessageDialog(null, "¡Trabajador agregado!");
+        } catch(Exception e){
+            if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+            }
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } finally {
+           session.close();
+        }
+    }
+    
+    private void edit(String antN, String antC, String antP, String nom, String corr, String p){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session.beginTransaction();
+            Trabajador d = session.createQuery("FROM Trabajador WHERE nombre = :n AND correo = :c AND puesto = :p", Trabajador.class)
+                  .setParameter("n", antN)
+                  .setParameter("c", antC)
+                  .setParameter("p", antP)
+                  .uniqueResult();
+            d.setNom(nom);
+            d.setCorreo(corr);
+            d.setPuesto(p);
+            session.update(d);
+            session.getTransaction().commit();
+            Main.updateTrabajadores();
+            JOptionPane.showMessageDialog(null, "¡Trabajador editado!");
+        } catch(Exception e){
+            if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+            }
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } finally {
+           session.close();
+        }
+    }
+    
+    private void borrar(String nom, String corr, String p){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session.beginTransaction();
+            Trabajador d = session.createQuery("FROM Trabajador WHERE nombre = :n AND correo = :c AND puesto = :p", Trabajador.class)
+                  .setParameter("n", nom)
+                  .setParameter("c", corr)
+                  .setParameter("p", p)
+                  .uniqueResult();
+            List<Adscripcion> adscs;
+            if(p.equals("DEFENSOR")){
+                adscs = session.createQuery("FROM Adscripcion WHERE defensor = :def", Adscripcion.class)
+                        .setParameter("def", d)
+                        .list();
+                for (Adscripcion a: adscs){
+                    a.setDefensor(null);
+                }
+            } else if(p.equals("OFICIAL")){
+                adscs = session.createQuery("FROM Adscripcion WHERE oficial = :of", Adscripcion.class)
+                        .setParameter("of", d)
+                        .list();
+                for (Adscripcion a: adscs){
+                    a.setOficial(null);
+                }
+            } else {
+                adscs = session.createQuery("FROM Adscripcion WHERE revisor = :rev", Adscripcion.class)
+                        .setParameter("rev", d)
+                        .list();
+                for (Adscripcion a: adscs){
+                    a.setRevisor(null);
+                }
+                List<Adscripcion> adscSups = session.createQuery("FROM Adscripcion WHERE revSup = :r", Adscripcion.class)
+                        .setParameter("r", d)
+                        .list();
+                for (Adscripcion a: adscSups){
+                    a.setRevSup(null);
+                }
+            }
+            for (Adscripcion a: adscs){
+                a.setDefensor(null);
+            }
+            session.delete(d);
+            session.getTransaction().commit();
+            Main.updateTrabajadores();
+            JOptionPane.showMessageDialog(null, "¡Trabajador editado!");
+        } catch(Exception e){
+            if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+            }
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } finally {
+           session.close();
+        }
+    }
+    
+    
+    private void blank(){
+        nomTF.setText("");
+        correoTF.setText("");
+        puestoCB.setSelectedIndex(0);
+    }
+    
+    private void addDocList(){
+        buscadorTF.getDocument().addDocumentListener(new DocumentListener(){
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                
+            }
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                String search = buscadorTF.getText();
+                if(search.isBlank()){
+                    initTrabajadores();
+                }
+            }
+            
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+            }
+        });
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton agregarBtn;
     private javax.swing.JPanel bg;
+    private javax.swing.JButton borrarBtn;
+    private javax.swing.JTextField buscadorTF;
+    private javax.swing.JButton buscarTrBtn;
+    private javax.swing.JButton conBtn;
+    private javax.swing.JTextField correoTF;
+    private javax.swing.JPanel databaseP;
+    private javax.swing.JPasswordField dbPassTF;
+    private javax.swing.JTextField dbUrlTF;
+    private javax.swing.JTextField dbUserTF;
+    private javax.swing.JButton editarBtn;
+    private javax.swing.JTabbedPane herramientasTP;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JToggleButton mostrarContraBtn;
+    private javax.swing.JTextField nomTF;
+    private javax.swing.JComboBox<String> puestoCB;
+    private javax.swing.JLabel resL;
+    private javax.swing.JButton testBtn;
+    private javax.swing.JPanel trabajadoresP;
+    private javax.swing.JTable trabajadoresT;
+    private javax.swing.JPanel trabsP;
+    private javax.swing.JButton vaciarBtn;
     // End of variables declaration//GEN-END:variables
 }

@@ -10,14 +10,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Keloc
  */
 @Entity
-@Table(name="defensor")
-public class Defensor {
+@Table(name="trabajador")
+public class Trabajador extends TableSetters {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
@@ -29,10 +30,14 @@ public class Defensor {
     @Column(name="correo")
     private String correo;
     
-    public Defensor(){}
-    public Defensor(String nom, String correo){
+    @Column(name="puesto")
+    private String puesto;
+    
+    public Trabajador(){}
+    public Trabajador(String nom, String correo, String puesto){
         this.nom = nom;
         this.correo = correo;
+        this.puesto = puesto;
     }
 
     public long getId() {
@@ -57,5 +62,23 @@ public class Defensor {
 
     public void setCorreo(String correo) {
         this.correo = correo;
+    }
+
+    public String getPuesto() {
+        return puesto;
+    }
+
+    public void setPuesto(String puesto) {
+        this.puesto = puesto;
+    }
+    
+    public Object[] toRow(){
+        Object[] row = {nom, correo, puesto};
+        return row;
+    }
+    
+    public DefaultTableModel getModel(){
+        String[] tblh = {"Trabajador", "Correo", "Puesto"};
+        return new DefaultTableModel(tblh,0);
     }
 }

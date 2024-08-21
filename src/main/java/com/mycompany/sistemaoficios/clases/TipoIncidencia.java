@@ -60,4 +60,5 @@ public class TipoIncidencia extends TableSetters{
         String[] tblh = {"Número", "Incidencia"};
         return new DefaultTableModel(tblh,0);
     }
+    
 }

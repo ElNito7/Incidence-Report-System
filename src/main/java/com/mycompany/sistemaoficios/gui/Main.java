@@ -4,16 +4,25 @@
  */
 package com.mycompany.sistemaoficios.gui;
 
+import com.formdev.flatlaf.FlatLightLaf;
 import com.mycompany.sistemaoficios.gui.Herramientas;
 import com.mycompany.sistemaoficios.gui.Catalogo;
 import com.formdev.flatlaf.FlatLightLaf;
+import static com.mycompany.sistemaoficios.gui.Catalogo.initTrabs;
 import com.mycompany.sistemaoficios.persistencia.HibernateUtil;
+import com.mycompany.sistemaoficios.persistencia.ReportsConfig;
 import java.awt.BorderLayout;
 import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JToggleButton;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import org.hibernate.Session;
 
 /**
@@ -27,10 +36,16 @@ public class Main extends javax.swing.JFrame {
      */
     private Image l1 = getImg("logo1").getImage();
     private Image l2 = getImg("logo2").getImage();
+    private static Catalogo cat;
+    private static Herramientas herramientas;
+    private static Reportes rep;
     public Main() {
         initComponents();
+        connect();
+        createStaticPanels();
         logo1L.setIcon(resizeImage(l1, logo1L));
         logo2L.setIcon(resizeImage(l2, logo2L));
+        changeContent(cat);
     }
 
     /**
@@ -42,11 +57,18 @@ public class Main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        dbConfigP = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        urlTF = new javax.swing.JTextField();
+        usuarioTF = new javax.swing.JTextField();
+        dbContra = new javax.swing.JPasswordField();
+        dbContraT = new javax.swing.JToggleButton();
         bg = new javax.swing.JPanel();
         optionMenuP = new javax.swing.JPanel();
         menubox = new javax.swing.JPanel();
         catalogoBtn = new javax.swing.JButton();
-        nadaBtn = new javax.swing.JButton();
         supervisionBtn = new javax.swing.JButton();
         herramientasBtn = new javax.swing.JButton();
         content = new javax.swing.JPanel();
@@ -54,12 +76,68 @@ public class Main extends javax.swing.JFrame {
         logo1L = new javax.swing.JLabel();
         logo2L = new javax.swing.JLabel();
 
+        jLabel14.setText("URL:");
+
+        jLabel15.setText("USUARIO:");
+
+        jLabel16.setText("CONTRASEÑA:");
+
+        dbContraT.setText("Mostrar");
+        dbContraT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dbContraTActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout dbConfigPLayout = new javax.swing.GroupLayout(dbConfigP);
+        dbConfigP.setLayout(dbConfigPLayout);
+        dbConfigPLayout.setHorizontalGroup(
+            dbConfigPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dbConfigPLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(dbConfigPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(dbContraT)
+                    .addGroup(dbConfigPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(dbConfigPLayout.createSequentialGroup()
+                            .addComponent(jLabel16)
+                            .addGap(18, 18, 18)
+                            .addComponent(dbContra))
+                        .addGroup(dbConfigPLayout.createSequentialGroup()
+                            .addGroup(dbConfigPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel14)
+                                .addComponent(jLabel15))
+                            .addGap(45, 45, 45)
+                            .addGroup(dbConfigPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(urlTF)
+                                .addComponent(usuarioTF, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)))))
+                .addContainerGap(40, Short.MAX_VALUE))
+        );
+        dbConfigPLayout.setVerticalGroup(
+            dbConfigPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dbConfigPLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(dbConfigPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14)
+                    .addComponent(urlTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(dbConfigPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(usuarioTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(dbConfigPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16)
+                    .addComponent(dbContra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(dbContraT)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(1080, 720));
+        setMinimumSize(new java.awt.Dimension(1100, 720));
 
         bg.setBackground(new java.awt.Color(204, 204, 204));
-        bg.setMinimumSize(new java.awt.Dimension(874, 461));
-        bg.setPreferredSize(new java.awt.Dimension(874, 461));
+        bg.setMinimumSize(new java.awt.Dimension(1100, 720));
+        bg.setPreferredSize(new java.awt.Dimension(1150, 720));
 
         optionMenuP.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -77,19 +155,6 @@ public class Main extends javax.swing.JFrame {
             }
         });
         menubox.add(catalogoBtn);
-
-        nadaBtn.setText("Supervisión");
-        nadaBtn.setBorder(null);
-        nadaBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        nadaBtn.setMaximumSize(new java.awt.Dimension(175, 120));
-        nadaBtn.setMinimumSize(new java.awt.Dimension(175, 70));
-        nadaBtn.setPreferredSize(new java.awt.Dimension(175, 70));
-        nadaBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nadaBtnActionPerformed(evt);
-            }
-        });
-        menubox.add(nadaBtn);
 
         supervisionBtn.setText("Supervisión");
         supervisionBtn.setBorder(null);
@@ -121,18 +186,18 @@ public class Main extends javax.swing.JFrame {
         optionMenuP.setLayout(optionMenuPLayout);
         optionMenuPLayout.setHorizontalGroup(
             optionMenuPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(menubox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(menubox, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         optionMenuPLayout.setVerticalGroup(
             optionMenuPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(optionMenuPLayout.createSequentialGroup()
                 .addGap(99, 99, 99)
                 .addComponent(menubox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(56, 56, 56))
+                .addGap(265, 265, 265))
         );
 
-        content.setMinimumSize(new java.awt.Dimension(899, 620));
-        content.setPreferredSize(new java.awt.Dimension(899, 620));
+        content.setMinimumSize(new java.awt.Dimension(960, 620));
+        content.setPreferredSize(new java.awt.Dimension(960, 620));
         content.setLayout(new java.awt.BorderLayout());
 
         header.setBackground(new java.awt.Color(153, 153, 153));
@@ -167,7 +232,7 @@ public class Main extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(header, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, 985, Short.MAX_VALUE)))
         );
         bgLayout.setVerticalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,7 +248,7 @@ public class Main extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1080, Short.MAX_VALUE)
+            .addComponent(bg, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1116, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -194,21 +259,21 @@ public class Main extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void nadaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nadaBtnActionPerformed
-        changeContent(new Supervision());
-    }//GEN-LAST:event_nadaBtnActionPerformed
-
     private void catalogoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_catalogoBtnActionPerformed
-        changeContent(new Catalogo());
+        changeContent(cat);
     }//GEN-LAST:event_catalogoBtnActionPerformed
 
     private void supervisionBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_supervisionBtnActionPerformed
-        changeContent(new Reportes());
+        changeContent(rep);
     }//GEN-LAST:event_supervisionBtnActionPerformed
 
     private void herramientasBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_herramientasBtnActionPerformed
-        changeContent(new Herramientas());
+        changeContent(herramientas);
     }//GEN-LAST:event_herramientasBtnActionPerformed
+
+    private void dbContraTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dbContraTActionPerformed
+        togglePass(dbContra, dbContraT);
+    }//GEN-LAST:event_dbContraTActionPerformed
 
     /**
      * @param args the command line arguments
@@ -223,28 +288,18 @@ public class Main extends javax.swing.JFrame {
     }
     public static void main(String args[]) {
         FlatLightLaf.setup();
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        try {
-            session.beginTransaction();
-            if (session.isConnected()){
-                System.out.println("CONNECTION SUCCESS");
-            }
-        } catch(Exception e){
-            if (session.getTransaction() != null) {
-                session.getTransaction().rollback();
-            }
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        } finally {
-           session.close();
-        }
-
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Main().setVisible(true);
             }
         });
+    }
+    private static void createStaticPanels() {
+        cat = new Catalogo();
+        herramientas = new Herramientas();
+        rep = new Reportes();
     }
     
     private ImageIcon getImg(String n){
@@ -254,7 +309,7 @@ public class Main extends javax.swing.JFrame {
             return new ImageIcon(iconURL);
         } else {
             System.err.println("No se pudo encontrar el icono");
-            return new ImageIcon("src/main/resources/img/"+n+".png");
+            return new ImageIcon("src/main/resources/"+n+".png");
         }
     }
     
@@ -262,18 +317,73 @@ public class Main extends javax.swing.JFrame {
         ImageIcon img = new ImageIcon(image.getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_SMOOTH));
         return img;
     }
+    
+    public static void updateSems(){
+        Reportes.initSemanas(rep.getSemCb());
+    }
+    
+    public static void updateTrabajadores(){
+        Catalogo.initTrabs(cat.getDefCB(), "DEFENSOR");
+        Catalogo.initTrabs(cat.geteDefsCB(), "DEFENSOR");
+        Catalogo.initTrabs(cat.getOficialCB(), "OFICIAL");
+        Catalogo.initTrabs(cat.geteOfsCB(), "OFICIAL");
+        Catalogo.initTrabs(cat.getRevisorCB(),"OFICIAL REVISOR");
+        Catalogo.initTrabs(cat.geteRevsCB(),"OFICIAL REVISOR");
+    }
+    
+    public static void togglePass(JPasswordField p, JToggleButton b){
+        if (b.isSelected()) {
+            p.setEchoChar((char) 0);
+            b.setText("Ocultar");
+        } else {
+            p.setEchoChar('•');
+            b.setText("Mostrar");
+        }
+    }
+    
+    private void connect(){
+        File props = new File("C://reportes-hibernate//hibernate.cfg.xml");
+        if (!props.exists()){
+            HibernateUtil.verify();
+            try {
+                props.createNewFile();
+                int res = JOptionPane.showConfirmDialog(null, dbConfigP, "Configuración de Base de Datos", JOptionPane.OK_CANCEL_OPTION);
+                String url = urlTF.getText();
+                String user = usuarioTF.getText();
+                String pass = new String(dbContra.getPassword());
+                if (res == 0 && HibernateUtil.testConnection(url, user, pass)){
+                    String write = HibernateUtil.generateConfigContent(url, user, pass);
+                    HibernateUtil.writeFile(write);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Presente todos los datos necesaios correctamente. La conexión a la base de datos es necesaria.");
+                    props.delete();
+                    System.exit(0);
+                }
+            } catch(IOException e){
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            }
+        }
+        HibernateUtil.newConnection();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
     private javax.swing.JButton catalogoBtn;
     private javax.swing.JPanel content;
+    private javax.swing.JPanel dbConfigP;
+    private javax.swing.JPasswordField dbContra;
+    private javax.swing.JToggleButton dbContraT;
     private javax.swing.JPanel header;
     private javax.swing.JButton herramientasBtn;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel logo1L;
     private javax.swing.JLabel logo2L;
     private javax.swing.JPanel menubox;
-    private javax.swing.JButton nadaBtn;
     private javax.swing.JPanel optionMenuP;
     private javax.swing.JButton supervisionBtn;
+    private javax.swing.JTextField urlTF;
+    private javax.swing.JTextField usuarioTF;
     // End of variables declaration//GEN-END:variables
 }
