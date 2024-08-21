@@ -1,4 +1,4 @@
-**Incidence Reporting System
+*Incidence Reporting System*
 This is a reporting system used by reviewers to neatly present the data of each incidence in documentation made by attorneys.
 
 The system allows you to:
